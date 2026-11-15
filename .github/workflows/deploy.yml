@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: read
-  deployments: write
 
 concurrency:
   group: pages-deploy
@@ -17,6 +16,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: "4c3ed2119a67ca48b471172aa2519fb5"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,8 +36,15 @@ jobs:
         run: npm run build
 
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: 4c3ed2119a67ca48b471172aa2519fb5
-          command: pages deploy dist --project-name=wangmingshu-me --branch=main
+        shell: bash
+        run: |
+          set +e
+          npx --yes wrangler@4 pages deploy dist \
+            --project-name=wangmingshu-me \
+            --branch=main \
+            --commit-dirty=true 2>&1 | tee deploy.log
+          code=${PIPESTATUS[0]}
+          if [ "$code" -ne 0 ]; then
+            echo "::error::wrangler deploy failed (exit $code): $(tail -c 700 deploy.log | tr '\n' ' ')"
+            exit "$code"
+          fi
