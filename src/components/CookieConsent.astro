@@ -1,0 +1,12 @@
+---
+import type { Lang } from '../data/site';
+
+interface Props {
+  lang: Lang;
+}
+
+// The consent UI is rendered by vanilla-cookieconsent into this root.
+// transition:persist keeps the mounted #cc-main alive across ClientRouter swaps.
+const { lang } = Astro.props;
+---
+<div class="cookie__container" data-lang={lang} transition:persist></div>

@@ -1,0 +1,102 @@
+---
+import { shell, site, routes, type Lang } from '../data/site';
+import PixelArrow from './svg/PixelArrow.astro';
+
+interface Props {
+  lang: Lang;
+  theme?: 'dark' | 'light';
+}
+
+const { lang, theme = 'dark' } = Astro.props;
+const copy = shell[lang];
+const r = routes[lang];
+const IG_URL = 'https://www.instagram.com/wangmingshu.me/';
+const XHS_URL = 'https://www.xiaohongshu.com/user/profile/5657f794f53ee0375b2aeb50';
+const rawConnect = String(copy.info.connect || '');
+const emailAddr = (rawConnect.match(/[^\s:]+@[^\s:]+/) || [''])[0];
+const displayEmail = site.email || emailAddr;
+// On the home page the in-page links are bare hashes; SmoothLink scrolls them.
+// Everywhere else they point back to the home page (normal navigation).
+const normalize = (path: string) => path.replace(/\/+$/, '') || '/';
+const isHome = normalize(Astro.url.pathname) === normalize(r.home);
+const labels = copy.footerNav.map((item, i) => ({
+  ...item,
+  href:
+    i === 0
+      ? isHome
+        ? '#services'
+        : r.home + '#services'
+      : i === 1
+        ? isHome
+          ? '#case-histories'
+          : r.home + '#case-histories'
+        : r.contact,
+}));
+---
+<footer class:list={['footer', 'js-footer', theme === 'dark' ? 'footer--dark' : 'footer--light']} data-footer>
+  <div class="footer__wrap">
+    <div class="footer__main js-footer-main">
+      <div class="footer__marquee" aria-hidden="true">
+        <div class="marquee js-marquee">
+          <div class="marquee__wrap">
+            {[0, 1, 2, 3].map(() => (
+              <div class="marquee__item">
+                <span class="footer__marquee-text">{copy.footerMarquee}</span>
+                <span class="footer__marquee-icon"><PixelArrow /></span>
+                <span class="footer__marquee-text">{copy.footerMarquee}</span>
+                <span class="footer__marquee-icon"><PixelArrow /></span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div class="footer__infos js-footer-infos">
+        <div class="footer__info-group">
+          <p class="t-sm footer__info-label">
+            <a class="cursor-pointer" href={r.contact}>{copy.footerLabel}</a>
+          </p>
+          <div class="footer__info-links">
+            {displayEmail && (
+              <a class="cursor-pointer p footer__info-link" href={`mailto:${displayEmail}`}>{displayEmail}</a>
+            )}
+            <a class="cursor-pointer p footer__info-link" href={IG_URL} target="_blank" rel="noopener noreferrer">IG:@wangmingshu.me</a>
+            <a class="cursor-pointer p footer__info-link" href={XHS_URL} target="_blank" rel="noopener noreferrer">小红书id: 949135495</a>
+          </div>
+        </div>
+        <nav class="footer__nav" aria-label={copy.menuAria}>
+          <ul>
+            {labels.map((item) => (
+              <li class="footer__nav-item">
+                <a href={item.href} class="footer__nav-link">
+                  <div class="footer__nav-link-bg" aria-hidden="true"></div>
+                  <p class="t-xl footer__nav-link-index">{item.index}</p>
+                  <p class="t-xl footer__nav-link-label">{item.label}</p>
+                  <div class="footer__nav-link-icon" aria-hidden="true">
+                    <div class="footer__nav-link-icon-inner"><PixelArrow /></div>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+      <div class="footer__end js-footer-end">
+        <div class="footer__end-wrapper">
+          <ul class="footer__end-links">
+            <li><a class="footer__end-link" href={r.privacy}>{copy.privacy}</a></li>
+            <li><a class="footer__end-link" href={r.cookies}>{copy.cookies}</a></li>
+            <li><button class="footer__end-link" type="button" data-open-cookie>{copy.manage}</button></li>
+          </ul>
+          <div class="footer__credits">
+            <p class="t-xs">{copy.credits}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer__canvas" aria-hidden="true">
+    <div class="custom-canvas" data-footer-canvas>
+      <div style="width:100%;height:100%"><canvas style="display:block"></canvas></div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { legalPages, type LegalKind } from '../data/legal';
+import { routes, type Lang } from '../data/site';
+
+interface Props {
+  lang: Lang;
+  kind: LegalKind;
+}
+const { lang, kind } = Astro.props;
+const page = legalPages[lang][kind];
+const alternate = routes[lang === 'zh' ? 'en' : 'zh'][kind];
+---
+<BaseLayout
+  lang={lang}
+  title={page.metaTitle}
+  description={page.metaDescription}
+  alternate={alternate}
+  navbarDark
+  footerTheme="light"
+  page="legal"
+>
+  <div class="page__content text-smoke-black bg-smoke-white js-page-content">
+    <main class="privacy">
+      <h1 class="privacy__title">{page.title}</h1>
+      <div class="privacy__content" set:html={page.content}></div>
+    </main>
+  </div>
+</BaseLayout>

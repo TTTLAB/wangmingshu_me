@@ -1,0 +1,31 @@
+---
+import { homeContent } from '../../data/home';
+import type { Lang } from '../../data/site';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = homeContent[lang];
+---
+<header class="main-hero js-main-hero">
+  <div class="main-hero__description-wrap">
+    <p class="t-lg main-hero__description js-description" set:html={c.heroDescription}></p>
+  </div>
+  <div class="main-hero__media">
+    <video class="main-hero__video" autoplay muted loop playsinline preload="metadata" poster="/works/pillbox/pillbox-01.webp" aria-hidden="true" data-hero-video>
+      <source src={c.video} type="video/mp4" data-src-desktop={c.video} data-src-mobile={c.videoMobile} />
+    </video>
+  </div>
+  <div class="main-hero__footer">
+    <h1 class="t-2xl main-hero__title js-title" set:html={c.heroTitle}></h1>
+    <a href="#about" class="main-hero__scroll">
+      <span class="main-hero__scroll-label t-eye-xs">{c.scrollLabel}</span>
+      <span class="main-hero__scroll-icon">
+        <svg fill="none" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6.835 3.498V5.03H5.302V3.498h1.533zM6.835 5.247V6.78H5.302V5.247h1.533zM3.338 6.996v1.533H1.804V6.996h1.534zM1.589 5.247V6.78H.056V5.247h1.533zM12.082 5.247V6.78H10.55V5.247h1.533zM6.835 0v1.533H5.302V0h1.533zM6.835 1.749v1.533H5.302V1.749h1.533zM8.585 8.745v1.533H7.052V8.745h1.533zM6.835 6.996v1.533H5.302V6.996h1.533zM6.835 8.745v1.533H5.302V8.745h1.533zM6.835 10.493v1.533H5.302v-1.533h1.533zM10.333 6.996v1.533H8.8V6.996h1.533zM5.086 8.745v1.533H3.553V8.745h1.533z" fill="currentColor"></path>
+        </svg>
+      </span>
+    </a>
+  </div>
+</header>

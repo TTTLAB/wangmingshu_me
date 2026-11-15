@@ -1,0 +1,47 @@
+---
+import { homeContent } from '../../data/home';
+import type { Lang } from '../../data/site';
+import ServicesPattern from '../svg/ServicesPattern.astro';
+import InteractiveGrid from '../InteractiveGrid.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = homeContent[lang];
+---
+<section class="services-section js-section-spy" id="services">
+  <div class="services-section__container">
+    <div class="services-section__pixel-pattern" aria-hidden="true">
+      <ServicesPattern />
+    </div>
+    <InteractiveGrid variant="dark" />
+    <div class="services-section__container">
+      <div class="services-section__head">
+        <h3 class="t-2xl services-section__title">{c.servicesTitle}</h3>
+        <p class="t-md services-section__text">{c.servicesText}</p>
+      </div>
+      <div class="services-section__content">
+        {c.services.map((service) => (
+          <article class="service-card js-service-card service-card--dark">
+            <span class="service-card__pin" aria-hidden="true"></span>
+            <span class="service-card__pin" aria-hidden="true"></span>
+            <span class="service-card__pin" aria-hidden="true"></span>
+            <span class="service-card__pin" aria-hidden="true"></span>
+            <div class="service-card__bg" aria-hidden="true"></div>
+            <div class="service-card__media-wrap">
+              <img class="service-card__media" src={service.image} alt="" loading="lazy" aria-hidden="true" />
+            </div>
+            <div class="service-card__content">
+              <div class="service-card__head">
+                <p class="t-2lg service-card__title">{service.title}</p>
+                <span class="service-card__label">[ {service.index} ]</span>
+              </div>
+              <p class="t-md service-card__text">{service.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

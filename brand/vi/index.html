@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>VI.SPEC — STENCIL_SIGNAL · 鼠王</title>
+<meta name="description" content="Banksy Stencil Rat × 瑞士工业网格 的 VI 规范：Logo 构成、色彩、字体、Logo 动效、授权与下载。"/>
+<link rel="icon" href="./assets/favicon.svg" type="image/svg+xml"/>
+<link rel="preload" href="./assets/ChivoMono_Bold.woff2" as="font" type="font/woff2" crossorigin/>
+<style>
+:root{--vi-bg-asphalt:#09090B;--vi-bg-concrete:#121215;--vi-stencil-white:#F2EFE9;--vi-tech-grey:#78756F;--vi-grid-line:rgba(242,239,233,0.12);--vi-accent-signal:#FF3B1D}
+@font-face{font-family:'Chivo Mono';src:url('./assets/ChivoMono_Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--vi-bg-asphalt);color:var(--vi-stencil-white);font-family:'Chivo Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+body{background-image:linear-gradient(to right,var(--vi-grid-line) 1px,transparent 1px),linear-gradient(to bottom,var(--vi-grid-line) 1px,transparent 1px);background-size:80px 80px}
+a{color:inherit}
+.vi-top{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:14px 22px;background:rgba(9,9,11,.86);border-bottom:1px solid var(--vi-grid-line);backdrop-filter:blur(6px)}
+.vi-top .brand{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.24em;color:var(--vi-tech-grey)}
+.vi-top .brand .ratbox{width:40px;height:22px;color:var(--vi-stencil-white)}
+.vi-top .brand .ratbox svg{width:100%;height:100%}
+.vi-top a.back{font-size:11px;letter-spacing:.16em;color:var(--vi-tech-grey);text-decoration:none;white-space:nowrap}
+.vi-top a.back:hover{color:var(--vi-accent-signal)}
+@media(max-width:700px){
+  .vi-top{padding:12px 16px}
+  .vi-top .brand{font-size:10px;letter-spacing:.12em;gap:8px;min-width:0}
+  .vi-top .brand .ratbox{width:32px;height:18px;flex:0 0 32px}
+  .vi-top a.back{font-size:10px;letter-spacing:.08em;margin-left:10px}
+}
+@media(max-width:520px){.vi-top .brand-full{display:none}}
+.wrap{max-width:1180px;margin:0 auto;padding:64px 22px 120px}
+.kicker{font-size:11px;letter-spacing:.3em;color:var(--vi-accent-signal);margin:0 0 10px}
+h1{font-size:clamp(34px,6vw,74px);line-height:.98;margin:0 0 14px;letter-spacing:-.01em}
+h1 .cut{position:relative;display:inline-block;-webkit-mask-image:linear-gradient(to bottom,#000 0,#000 calc(50% - 1px),transparent calc(50% - 1px),transparent calc(50% + 1px),#000 calc(50% + 1px),#000 100%);mask-image:linear-gradient(to bottom,#000 0,#000 calc(50% - 1px),transparent calc(50% - 1px),transparent calc(50% + 1px),#000 calc(50% + 1px),#000 100%)}
+.lede{max-width:640px;color:var(--vi-tech-grey);font-size:13px;line-height:1.8;margin:0 0 60px}
+.section{border-top:1px solid var(--vi-grid-line);padding:44px 0}
+.section h2{font-size:12px;letter-spacing:.26em;color:var(--vi-tech-grey);margin:0 0 26px;display:flex;gap:12px;align-items:center}
+.section h2 b{color:var(--vi-accent-signal);font-weight:700}
+.two{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:start}.two>*{min-width:0}
+@media(max-width:860px){.two{grid-template-columns:1fr}}
+.construct{position:relative;background:var(--vi-bg-concrete);border:1px solid var(--vi-grid-line);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.construct:before{content:"";position:absolute;inset:0;background-image:linear-gradient(to right,rgba(242,239,233,.10) 1px,transparent 1px),linear-gradient(to bottom,rgba(242,239,233,.10) 1px,transparent 1px);background-size:40px 40px}
+.construct .center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.construct .rat{width:66%;color:var(--vi-stencil-white)}
+.construct .rat svg{width:100%;height:auto;display:block}
+.construct .guide-h,.construct .guide-v{position:absolute;background:var(--vi-accent-signal);opacity:.55}
+.construct .guide-h{left:0;right:0;height:1px}
+.construct .guide-v{top:0;bottom:0;width:1px}
+.meta{font-size:11px;line-height:2;color:var(--vi-tech-grey)}
+.meta b{color:var(--vi-stencil-white);font-weight:700}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--vi-grid-line);background:transparent;color:var(--vi-stencil-white);font:700 10px/1 inherit;letter-spacing:.16em;padding:10px 14px;cursor:pointer;margin:6px 8px 0 0;text-decoration:none}
+.btn:hover{border-color:var(--vi-accent-signal);color:var(--vi-accent-signal)}
+pre{background:var(--vi-bg-concrete);border:1px solid var(--vi-grid-line);padding:16px;overflow:auto;max-height:260px;font-size:10px;line-height:1.7;color:var(--vi-tech-grey);margin:14px 0 0;white-space:pre-wrap;word-break:break-all;max-width:100%}
+.swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:700px){.swatches{grid-template-columns:repeat(2,1fr)}}
+.sw{border:1px solid var(--vi-grid-line);background:var(--vi-bg-concrete);padding:0;cursor:pointer;text-align:left;color:var(--vi-stencil-white);font:inherit;overflow:hidden}
+.sw .chip{height:96px}
+.sw .info{padding:10px 12px;font-size:10px;letter-spacing:.12em;line-height:1.7;color:var(--vi-tech-grey)}
+.sw .info b{display:block;color:var(--vi-stencil-white);font-size:11px;letter-spacing:.18em}
+.sw:hover{border-color:var(--vi-accent-signal)}
+@media(max-width:700px){.sw .info{letter-spacing:.08em}.sw .info b{font-size:10px;letter-spacing:.12em}}
+.type-spec .big{font-size:clamp(40px,8vw,120px);line-height:.9;margin:0 0 10px;letter-spacing:-.02em}
+.type-spec .small{font-size:12px;letter-spacing:.24em;color:var(--vi-tech-grey)}
+.motion-demo{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--vi-grid-line);background:var(--vi-bg-concrete);margin:16px 0 22px}
+.motion-stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:300px;padding:20px;border-right:1px solid var(--vi-grid-line);overflow:hidden;background-image:linear-gradient(to right,rgba(242,239,233,.08) 1px,transparent 1px),linear-gradient(to bottom,rgba(242,239,233,.08) 1px,transparent 1px);background-size:40px 40px}
+.motion-stage .rat{width:190px;max-width:72%;color:var(--vi-stencil-white)}
+.motion-stage .rat svg{width:100%;height:auto;display:block;overflow:visible}
+.motion-live{position:absolute;left:12px;top:10px;display:flex;align-items:center;gap:6px;font-size:9px;letter-spacing:.18em;color:var(--vi-tech-grey)}
+.motion-live i{display:block;width:5px;height:5px;background:var(--vi-accent-signal)}
+.motion-live[data-state="off"] i{background:var(--vi-tech-grey)}
+.motion-side{padding:22px;display:flex;flex-direction:column;justify-content:center;gap:10px;min-width:0}
+.motion-side .sub{margin:0}
+.motion-side .meta{margin:0}
+.motion-controls{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0}
+.motion-controls .btn{margin:0}
+.motion-status{font-size:10px;letter-spacing:.12em;line-height:1.6;color:var(--vi-accent-signal);margin:0;min-height:1.6em}
+.motion-status[data-state="off"]{color:var(--vi-tech-grey)}
+.motion-note{font-size:10px;line-height:1.8;color:var(--vi-tech-grey);margin:0}
+.nowrap{white-space:nowrap}
+@media(max-width:700px){.motion-demo{grid-template-columns:1fr}.motion-stage{border-right:0;border-bottom:1px solid var(--vi-grid-line);min-height:250px}.motion-stage .rat{width:160px}}
+.lockups{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:700px){.lockups{grid-template-columns:1fr}}
+.lock{border:1px solid var(--vi-grid-line);padding:26px;display:flex;align-items:center;justify-content:center;gap:16px;min-height:150px}
+.lock.dark{background:var(--vi-bg-concrete);color:var(--vi-stencil-white)}
+.lock.light{background:var(--vi-stencil-white);color:var(--vi-bg-asphalt)}
+.lock .rat{width:120px}
+.lock .rat svg{width:100%;height:auto;display:block}
+.lock .word{font-size:12px;letter-spacing:.24em;line-height:1.4}
+.badge-lock .badge{width:110px}
+.badge-lock .badge svg{width:100%;height:auto;display:block}
+.glitch-demo{position:relative;display:inline-block}
+.glitch-demo:hover .rat{animation:vi-glitch .28s steps(2) infinite}
+@keyframes vi-glitch{0%{transform:translate(0,0)}25%{transform:translate(-2px,1px)}50%{transform:translate(2px,-1px)}75%{transform:translate(-1px,-1px)}100%{transform:translate(0,0)}}
+@media(prefers-reduced-motion:reduce){.glitch-demo:hover .rat{animation:none}}
+.dl-row{display:flex;flex-wrap:wrap;gap:10px}
+.note{font-size:10px;color:var(--vi-tech-grey);line-height:1.9;margin-top:30px;border-top:1px solid var(--vi-grid-line);padding-top:18px}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--vi-accent-signal);color:#09090B;font:700 11px/1 inherit;letter-spacing:.14em;padding:10px 16px;opacity:0;transition:.25s;pointer-events:none;z-index:50}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+/* 06–11 · 补充规范样式；不改 01–05 既有规则 */
+.sub{font-size:11px;letter-spacing:.18em;color:var(--vi-stencil-white);margin:24px 0 8px}
+.rule-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:860px){.rule-grid{grid-template-columns:1fr}}
+.rule{border:1px solid var(--vi-grid-line);background:var(--vi-bg-concrete);padding:16px;font-size:11px;line-height:1.9;color:var(--vi-tech-grey)}
+.rule > b{display:block;color:var(--vi-stencil-white);font-size:10px;letter-spacing:.18em;margin-bottom:6px}
+.rule .hit{color:var(--vi-accent-signal)}
+.bans{columns:2;column-gap:28px;margin:8px 0 0;padding-left:18px;font-size:11px;line-height:2;color:var(--vi-tech-grey)}
+@media(max-width:700px){.bans{columns:1}}
+.use-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+@media(max-width:980px){.use-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.use-grid{grid-template-columns:1fr}}
+.use{border:1px solid var(--vi-grid-line);background:var(--vi-bg-concrete);padding:12px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.use .stage{position:relative;min-height:110px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid var(--vi-grid-line)}
+.use .stage.dark{background:var(--vi-bg-asphalt);color:var(--vi-stencil-white)}
+.use .stage.light{background:var(--vi-stencil-white);color:var(--vi-bg-asphalt)}
+.use .stage.low{background:var(--vi-bg-asphalt);color:var(--vi-bg-concrete)}
+.use .stage.red{background:var(--vi-bg-asphalt);color:var(--vi-accent-signal)}
+.use .stage.photo{color:var(--vi-stencil-white);background:linear-gradient(rgba(9,9,11,.55),rgba(9,9,11,.55)),repeating-linear-gradient(115deg,#09090B 0 18px,#78756F 18px 36px,#F2EFE9 36px 52px,#121215 52px 70px)}
+.use .stage .rat{width:72px;position:relative;z-index:1}
+.use .stage .rat svg{width:100%;height:auto;display:block}
+.use .stage .badge{width:54px;position:relative;z-index:1}
+.use .stage .badge svg{width:100%;height:auto;display:block}
+.use .stage .rat-min svg{height:22px;width:auto}
+.use .stage .stretch svg{transform:scaleX(1.7);transform-origin:center}
+.use .stage .glow svg{filter:drop-shadow(0 0 6px rgba(255,59,29,.9))}
+.use .stage .frag{width:64px;position:relative;z-index:1}
+.use .stage .frag svg{width:100%;height:auto;display:block}
+.use .cap{font-size:10px;line-height:1.6;color:var(--vi-tech-grey)}
+.use .cap b{display:block;color:var(--vi-stencil-white);font-weight:700}
+.tag{display:inline-block;font-size:9px;letter-spacing:.16em;padding:3px 6px;border:1px solid currentColor;margin-bottom:5px}
+.tag-ok{color:var(--vi-stencil-white)}
+.tag-bad{color:var(--vi-accent-signal)}
+.table-wrap{overflow-x:auto;margin-top:14px}
+.spec-table{width:100%;min-width:560px;border-collapse:collapse;font-size:10px;line-height:1.7}
+.spec-table th,.spec-table td{border-top:1px solid var(--vi-grid-line);padding:9px 10px;text-align:left;vertical-align:top;color:var(--vi-tech-grey)}
+.spec-table th{color:var(--vi-stencil-white);font-size:9px;letter-spacing:.16em;font-weight:700}
+.spec-table td:first-child{color:var(--vi-stencil-white);white-space:nowrap}
+.spec-table code{font:inherit;color:var(--vi-stencil-white)}
+.spec-table--flow{min-width:0}
+@media(max-width:700px){
+  .font-table{min-width:0}
+  .font-table thead{display:none}
+  .font-table tr{display:block;border-top:1px solid var(--vi-grid-line);padding:12px 0}
+  .font-table td{display:block;border-top:0;padding:2px 0;white-space:normal}
+  .font-table td:nth-child(2):before{content:"风格 / ";color:var(--vi-accent-signal);letter-spacing:.12em}
+  .font-table td:nth-child(3):before{content:"授权 / ";color:var(--vi-accent-signal);letter-spacing:.12em}
+  .font-table td:nth-child(4):before{content:"结论 / ";color:var(--vi-accent-signal);letter-spacing:.12em}
+}
+.voice{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+@media(max-width:860px){.voice{grid-template-columns:1fr}}
+.voice .pair{border:1px solid var(--vi-grid-line);background:var(--vi-bg-concrete);padding:16px;font-size:11px;line-height:2}
+.voice .pair p{margin:0}
+.voice .lbl{display:inline-block;min-width:34px;font-size:9px;letter-spacing:.16em;margin-right:8px;vertical-align:2px}
+.voice .yes{color:var(--vi-stencil-white)}
+.voice .yes .lbl{color:var(--vi-accent-signal)}
+.voice .no{color:var(--vi-tech-grey)}
+.voice .no .lbl{color:var(--vi-tech-grey);border:1px solid var(--vi-grid-line);padding:1px 5px}
+.voice .no em{font-style:normal;text-decoration:line-through;text-decoration-color:var(--vi-accent-signal)}
+.bg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}
+@media(max-width:700px){.bg-grid{grid-template-columns:1fr}}
+.bg-tile{position:relative;border:1px solid var(--vi-grid-line);min-height:180px;display:flex;align-items:center;justify-content:center;padding:24px;overflow:hidden}
+.bg-tile .rat{width:74px;position:relative;z-index:1}
+.bg-tile .rat svg{width:100%;height:auto;display:block}
+.bg-tile .badge{width:64px;position:relative;z-index:1}
+.bg-tile .badge svg{width:100%;height:auto;display:block}
+.bg-tile .cap{position:absolute;left:10px;bottom:8px;font-size:9px;letter-spacing:.14em;color:var(--vi-tech-grey);z-index:2}
+.bg-dark{background:var(--vi-bg-asphalt);color:var(--vi-stencil-white)}
+.bg-concrete{background:var(--vi-bg-concrete);color:var(--vi-stencil-white)}
+.bg-light{background:var(--vi-stencil-white);color:var(--vi-bg-asphalt)}
+.bg-light .cap{color:var(--vi-tech-grey)}
+.bg-mint{background:#AAF0CE;color:var(--vi-bg-asphalt)}
+.bg-mint .cap{color:var(--vi-bg-asphalt);opacity:.65}
+.bg-photo{color:var(--vi-stencil-white);background:linear-gradient(rgba(9,9,11,.55),rgba(9,9,11,.55)),repeating-linear-gradient(115deg,#09090B 0 18px,#78756F 18px 36px,#F2EFE9 36px 52px,#121215 52px 70px)}
+.bg-photo .cap{color:var(--vi-stencil-white);background:rgba(9,9,11,.72);padding:2px 5px}
+</style>
+</head>
+<body>
+<div class="vi-top"><div class="brand"><span class="ratbox" id="topRat"></span><span><span class="brand-full">STENCIL_SIGNAL · </span>VI.SPEC</span></div><a class="back" href="/">← 返回主页</a></div>
+<div class="wrap">
+  <p class="kicker">VISUAL IDENTITY / 2026</p>
+  <h1><span class="cut">Stencil Rat</span><br/>× 工业网格</h1>
+  <p class="lede">Banksy 模板鼠的街头涂鸦张力，装配瑞士工业网格。单色骨白剪影、镂空断桥、信号朱红点睛；全部图形为原生 SVG Path，配合 GSAP 微动效与全站 1px 裸露网格。</p>
+
+  <section class="section"><h2><b>01</b> 模板鼠构成 · CONSTRUCTION</h2>
+    <div class="two">
+      <div class="construct"><div class="center"><div class="rat" id="bigRat"></div></div><div class="guide-h" style="top:50%"></div><div class="guide-v" style="left:38%"></div></div>
+      <div class="meta">
+        <p><b>几何</b> · 7 组剪影碎片（身体 / 头 / 耳 / 手臂 / 后脚 / 前腿 / 前脚）+ 安全帽 + 电钻 + 红色闪电 / 眼睛 + 尾巴 + 胡须。</p>
+        <p><b>视口</b> · 270 × 240，单色 currentColor 剪影；瞳孔 / 闪电固定信号朱红 #FF3B1D。</p>
+        <p><b>动效</b> · 瞳孔随光标移动；耳朵随机抽动；尾尖随滚动速度摆动（Lenis/scroll velocity）；悬停碎片错位抖动；VI 页演示尾巴 4–9s 轻甩、电钻 6–12s 间歇工作（rat-motion.js，可暂停）。</p>
+        <button class="btn" id="copySvg">COPY SVG 源码</button>
+        <button class="btn" id="copyHooks">COPY 动效钩子</button>
+        <pre id="svgPre"></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="section"><h2><b>02</b> VI 色彩系统 · PALETTE</h2>
+    <div class="swatches" id="swatches"></div>
+    <p class="note">点击色卡复制 Hex。默认主题 STENCIL_SIGNAL 锁定为沥青 × 骨白 × 信号朱红；构建保留了预设 A（薄荷青 #AAF0CE）与 C（激光绿 #CCFF00）可切换。</p>
+  </section>
+
+  <section class="section"><h2><b>03</b> 字体与网格 · TYPE &amp; GRID</h2>
+    <div class="type-spec">
+      <p class="big">Aa Bb 0123</p>
+      <p class="small">CHIVO MONO 700 · SIL OFL 1.1 · 等宽无衬线 · 全大写字距 0.18–0.30em</p>
+      <p class="meta" style="margin-top:22px">HTML 根字号 16px；标题行高 0.92–1.0；正文 13px/1.8。网格：80px 基础格 + 40px 细分格，1px 线 rgba(242,239,233,.12)；卡片边框 1px 同色。<br/>断桥切口：大号编号 [001] 与巨型标题中缝 2px 镂空。</p>
+    </div>
+    <p class="sub">字体选型 / TYPEFACE</p>
+    <p class="meta">从三款免费可商用的等宽粗体中选定 <b>Chivo Mono 700</b>：字宽、字重与灰度最接近上一版字体，grotesque 骨架 + 方切终端，工业感够用又不抢图形。字体以 <b>woff2 子集</b>交付：<b>10,756 bytes</b>，覆盖 Basic Latin、<span class="nowrap">Latin-1</span>、常用标点与 ≤ ≥ × —；箭头 ← → ↑ ↓ 不在字体字符集内，按系统等宽回退。所有文字仍只用这一字体族，不引入第二款字体。</p>
+    <div class="table-wrap"><table class="spec-table font-table">
+      <thead><tr><th>候选</th><th>风格判断</th><th>授权 / 官方来源</th><th>结论</th></tr></thead>
+      <tbody>
+        <tr><td><b>Chivo Mono 700</b></td><td>最接近原字宽度与灰度；grotesque 骨架、方切终端，工业但不花。</td><td>SIL OFL 1.1 · <a href="https://github.com/Omnibus-Type/Chivo" target="_blank" rel="noopener">Omnibus-Type/Chivo</a> · <a href="https://fonts.google.com/specimen/Chivo+Mono" target="_blank" rel="noopener">Google Fonts</a></td><td><b>采用</b></td></tr>
+        <tr><td>Martian Mono 700</td><td>工业信号最强，但字面更宽、更圆，密集表格里占位明显。</td><td>SIL OFL 1.1 · <a href="https://github.com/evilmartians/mono" target="_blank" rel="noopener">evilmartians/mono</a></td><td>备选</td></tr>
+        <tr><td>Azeret Mono 700</td><td>窄、干净、技术感；性格最弱，更像通用 coding mono。</td><td>SIL OFL 1.1 · <a href="https://github.com/displaay/azeret" target="_blank" rel="noopener">displaay/azeret</a></td><td>备选</td></tr>
+      </tbody>
+    </table></div>
+    <p class="meta" style="margin-top:14px">字体重命名与再分发遵循 OFL：保留版权与许可文本；不单独售卖字体；修改版不占用原作者名义。许可全文：<a href="./assets/OFL-ChivoMono.txt"><b>OFL-ChivoMono.txt</b></a>。字体文件：<a href="./assets/ChivoMono_Bold.woff2" download><b>ChivoMono_Bold.woff2</b></a>。<br/>站点接入：目标路径 <code>/fonts/ChivoMono_Bold.woff2</code>；由网站会话替换 <code>site.css</code> 与 <code>dataviz.js</code> 的旧字体引用。本页已使用新字体。</p>
+  </section>
+
+  <section class="section"><h2><b>04</b> 组件锁定 · LOCKUPS</h2>
+    <div class="lockups">
+      <div class="lock dark"><span class="glitch-demo" style="display:flex;align-items:center;gap:16px"><span class="rat" id="lockRat1"></span><span class="word">鼠王<br/>RAT KING</span></span></div>
+      <div class="lock light"><span class="rat" id="lockRat2"></span><span class="word">鼠王<br/>RAT KING</span></div>
+      <div class="lock badge-lock dark"><span class="badge" id="badge1"></span><span class="meta">RAT BADGE<br/>社交头像 / Favicon 变体</span></div>
+      <div class="lock dark"><span class="rat" id="lockRat3" style="width:70px"></span><span class="meta">悬停看碎片错位抖动<br/>（真实站点为 GSAP 驱动）</span></div>
+    </div>
+  </section>
+
+  <section class="section"><h2><b>05</b> 下载 · ASSETS</h2>
+    <p class="meta">全部为矢量 SVG，可直接用于导航、社媒、印刷。交付资产统一命名 <b>stencil-rat-*</b>；<b>vi-*</b> 只用于本页内部 CSS / JS，不再用于新资产。</p>
+    <div class="dl-row">
+      <a class="btn" href="./assets/stencil-rat-bone.svg" download>↓ STENCIL-RAT-BONE.SVG</a>
+      <a class="btn" href="./assets/stencil-rat-asphalt.svg" download>↓ STENCIL-RAT-ASPHALT.SVG</a>
+      <a class="btn" href="./assets/stencil-rat-badge.svg" download>↓ STENCIL-RAT-BADGE.SVG</a>
+    </div>
+    <p class="note">STENCIL_SIGNAL —— 地下信号鼠。Banksy 模板鼠 × ratking.studio 工业网格。本页为 VI 规范说明，非生产首页。三个文件由 rat.js 生成，未手画；页面 logo 仍由 rat.js 动态渲染。下载的 SVG 是纯静态文件，不含任何动画；Logo 动效只作用于页面实时渲染，由 rat-motion.js 驱动，不影响下载。</p>
+  </section>
+
+  <section class="section" id="s06"><h2><b>06</b> LOGO 边界 / USAGE</h2>
+    <p class="meta">最小尺寸、安全区与禁用清单为正式规范；数字下限以顶栏 22px 实测为据。小于下限时改用 badge 或文字，不硬缩。</p>
+    <div class="rule-grid">
+      <div class="rule"><b>数字最小尺寸</b>图形高度不小于 <span class="hit">22px</span>（现有顶栏已验证 22px）；宽度按 270:240 等比约 <span class="hit">24.75px</span>。小于此尺寸改用 badge 或文字。</div>
+      <div class="rule"><b>印刷最小尺寸</b>图形高度不小于 <span class="hit">12mm</span>。锁定组合整体宽度不小于 <span class="hit">96px</span>。</div>
+      <div class="rule"><b>安全区</b>四周至少 <span class="hit">0.5× 图形高度</span>；安全区内不放文字、边框或其他图形。</div>
+    </div>
+    <p class="sub">禁用清单 / DON'T</p>
+    <ul class="bans">
+      <li>拉伸、压扁或任何非等比缩放。</li>
+      <li>旋转、倾斜。</li>
+      <li>改主体色；只允许 currentColor 单色。</li>
+      <li>改瞳孔 / 闪电的红（固定 #FF3B1D）。</li>
+      <li>加描边、阴影、渐变、发光。</li>
+      <li>拆碎片单独使用。</li>
+      <li>裁切图形或切除安全区。</li>
+      <li>低对比背景上直接使用。</li>
+      <li>繁忙照片 / 视频上无遮罩直接放。</li>
+      <li>把 badge 当主 logo 拉伸使用。</li>
+    </ul>
+    <p class="sub">正误示例 / DO &amp; DON'T</p>
+    <div class="use-grid">
+      <div class="use">
+        <div class="stage dark"><span class="rat" data-rat></span></div>
+        <div class="cap"><span class="tag tag-ok">正确</span><b>深底 · bone</b>#F2EFE9 图形 / #09090B 底</div>
+      </div>
+      <div class="use">
+        <div class="stage light"><span class="rat" data-rat></span></div>
+        <div class="cap"><span class="tag tag-ok">正确</span><b>浅底 · asphalt</b>#09090B 图形 / #F2EFE9 底</div>
+      </div>
+      <div class="use">
+        <div class="stage dark"><span class="rat rat-min" data-rat></span></div>
+        <div class="cap"><span class="tag tag-ok">正确</span><b>22px 最小高度</b>宽度随比例约 24.75px</div>
+      </div>
+      <div class="use">
+        <div class="stage dark"><span class="badge" data-badge></span></div>
+        <div class="cap"><span class="tag tag-ok">正确</span><b>小尺寸替代</b>低于下限用 badge 或文字</div>
+      </div>
+      <div class="use">
+        <div class="stage dark"><span class="rat stretch" data-rat></span></div>
+        <div class="cap"><span class="tag tag-bad">错误</span><b>横向拉伸</b>非等比缩放，比例失真</div>
+      </div>
+      <div class="use">
+        <div class="stage red"><span class="rat" data-rat></span></div>
+        <div class="cap"><span class="tag tag-bad">错误</span><b>整体改红</b>主体只允许 currentColor 单色</div>
+      </div>
+      <div class="use">
+        <div class="stage dark"><span class="rat glow" data-rat></span></div>
+        <div class="cap"><span class="tag tag-bad">错误</span><b>加描边 / 阴影 / 发光</b>不靠特效补存在感</div>
+      </div>
+      <div class="use">
+        <div class="stage low"><span class="rat" data-rat></span></div>
+        <div class="cap"><span class="tag tag-bad">错误</span><b>低对比</b>#121215 图形压 #09090B 底</div>
+      </div>
+      <div class="use">
+        <div class="stage dark"><span class="frag" data-fragment></span></div>
+        <div class="cap"><span class="tag tag-bad">错误</span><b>拆碎片单用</b>7 组碎片必须整体出现</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="s07"><h2><b>07</b> 动效 / MOTION</h2>
+    <p class="sub">07.1 Logo 动效 / LOGO MOTION</p>
+    <p class="meta">工程鼠的两组微动效：尾巴每 <b>4–9s</b> 轻甩一次（480ms）；电钻每 <b>6–12s</b> 间歇工作一次（520ms，短促高频抖动 + 钻头火花）。动作只作用于页面实时渲染，不改 <code>rat.js</code>，也不影响静态 SVG 下载。</p>
+    <div class="motion-demo">
+      <div class="motion-stage">
+        <span class="motion-live" id="motionLive" data-state="on"><i></i><span id="motionLiveText">LIVE / 实时渲染</span></span>
+        <span class="rat" id="motionRat" data-rat data-rat-motion></span>
+      </div>
+      <div class="motion-side">
+        <p class="sub">演示 / DEMO</p>
+        <p class="meta">开关只影响本页演示。系统开启“减少动态”时默认关闭；页面不可见时自动停表。</p>
+        <div class="motion-controls">
+          <button class="btn" id="motionToggle" type="button" aria-pressed="true">动效 开</button>
+          <button class="btn" id="motionPause" type="button" aria-pressed="false">暂停</button>
+          <button class="btn" id="tailTrigger" type="button">甩尾</button>
+          <button class="btn" id="drillTrigger" type="button">电钻</button>
+        </div>
+        <p class="motion-status" id="motionStatus" data-state="on" role="status" aria-live="polite">运行中 · 尾巴 4–9s / 电钻 6–12s</p>
+        <p class="motion-note">频率为随机区间，不是固定节拍；每次动作短促、结束即停，不做循环旋转或持续呼吸。</p>
+      </div>
+    </div>
+    <div class="table-wrap"><table class="spec-table spec-table--flow">
+      <thead><tr><th>项目</th><th>规范</th></tr></thead>
+      <tbody>
+        <tr><td>何时用</td><td>VI / 品牌演示页、官网导航或页脚的动态 Logo、社交头像动图（可选）。只在品牌自有触点使用。</td></tr>
+        <tr><td>尾巴</td><td>间隔 4–9s 随机；单次 480ms；0° → +9° → -3.5° → +1.2° → 0°；绕尾根旋转。</td></tr>
+        <tr><td>电钻</td><td>间隔 6–12s 随机；单次 520ms；9 段 52ms 高频位移 / 旋转抖动，钻头火花闪 2 次。</td></tr>
+        <tr><td>缓动</td><td>尾巴 <code>cubic-bezier(.22,1,.36,1)</code> 起手、<code>cubic-bezier(.37,0,.63,1)</code> 回位；电钻 <code>steps(1,end)</code>，要“顿”不要“滑”。</td></tr>
+        <tr><td>自动停止</td><td><code>prefers-reduced-motion: reduce</code> 默认关闭；页面不可见、用户暂停、打印时停止。</td></tr>
+      </tbody>
+    </table></div>
+    <p class="sub">禁用 / DON'T</p>
+    <ul class="bans">
+      <li>不做持续循环、呼吸、漂浮或无限旋转；动效必须短促、有间歇。</li>
+      <li>不改瞳孔 / 闪电红色，不给电钻加渐变、发光或大面积光效。</li>
+      <li>不在 22px 顶栏、favicon、印刷稿、静态 SVG 下载里加动画。</li>
+      <li>不忽略用户的“减少动态”设置：默认关闭，只有用户手动开启才运行。</li>
+      <li>不让尾巴和电钻同时触发；同一时刻只做一组动作。</li>
+      <li>不把动效当加载动画、警示或交互反馈使用；它只是品牌性格。</li>
+    </ul>
+    <p class="sub">07.2 通用动效 token / TOKENS</p>
+    <p class="meta">时长与缓动取自 <code>src/scripts/</code> 现有 GSAP 调用，并补入 Logo 动效的两组 CSS 值；token 供交接与实现引用，不据此批量改写既有动效。</p>
+    <pre>:root{
+  --dur-instant: 50ms;      /* .02–.05 闪烁 / 指针 */
+  --dur-fast: 200ms;        /* .2 */
+  --dur-base: 300ms;        /* .3 */
+  --dur-medium: 400ms;      /* .4 */
+  --dur-slow: 600ms;        /* .6 */
+  --dur-slower: 800ms;      /* .8 */
+  --dur-long: 1250ms;       /* 1.25 */
+  --dur-cinematic: 1500ms;  /* 1.5 */
+  --dur-hero: 1750ms;       /* 1.75 */
+  --dur-epic: 3200ms;       /* 3.2 */
+  --dur-transition: 250ms;  /* transition.js */
+  --dur-vi-glitch: 280ms;   /* 本页 .28s */
+  --ease-out: power2;
+  --ease-in-out: power1.inOut;
+  --ease-strong: power4.inOut;
+  --ease-enter: power4;
+  --ease-exit: power4.in;
+  --ease-ui: power3.out;
+  --ease-linear: none;
+  --ease-scramble: sine.in;
+  --ease-bounce: bounce.inOut;
+  --ease-steps: steps(2);
+  --dur-logo-tail: 480ms;
+  --dur-logo-drill: 520ms;
+  --ease-logo-tail: cubic-bezier(.22,1,.36,1);
+  --ease-logo-drill: steps(1,end);
+}</pre>
+    <p class="sub">时长 token / DURATION</p>
+    <div class="table-wrap"><table class="spec-table">
+      <thead><tr><th>Token</th><th>值</th><th>用途</th><th>来源</th></tr></thead>
+      <tbody>
+        <tr><td><code>--dur-instant</code></td><td>50ms</td><td>.02–.05 闪烁 / 指针</td><td>loader.js、menu.js</td></tr>
+        <tr><td><code>--dur-fast</code></td><td>200ms</td><td>.2 快速反馈</td><td>home/dataviz.js、home/call.js</td></tr>
+        <tr><td><code>--dur-base</code></td><td>300ms</td><td>.3 基础过渡</td><td>home/services.js、home/case-reveal.js</td></tr>
+        <tr><td><code>--dur-medium</code></td><td>400ms</td><td>.4 常规位移</td><td>navbar.js、menu.js、home/interactive-grid.js</td></tr>
+        <tr><td><code>--dur-slow</code></td><td>600ms</td><td>.6 场景切换</td><td>home/services.js、loader.js、noise.js</td></tr>
+        <tr><td><code>--dur-slower</code></td><td>800ms</td><td>.8 强调出场</td><td>menu.js、loader.js、home/call.js</td></tr>
+        <tr><td><code>--dur-long</code></td><td>1250ms</td><td>1.25 长揭示</td><td>home/hero.js、home/case-reveal.js</td></tr>
+        <tr><td><code>--dur-cinematic</code></td><td>1500ms</td><td>1.5 电影感段落</td><td>loader.js</td></tr>
+        <tr><td><code>--dur-hero</code></td><td>1750ms</td><td>1.75 首屏主叙事</td><td>home/hero.js、home/case-reveal.js</td></tr>
+        <tr><td><code>--dur-epic</code></td><td>3200ms</td><td>3.2 氛围长镜头</td><td>home/call.js</td></tr>
+        <tr><td><code>--dur-transition</code></td><td>250ms</td><td>页面转场</td><td>transition.js（DURATION = 0.25）</td></tr>
+        <tr><td><code>--dur-vi-glitch</code></td><td>280ms</td><td>本页 04 节 hover glitch</td><td>index.html（.28s steps(2)）</td></tr>
+        <tr><td><code>--dur-logo-tail</code></td><td>480ms</td><td>Logo 尾巴轻甩</td><td>rat-motion.js</td></tr>
+        <tr><td><code>--dur-logo-drill</code></td><td>520ms</td><td>Logo 电钻工作</td><td>rat-motion.js</td></tr>
+      </tbody>
+    </table></div>
+    <p class="sub">缓动 token / EASING</p>
+    <div class="table-wrap"><table class="spec-table">
+      <thead><tr><th>Token</th><th>值</th><th>用途</th><th>来源</th></tr></thead>
+      <tbody>
+        <tr><td><code>--ease-out</code></td><td><code>power2</code></td><td>通用出场</td><td>全站最常见（18 处）</td></tr>
+        <tr><td><code>--ease-in-out</code></td><td><code>power1.inOut</code></td><td>对称过渡</td><td>多处</td></tr>
+        <tr><td><code>--ease-strong</code></td><td><code>power4.inOut</code></td><td>强对比转场</td><td>多处（17 处）</td></tr>
+        <tr><td><code>--ease-enter</code></td><td><code>power4</code></td><td>入场</td><td>多处</td></tr>
+        <tr><td><code>--ease-exit</code></td><td><code>power4.in</code></td><td>退场</td><td>多处</td></tr>
+        <tr><td><code>--ease-ui</code></td><td><code>power3.out</code></td><td>UI 反馈</td><td>菜单 / 导航</td></tr>
+        <tr><td><code>--ease-linear</code></td><td><code>none</code></td><td>匀速 / 循环</td><td>多处（11 处）</td></tr>
+        <tr><td><code>--ease-scramble</code></td><td><code>sine.in</code></td><td>文本扰动</td><td>菜单 / 乱码效果</td></tr>
+        <tr><td><code>--ease-bounce</code></td><td><code>bounce.inOut</code></td><td>弹跳强调</td><td>多处（7 处）</td></tr>
+        <tr><td><code>--ease-steps</code></td><td><code>steps(2)</code></td><td>本页 glitch 步进</td><td>index.html</td></tr>
+        <tr><td><code>--ease-logo-tail</code></td><td><code>cubic-bezier(.22,1,.36,1)</code></td><td>Logo 尾巴起手 / 回位</td><td>rat-motion.js</td></tr>
+        <tr><td><code>--ease-logo-drill</code></td><td><code>steps(1,end)</code></td><td>Logo 电钻高频抖动</td><td>rat-motion.js</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">说明：通用 <code>--ease-*</code> 存的是 GSAP 缓动名，不是 CSS 关键字；直接写进 CSS 前需换成等价 cubic-bezier。<code>--ease-logo-tail</code> / <code>--ease-logo-drill</code> 例外，存的是 CSS 值，可直接用于 Web Animations API。代码另有 0.01 / 0.08 / 0.7 / 0.9 秒等零散值，不新增 token，按最近档取用。`.28s steps(2)` 是本页 04 节 hover glitch 的现有值，保留不改；<code>prefers-reduced-motion</code> 下该 hover 动画关闭。</p>
+  </section>
+
+  <section class="section" id="s08"><h2><b>08</b> 语气 / VOICE</h2>
+    <p class="meta">语气基于三条线：地下电子音乐俱乐部灯光系统设计与施工；Banksy 式涂鸦鼠；自嘲的「下水道鼠王」与红猪式骑士精神（对客户有礼、对工艺认真）。</p>
+    <ul class="bans">
+      <li>先讲现场、系统、限制、预算，再讲效果。</li>
+      <li>短句、具体、克制；能用数字就不用形容词。</li>
+      <li>可以自黑，不贬低客户 / 同行。</li>
+      <li>不装艺术豪门，不吹「顶级 / 唯一 / 100%」。</li>
+      <li>不卖萌，不堆表情包；玩笑只冲事，不冲人。</li>
+      <li>承诺要能落地；做不到就说做不到，并给出替代方案。</li>
+    </ul>
+    <p class="sub">可 / 不可</p>
+    <div class="voice">
+      <div class="pair">
+        <p class="yes"><span class="lbl">可</span>「这套系统跟 DJ 台走，不跑预设。」</p>
+        <p class="no"><span class="lbl">不可</span><em>「顶级沉浸式光影艺术盛宴。」</em></p>
+      </div>
+      <div class="pair">
+        <p class="yes"><span class="lbl">可</span>「两周落地，不影响营业。」</p>
+        <p class="no"><span class="lbl">不可</span><em>「行业首创，完美还原。」</em></p>
+      </div>
+      <div class="pair">
+        <p class="yes"><span class="lbl">可</span>「预算 7 万，能做；要更多得加钱或砍项。」</p>
+        <p class="no"><span class="lbl">不可</span><em>「预算不是问题，效果拉满。」</em></p>
+      </div>
+      <div class="pair">
+        <p class="yes"><span class="lbl">可</span>「我是下水道鼠王，活儿得干细。」</p>
+        <p class="no"><span class="lbl">不可</span><em>「鼠鼠我呀，今天也要努力呢。」</em></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="s09"><h2><b>09</b> 背景 / BACKGROUND</h2>
+    <ul class="bans">
+      <li>深色 <b>#09090B / #121215</b>：用 bone <b>#F2EFE9</b> 的 logo 与文字；红只做小面积强调。</li>
+      <li>浅色 <b>#F2EFE9</b>：用 asphalt <b>#09090B</b> 的 logo 与文字；红可做强调。</li>
+      <li>照片 / 视频：只放在相对平静区域；先加 <b>40–60% 同色遮罩</b>（深底 asphalt，浅底 bone），再放 logo / 文字。</li>
+      <li>不得直接压在繁忙高光上；对比度至少按正文 <b>4.5:1</b>、大 logo <b>3:1</b> 检查。</li>
+      <li>预设 A 薄荷青 <b>#AAF0CE</b>：用 asphalt 图形 / 文字，红只做小面积；预设 C 激光绿 <b>#CCFF00</b>：用 asphalt，避免红绿相邻高饱和。</li>
+      <li>不用阴影 / 渐变 / 发光给 logo 补对比；遮罩是背景层，不是 logo 效果。</li>
+    </ul>
+    <div class="bg-grid">
+      <div class="bg-tile bg-dark"><span class="rat" data-rat></span><span class="cap">深色 #09090B · bone 图形</span></div>
+      <div class="bg-tile bg-light"><span class="rat" data-rat></span><span class="cap">浅色 #F2EFE9 · asphalt 图形</span></div>
+      <div class="bg-tile bg-photo"><span class="rat" data-rat></span><span class="cap">照片模拟 + 55% asphalt 遮罩</span></div>
+      <div class="bg-tile bg-mint"><span class="rat" data-rat></span><span class="cap">预设 A #AAF0CE · asphalt 图形</span></div>
+    </div>
+    <p class="note">示例瓦片为 CSS 渐变模拟，不含真实照片。实际投放时遮罩取 40–60%，按背景明暗与对比度实测调整。</p>
+  </section>
+
+  <section class="section" id="s10"><h2><b>10</b> 印刷 / PRINT</h2>
+    <p class="meta">CMYK / Pantone 仅为换算参考，不是已确认色，也不构成印刷指定色；实际以打样为准。</p>
+    <div class="table-wrap"><table class="spec-table">
+      <thead><tr><th>Token</th><th>HEX</th><th>RGB</th><th>CMYK 换算参考</th><th>Pantone 参考（未打样）</th></tr></thead>
+      <tbody>
+        <tr><td><code>--vi-bg-asphalt</code></td><td>#09090B</td><td>9, 9, 11</td><td>C18 M18 Y0 K96</td><td>Black 6 C（参考，未打样）</td></tr>
+        <tr><td><code>--vi-bg-concrete</code></td><td>#121215</td><td>18, 18, 21</td><td>C14 M14 Y0 K92</td><td>Black 3 C（参考，未打样）</td></tr>
+        <tr><td><code>--vi-stencil-white</code></td><td>#F2EFE9</td><td>242, 239, 233</td><td>C0 M1 Y4 K5</td><td>Warm Gray 1 C（参考，未打样）</td></tr>
+        <tr><td><code>--vi-tech-grey</code></td><td>#78756F</td><td>120, 117, 111</td><td>C0 M3 Y7 K53</td><td>404 C（参考，未打样）</td></tr>
+        <tr><td><code>--vi-grid-line</code></td><td>rgba(242,239,233,.12)<br/>合成约 #252526</td><td>242, 239, 233 / 12%</td><td>骨白 12% 网点；合成约 C3 M3 Y0 K85</td><td>Warm Gray 1 C 12%（参考）</td></tr>
+        <tr><td><code>--vi-accent-signal</code></td><td>#FF3B1D</td><td>255, 59, 29</td><td>C0 M77 Y89 K0</td><td>172 C（参考，未打样）</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">CMYK 为 naive sRGB→CMYK 换算，非 ICC 分色；深色需 GCR / 总墨量控制，Pantone 只是参考，必须打样确认。网格线按骨白 12% 网点处理，叠在沥青上合成约 #252526。</p>
+    <div class="rule-grid">
+      <div class="rule"><b>文件</b>矢量 SVG / PDF/X-4；全部转 CMYK；位图 ≥ 300dpi；深底需白墨或专色。</div>
+      <div class="rule"><b>版面</b>字体转曲；出血 3mm；安全边 5mm；1px 网格线在印刷中按最小可印线宽放大。</div>
+      <div class="rule"><b>流程</b>先数码打样或上机打样，确认黑位、专色与网点后再批量。</div>
+    </div>
+  </section>
+
+  <section class="section" id="s11"><h2><b>11</b> 授权 / LICENSE</h2>
+    <p class="meta"><b>版本</b> v1.0 · 2026-11-12 · 中文为准，英文为摘要。本条款为品牌使用规范，非法律意见。</p>
+    <p class="sub">11.1 适用范围 / SCOPE</p>
+    <p class="meta">本条款适用于鼠王 / ratking.me 的品牌标识（以下简称“Logo”，含 rat.js 生成的工程鼠主标、badge、静态 SVG）、VI 规范与规范资产（网格、锁定组合、字体排印系统、色彩 token、Logo 动效脚本与参数、本页与 VI.md 文档）。摄影作品、第三方字体、站点源代码不在此列：摄影按各案例署名，字体按 SIL OFL 1.1，代码按仓库许可。</p>
+    <div class="rule-grid">
+      <div class="rule"><b>自有使用</b>鼠王本人及 ratking.me 自有项目可无限使用；不转让、不转授权、不售卖 Logo 本身。</div>
+      <div class="rule"><b>合作许可</b>合作方须取得书面许可，写明项目、渠道、期限、尺寸与署名；许可不得转授第三方。</div>
+      <div class="rule"><b>编辑引用</b>为报道 / 评论 ratking.me 可展示 Logo，须注明 <span class="hit">ratking.me</span> 并链接；不得暗示背书。</div>
+    </div>
+    <p class="sub">11.2 允许 / PERMITTED</p>
+    <ul class="bans">
+      <li>在品牌自有网站、作品集、提案、报价、合同、社媒头像与现场物料中使用 Logo 与 VI 资产。</li>
+      <li>按 VI 第 06 / 13 节的尺寸、安全区、配色与构造规则做等比缩放与单色切换。</li>
+      <li>在经书面许可的客户案例中展示；摄影与出镜另按案例 credit 署名。</li>
+      <li>在技术文档、设计评审与教学中引用本页链接，并保留出处。</li>
+    </ul>
+    <p class="sub">11.3 禁止 / PROHIBITED</p>
+    <ul class="bans">
+      <li>拉伸、压扁、旋转、倾斜、改主体色、改瞳孔 / 闪电红、加描边 / 阴影 / 渐变 / 发光。</li>
+      <li>拆碎片另组标识，或把 badge 当主 Logo 拉伸；不得手画、描摹、伪造“官方 Logo”。</li>
+      <li>把 Logo 或 VI 资产注册为商标、外观设计、域名、账号名，或申请为他人所有。</li>
+      <li>未经许可暗示与鼠王 / ratking.me 的合作、赞助、认证或背书。</li>
+      <li>单独售卖、再许可、打包为模板 / 素材库，或移除版权与许可标识。</li>
+      <li>用于违法、欺诈、侵权、仇恨、色情、赌博等损害品牌声誉的场景。</li>
+    </ul>
+    <p class="sub">11.4 字体 / TYPEFACE</p>
+    <ul class="bans">
+      <li><b>Chivo Mono 700</b> 由 Omnibus-Type 以 <b>SIL OFL 1.1</b> 发布，允许商用、嵌入、修改与再分发；再分发须保留版权与许可文本，不得单独售卖字体。</li>
+      <li>字体许可独立于本品牌条款；字体不因收录进 VI 而变成鼠王专属资产。OFL 全文：<a href="./assets/OFL-ChivoMono.txt">OFL-ChivoMono.txt</a>。</li>
+      <li>网页交付使用 woff2 子集（10,756 bytes）；不得把字体文件当作 Logo 或商标的一部分注册。</li>
+    </ul>
+    <p class="sub">11.5 署名与联系 / CREDIT &amp; CONTACT</p>
+    <ul class="bans">
+      <li>必署：<b>STENCIL_SIGNAL · 鼠王</b> / <b>ratking.me</b>；可链接 <a href="https://ratking.me">ratking.me</a>。</li>
+      <li>摄影：按案例 frontmatter 的 <code>credit</code> 署名；Pillbox 现场摄影 <b>@AkilouPhoto</b>（Akilou Photo）。</li>
+      <li>许可、商用、合作与侵权联系：<b>ratking.me</b>（站内联系入口）。本页不提供私人邮箱。</li>
+      <li>许可被撤销或发现违约时，应立即停止使用并删除相关物料；已产生的第三方权利不因此自动转移。</li>
+    </ul>
+    <p class="sub">11.6 English summary</p>
+    <p class="meta">The STENCIL_SIGNAL / 鼠王 logo, VI system and its assets are brand property of ratking.me. They may be used by the owner without restriction, by partners only under written permission, and by editors for commentary with clear credit and a link to ratking.me. Do not alter, stretch, recolor, split, register, sublicense or sell the marks, or imply endorsement. Chivo Mono is licensed separately under SIL OFL 1.1. Photography credits follow each case. Contact: ratking.me. This is a brand usage policy, not legal advice.</p>
+    <p class="note">本条款为品牌使用规范，非法律意见。具体许可范围以双方书面协议为准。v1.0 定稿 · 2026-11-12。</p>
+  </section>
+</div>
+<div class="toast" id="toast">已复制</div>
+<script src="./assets/rat.js"></script>
+<script src="./assets/rat-motion.js"></script>
+<script>
+(function(){
+  var RAT = window.__VI_RAT__(); var BADGE = window.__VI_RAT_BADGE__();
+  function put(id, html){ var el=document.getElementById(id); if(el) el.innerHTML=html; }
+  put('topRat', RAT); put('bigRat', RAT); put('lockRat1', RAT); put('lockRat2', RAT); put('lockRat3', RAT); put('badge1', BADGE);
+  document.querySelectorAll('[data-rat]').forEach(function(el){ el.innerHTML = RAT; });
+  document.querySelectorAll('[data-badge]').forEach(function(el){ el.innerHTML = BADGE; });
+
+  var mToggle=document.getElementById('motionToggle'), mPause=document.getElementById('motionPause'),
+      mTail=document.getElementById('tailTrigger'), mDrill=document.getElementById('drillTrigger'),
+      mStatus=document.getElementById('motionStatus'), mLive=document.getElementById('motionLive'),
+      mLiveText=document.getElementById('motionLiveText');
+  function renderMotion(s){
+    if(!s) return;
+    mToggle.textContent = s.running ? '动效 开' : '动效 关';
+    mToggle.setAttribute('aria-pressed', s.running ? 'true' : 'false');
+    mPause.textContent = s.paused ? '继续' : '暂停';
+    mPause.setAttribute('aria-pressed', s.paused ? 'true' : 'false');
+    mPause.disabled = !s.running && !s.paused;
+    mTail.disabled = !s.running;
+    mDrill.disabled = !s.running;
+    var text;
+    if(s.paused) text='已暂停 · 点「继续」恢复';
+    else if(s.hidden) text='页面不可见，已暂停';
+    else if(s.printing) text='打印中，已暂停';
+    else if(s.reduced && s.userEnabled !== true) text='系统偏好减少动态，已自动关闭';
+    else if(s.running) text='运行中 · 尾巴 4–9s / 电钻 6–12s';
+    else text='已关闭';
+    mStatus.textContent=text;
+    mStatus.dataset.state = s.running ? 'on' : 'off';
+    mLive.dataset.state = s.running ? 'on' : 'off';
+    mLiveText.textContent = s.running ? 'LIVE / 实时渲染' : (s.paused ? 'PAUSED / 已暂停' : 'STATIC / 静态');
+  }
+  var motion = window.RatMotion ? window.RatMotion.init(document.getElementById('motionRat'), {warmup:true, onState:renderMotion}) : null;
+  if(motion){
+    mToggle.onclick=function(){ motion.getState().running ? motion.stop() : motion.start(); };
+    mPause.onclick=function(){ motion.getState().paused ? motion.resume() : motion.pause(); };
+    mTail.onclick=function(){ motion.triggerTail(); };
+    mDrill.onclick=function(){ motion.triggerDrill(); };
+  }
+
+  var fragMatch = RAT.match(/data-part="body" d="([^"]+)"/);
+  var FRAG = fragMatch ? '<svg viewBox="0 0 270 240" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Single shard"><path d="' + fragMatch[1] + '" fill="currentColor"/></svg>' : '';
+  document.querySelectorAll('[data-fragment]').forEach(function(el){ el.innerHTML = FRAG; });
+  var raw = RAT.replace(/currentColor/g, '#F2EFE9');
+  document.getElementById('svgPre').textContent = raw;
+  var toast=document.getElementById('toast'); var tt;
+  function flash(){ toast.classList.add('on'); clearTimeout(tt); tt=setTimeout(function(){toast.classList.remove('on');},1200); }
+  function copy(text){ if(navigator.clipboard){navigator.clipboard.writeText(text).then(flash,flash);} else { var ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');}catch(e){} ta.remove(); flash(); } }
+  document.getElementById('copySvg').onclick=function(){copy(raw);};
+  document.getElementById('copyHooks').onclick=function(){copy('// Logo motion (rat-motion.js)\n// tail: every 4–9s, 480ms, rotate 0 -> 9 -> -3.5 -> 1.2 -> 0 (origin 100% 100%)\n// drill: every 6–12s, 520ms, steps(1,end) jitter + spark\n// lifecycle: prefers-reduced-motion off by default; pause; visibilitychange stop\n// GSAP hooks\n// eye-tracking: mousemove -> gsap.to([data-part=eye],{x,y});\n// tail wave: scroll velocity -> gsap.to([data-part=tail],{rotation:v*14,transformOrigin:"100% 100%"});\n// ear twitch: random interval -> gsap.fromTo([data-part=ear],{rotation:0},{rotation:-14,yoyo:true,repeat:1});\n// hover glitch: mouseenter -> shards x/y jitter (repeat:2, yoyo)');};
+  var swatches=[
+    ['--vi-bg-asphalt','#09090B','地下沥青黑'],['--vi-bg-concrete','#121215','暗部混凝土'],['--vi-stencil-white','#F2EFE9','喷漆骨白'],
+    ['--vi-tech-grey','#78756F','工程铅灰'],['--vi-grid-line','rgba(242,239,233,0.12)','裸露网格线'],['--vi-accent-signal','#FF3B1D','信号朱红']
+  ];
+  var wrap=document.getElementById('swatches');
+  swatches.forEach(function(s){ var b=document.createElement('button'); b.className='sw'; b.innerHTML='<div class="chip" style="background:'+s[1]+'"></div><div class="info"><b>'+s[0].replace('--vi-','').toUpperCase()+'</b>'+s[1]+'<br/>'+s[2]+'</div>'; b.onclick=function(){copy(s[1]);}; wrap.appendChild(b); });
+})();
+</script>
+</body>
+</html>

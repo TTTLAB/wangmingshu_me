@@ -1,0 +1,13 @@
+---
+import CasePage from '../../components/CasePage.astro';
+import { cases } from '../../data/cases';
+
+export function getStaticPaths() {
+  return cases
+    .filter((study) => study.lang === 'zh')
+    .map((study) => ({ params: { slug: study.slug }, props: { study } }));
+}
+
+const { study } = Astro.props;
+---
+<CasePage study={study} />

@@ -1,0 +1,180 @@
+---
+import { contactContent } from '../data/contact';
+import { site, type Lang } from '../data/site';
+import InteractiveGrid from './InteractiveGrid.astro';
+import BreakText from './BreakText.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = contactContent[lang];
+const IG_URL = 'https://www.instagram.com/wangmingshu.me/';
+const XHS_URL = 'https://www.xiaohongshu.com/user/profile/5657f794f53ee0375b2aeb50';
+const infoParts = String(c.infoEmpty ?? '').split(/<br\s*\/?>/i);
+---
+<div class="contacts page__content js-page-content">
+  <InteractiveGrid variant="light" />
+  <div class="l-container contacts__container">
+    <div class="contacts__head">
+      <div class="contacts__infos">
+        <p class="t-eye-sm contacts__infos-label p-eye js-side-el">{c.infoLabel}</p>
+        <div class="contacts__infos-values">
+          {site.email && (
+            <a class="cursor-pointer contacts__infos-value js-side-el" href={`mailto:${site.email}`}>
+              <p class="t-md">{site.email}</p>
+            </a>
+          )}
+          {site.phone && (
+            <a class="contacts__infos-value js-side-el" href={site.phoneHref}>
+              <p class="t-md">{site.phone}</p>
+            </a>
+          )}
+          {!site.email && !site.phone && (
+            <p class="t-md contacts__infos-empty js-side-el">
+              {infoParts.map((part, i) => {
+                const href = part.includes('@wangmingshu.me')
+                  ? IG_URL
+                  : /xiaohongshu|小红书id/i.test(part)
+                    ? XHS_URL
+                    : null;
+                return (
+                  <Fragment>
+                    {i > 0 && <br />}
+                    {href ? (
+                      <a class="cursor-pointer" href={href} target="_blank" rel="noopener noreferrer">{part}</a>
+                    ) : (
+                      part
+                    )}
+                  </Fragment>
+                );
+              })}
+            </p>
+          )}
+        </div>
+      </div>
+      <h1 class="t-half-xl contacts__title js-main-title"><BreakText text={c.title} /></h1>
+    </div>
+    <div class="contacts__body js-contacts-body">
+      <div class="multi-step-form" data-contact-form>
+        <aside class="multi-step-form__sidebar">
+          <nav class="multi-step-form__nav" aria-label={c.summaryTitle}>
+            {c.nav.map((label, i) => (
+              <button type="button" class:list={['multi-step-form__nav-item', { 'is-active': i === 0 }]} disabled data-step-nav={i}>
+                <span class="multi-step-form__nav-indicator" aria-hidden="true"></span>
+                <span class="multi-step-form__nav-label">{label}</span>
+              </button>
+            ))}
+          </nav>
+        </aside>
+        <div class="multi-step-form__main">
+          <form class="multi-step-form__form" novalidate data-form>
+            <div class="multi-step-form__content">
+              <div class="multi-step-form__step-wrapper" style="display:block" data-step="0">
+                <div class="multi-step-form__step">
+                  <fieldset class="multi-step-form__fieldset">
+                    <legend class="t-lg multi-step-form__step-title">{c.serviceTitle}</legend>
+                    <div class="multi-step-form__radio-group multi-step-form__radio-group--buttons">
+                      {c.services.map((service) => (
+                        <button type="button" class="multi-step-form__radio-button" data-service={service} aria-pressed="false">
+                          <p class="t-md multi-step-form__radio-button-text">{service}</p>
+                        </button>
+                      ))}
+                    </div>
+                    <p class="multi-step-form__error" data-error-for="service" aria-live="polite"></p>
+                  </fieldset>
+                </div>
+              </div>
+              <div class="multi-step-form__step-wrapper" style="display:none" data-step="1">
+                <div class="multi-step-form__step">
+                  <p class="t-lg multi-step-form__step-title">{c.detailsTitle}</p>
+                  <div class="multi-step-form__field">
+                    <label class="t-sm multi-step-form__label" for="full_name">{c.fields.name}</label>
+                    <input type="text" id="full_name" name="full_name" class="multi-step-form__input" placeholder={c.placeholders.name} autocomplete="name" required />
+                    <p class="multi-step-form__error" data-error-for="full_name" aria-live="polite"></p>
+                  </div>
+                  <div class="multi-step-form__field">
+                    <label class="t-sm multi-step-form__label" for="email">{c.fields.email}</label>
+                    <input type="email" id="email" name="email" class="multi-step-form__input" placeholder={c.placeholders.email} autocomplete="email" required />
+                    <p class="multi-step-form__error" data-error-for="email" aria-live="polite"></p>
+                  </div>
+                  <div class="multi-step-form__field">
+                    <label class="t-sm multi-step-form__label" for="phone_number">{c.fields.phone}</label>
+                    <input type="tel" id="phone_number" name="phone_number" class="multi-step-form__input" placeholder={c.placeholders.phone} autocomplete="tel" />
+                  </div>
+                  <div class="multi-step-form__field">
+                    <label class="t-sm multi-step-form__label" for="message">{c.fields.message}</label>
+                    <textarea id="message" name="message" class="multi-step-form__textarea" placeholder={c.placeholders.message} rows="5" required></textarea>
+                    <p class="multi-step-form__error" data-error-for="message" aria-live="polite"></p>
+                  </div>
+                </div>
+              </div>
+              <div class="multi-step-form__step-wrapper" style="display:none" data-step="2">
+                <div class="multi-step-form__step">
+                  <p class="t-lg multi-step-form__step-title">{c.summaryTitle}</p>
+                  <div class="multi-step-form__summary">
+                    <div class="multi-step-form__summary-item">
+                      <p class="t-sm multi-step-form__summary-label">{c.summary.service} :</p>
+                      <p class="t-sm multi-step-form__summary-value" data-summary="service"></p>
+                    </div>
+                    <div class="multi-step-form__summary-item">
+                      <p class="t-sm multi-step-form__summary-label">{c.summary.name} :</p>
+                      <p class="t-sm multi-step-form__summary-value" data-summary="name"></p>
+                    </div>
+                    <div class="multi-step-form__summary-item">
+                      <p class="t-sm multi-step-form__summary-label">{c.summary.email} :</p>
+                      <p class="t-sm multi-step-form__summary-value" data-summary="email"></p>
+                    </div>
+                    <div class="multi-step-form__summary-item">
+                      <p class="t-sm multi-step-form__summary-label">{c.summary.message} :</p>
+                      <p class="t-sm multi-step-form__summary-value" data-summary="message"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="multi-step-form__success" hidden data-success>
+                <p class="t-lg multi-step-form__step-title">{c.successTitle}</p>
+                <p class="t-md multi-step-form__success-text">{c.successText}</p>
+                <button type="button" class="button button--primary button--regular" data-restart>
+                  <p class="t-sm button__text">{c.successAgain}</p>
+                </button>
+              </div>
+            </div>
+            <div class="multi-step-form__footer" data-form-footer>
+              <div class="multi-step-form__hint">
+                <button type="button" class="multi-step-form__hint-enter" data-enter aria-label={c.hint}>
+                  <p class="t-sm">{c.ok}</p>
+                </button>
+                <div class="multi-step-form__hint-message">
+                  <p class="t-md multi-step-form__hint-message-label">{c.hint.split(' ')[0]} <strong>{c.hint.split(' ').slice(1).join(' ')}</strong></p>
+                  <svg fill="none" viewBox="0 0 14 19" xmlns="http://www.w3.org/2000/svg" class="multi-step-form__hint-icon" aria-hidden="true">
+                    <path d="M13.5 15v.5h.5V15zM.146 14.646a.5.5 0 000 .708l3.182 3.182a.5.5 0 10.708-.708L1.207 15l2.829-2.828a.5.5 0 10-.708-.708zM13.5 0H13v15h1V0zm0 15v-.5H.5v1h13z" fill="currentColor"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="multi-step-form__footer-buttons">
+                <button type="button" class="multi-step-form__footer-button is-disabled" data-back>
+                  <span class="multi-step-form__footer-button-label">{c.back}</span>
+                  <svg fill="none" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg" class="multi-step-form__footer-button-icon" aria-hidden="true">
+                    <path d="M6.164 9.502V7.97h1.533v1.532zm0-1.749V6.22h1.533v1.533zm3.497-1.749V4.471h1.534v1.533zm1.75 1.749V6.22h1.532v1.533zm-10.494 0V6.22H2.45v1.533zM6.164 13v-1.533h1.533V13zm0-1.749V9.718h1.533v1.533zm-1.75-6.996V2.722h1.533v1.533zm1.75 1.749V4.471h1.533v1.533zm0-1.749V2.722h1.533v1.533zm0-1.748V.974h1.533v1.533zM2.666 6.004V4.471H4.2v1.533zm5.247-1.749V2.722h1.533v1.533z" fill="currentColor"></path>
+                  </svg>
+                </button>
+                <button type="button" class="multi-step-form__footer-button" data-next>
+                  <span class="multi-step-form__footer-button-label">{c.next}</span>
+                  <svg fill="none" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg" class="multi-step-form__footer-button-icon" aria-hidden="true">
+                    <path d="M6.835 3.498V5.03H5.302V3.498h1.533zM6.835 5.247V6.78H5.302V5.247h1.533zM3.338 6.996v1.533H1.804V6.996h1.534zM1.589 5.247V6.78H.056V5.247h1.533zM12.082 5.247V6.78H10.55V5.247h1.533zM6.835 0v1.533H5.302V0h1.533zM6.835 1.749v1.533H5.302V1.749h1.533zM8.585 8.745v1.533H7.052V8.745h1.533zM6.835 6.996v1.533H5.302V6.996h1.533zM6.835 8.745v1.533H5.302V8.745h1.533zM6.835 10.493v1.533H5.302v-1.533h1.533zM10.333 6.996v1.533H8.8V6.996h1.533zM5.086 8.745v1.533H3.553V8.745h1.533z" fill="currentColor"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .contacts__infos-empty a:hover {
+    text-decoration: underline;
+  }
+</style>

@@ -1,0 +1,27 @@
+---
+import { homeContent } from '../../data/home';
+import type { Lang } from '../../data/site';
+import ServicesPattern from '../svg/ServicesPattern.astro';
+import AboutPattern from '../svg/AboutPattern.astro';
+import InteractiveGrid from '../InteractiveGrid.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = homeContent[lang];
+---
+<section class="about-section js-about-intro" data-navbar-theme="dark">
+  <div class="about-section__container">
+    <div class="about-section__pixel-pattern" aria-hidden="true">
+      <ServicesPattern />
+    </div>
+    <InteractiveGrid variant="light" />
+    <h2 class="t-xl about-section__title" set:html={c.aboutTitle}></h2>
+    <div class="about-section__image-wrap">
+      <div class="about-section__pattern" aria-hidden="true">
+        <AboutPattern />
+      </div>
+    </div>
+  </div>
+</section>

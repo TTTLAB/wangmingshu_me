@@ -1,0 +1,89 @@
+---
+import { shell, site, type Lang } from '../data/site';
+import NavMenuArrow from './svg/NavMenuArrow.astro';
+
+interface Props {
+  lang: Lang;
+  home?: boolean;
+}
+
+const { lang, home = false } = Astro.props;
+const copy = shell[lang];
+const prefix = home ? '' : lang === 'zh' ? '/' : '/en';
+
+const IG_URL = 'https://www.instagram.com/wangmingshu.me/';
+const XHS_URL = 'https://www.xiaohongshu.com/user/profile/5657f794f53ee0375b2aeb50';
+const rawConnect = String(copy.info.connect || '');
+const emailAddr = (rawConnect.match(/[^\s:]+@[^\s:]+/) || [''])[0];
+const hasEmail = !!emailAddr;
+const xhsText = '小红书id: 949135495';
+---
+<button class="navmenu__close" type="button" aria-label={copy.closeLabel}>
+  <span class="sr-only">{copy.closeLabel}</span>
+</button>
+<nav class="navmenu" id="navmenu" role="navigation" aria-label={copy.menuAria} inert aria-expanded="false" data-navmenu>
+  <div class="navmenu__bg js-navmenu-bg"></div>
+  <ul class="navmenu__list js-navmenu-list">
+    {copy.nav.map((item, i) => (
+      <li class="navmenu__item js-navmenu-item">
+        <a href={'href' in item ? item.href : `${prefix}#${item.hash}`} class="navmenu__link js-navmenu-link" data-menu-link>
+          <div class="navmenu__link-bg" aria-hidden="true"></div>
+          <p class="t-xl navmenu__link-index">{String(i + 1).padStart(2, '0')}</p>
+          <p class="t-xl navmenu__link-label">{item.label}</p>
+          <div class="navmenu__link-icon" aria-hidden="true">
+            <div class="navmenu__link-icon-inner"><NavMenuArrow /></div>
+          </div>
+        </a>
+      </li>
+    ))}
+  </ul>
+  <div class="navmenu__infos js-navmenu-infos">
+    {hasEmail ? (
+      <div class="navmenu__info-group">
+        <div class="navmenu__info-cell-item">
+          <a class="navmenu__info-title js-navmenu-value-item cursor-pointer" href={`mailto:${emailAddr}`}>{copy.info.connect}</a>
+        </div>
+        <div class="navmenu__info-cell-item">
+          <a class="navmenu__info-title js-navmenu-value-item cursor-pointer" href={IG_URL} target="_blank" rel="noopener noreferrer">{copy.info.phone}</a>
+        </div>
+        <div class="navmenu__info-cell-item">
+          <a class="navmenu__info-title js-navmenu-value-item cursor-pointer" href={XHS_URL} target="_blank" rel="noopener noreferrer">{xhsText}</a>
+        </div>
+      </div>
+    ) : (
+    <div class="navmenu__info-group">
+      <div class="navmenu__info-cell-item">
+        <p class="navmenu__info-title js-navmenu-value-item">{copy.info.connect}</p>
+      </div>
+      <div class="navmenu__info-cell-item">
+        {site.emailMenu ? (
+          <a class="cursor-pointer navmenu__info-value js-navmenu-value-item" href={`mailto:${site.emailMenu}`}>{site.emailMenu}</a>
+        ) : (
+          <span class="navmenu__info-value js-navmenu-value-item">—</span>
+        )}
+      </div>
+    </div>
+    <div class="navmenu__info-group">
+      <div class="navmenu__info-cell-item">
+        {copy.info.phone.includes('@wangmingshu.me') ? (
+          <a class="navmenu__info-title js-navmenu-value-item cursor-pointer" href="https://www.instagram.com/wangmingshu.me/" target="_blank" rel="noopener noreferrer">{copy.info.phone}</a>
+        ) : (
+          <p class="navmenu__info-title js-navmenu-value-item">{copy.info.phone}</p>
+        )}
+      </div>
+      <div class="navmenu__info-cell-item">
+        {site.phone ? (
+          <a class="navmenu__info-value js-navmenu-value-item" href={site.phoneHref}>{site.phone}</a>
+        ) : (
+          <span class="navmenu__info-value js-navmenu-value-item">—</span>
+        )}
+      </div>
+    </div>
+    )}
+  </div>
+</nav>
+<style>
+  a.navmenu__info-title:hover {
+    text-decoration: underline;
+  }
+</style>

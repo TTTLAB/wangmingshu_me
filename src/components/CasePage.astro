@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import InteractiveGrid from './InteractiveGrid.astro';
+import Button from './Button.astro';
+import ScrollIcon from './svg/ScrollIcon.astro';
+import type { CaseStudy } from '../data/cases';
+
+interface Props {
+  study: CaseStudy;
+}
+const { study } = Astro.props;
+---
+<BaseLayout
+  lang={study.lang}
+  title={study.metaTitle}
+  description={study.metaDescription}
+  alternate={study.alternate}
+  navbarDark
+  footerTheme="light"
+  page="case"
+>
+  <header class="case-hero js-case-hero">
+    <InteractiveGrid variant="light" />
+    <div class="case-hero__content">
+      <h1 class="case-hero__title js-main-title">{study.h1}</h1>
+      <span class="case-hero__index js-main-index">{study.index}</span>
+    </div>
+    <div class="case-hero__infos">
+      {study.infos.map((info) => (
+        <div class="case-hero__info-group js-info-group">
+          <p class="case-hero__info-group-title js-info-group-title">{info.label}</p>
+          <p class="case-hero__info-group-value js-info-group-value">{info.value}</p>
+        </div>
+      ))}
+    </div>
+    <a href="#content" class="case-hero__scroll">
+      <span class="case-hero__scroll-label">{study.scrollLabel}</span>
+      <span class="case-hero__scroll-icon"><ScrollIcon /></span>
+    </a>
+  </header>
+  <main class="page__content text-smoke-black bg-smoke-white js-page-content">
+    <section class="case-head" id="content">
+      <div class="case-head__container">
+        <h2 class="t-2xl case-head__title js-anim-title">{study.head}</h2>
+      </div>
+    </section>
+    <div class="case-info__wrap">
+      {study.sections.map((section) => (
+        <section class="case-info">
+          <div class="l-container case-info__container">
+            <div class="case-info__head">
+              <p class="t-eye-xs case-info__label js-anim-title">{section.label}</p>
+            </div>
+            <div class="case-info__content js-anim-content" set:html={section.html}></div>
+          </div>
+        </section>
+      ))}
+    </div>
+    <section class="case-next">
+      <div class="l-container case-next__link">
+        <p class="t-eye-sm text-silver js-anim-el">{study.lang === 'zh' ? '下一个' : 'Next'} [ {study.nextTitle} ]</p>
+        <Button href={study.next.href} label={study.next.label} variant="light" size="sm" className="js-anim-el" />
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,38 @@
+---
+import { shell, type Lang } from '../data/site';
+import NavLogo from './svg/NavLogo.astro';
+
+interface Props {
+  lang: Lang;
+  alternate: string;
+  theme?: 'dark' | 'light';
+}
+
+const { lang, alternate, theme = 'dark' } = Astro.props;
+const copy = shell[lang];
+const home = lang === 'zh' ? '/' : '/en/';
+const normalize = (path: string) => path.replace(/\/+$/, '') || '/';
+const isHome = normalize(Astro.url.pathname) === normalize(home);
+const isZh = lang === 'zh';
+---
+<nav class:list={['navbar', { 'navbar--dark': theme === 'dark', 'navbar--home': isHome }]} data-navbar>
+  <div class="navbar__container">
+    <a class="navbar__link js-logo-nav" href={home} aria-label="鼠王 Ratking — home">
+      <NavLogo />
+      <span class="sr-only">鼠王 Ratking</span>
+    </a>
+    <div class="navbar__actions">
+      <div class="locale-switcher locale-switcher--nav" aria-label="Language">
+        <a class:list={['locale-switcher__item', { 'locale-switcher__item--active': isZh }]} href={isZh ? Astro.url.pathname : alternate} aria-current={isZh ? 'true' : undefined}><span>zh</span></a>
+        <a class:list={['locale-switcher__item', { 'locale-switcher__item--active': !isZh }]} href={isZh ? alternate : Astro.url.pathname} aria-current={!isZh ? 'true' : undefined}><span>en</span></a>
+      </div>
+      <button class="navbar__toggle js-navbar-toggle" aria-label={copy.menuLabel} aria-controls="navmenu" aria-expanded="false">
+        <span class="navbar__toggle-label">{copy.menuLabel}</span>
+        <div class="navbar__toggle-button">
+          <div class="navbar__toggle-button-open" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="navbar__toggle-button-close" aria-hidden="true"><span></span><span></span></div>
+        </div>
+      </button>
+    </div>
+  </div>
+</nav>

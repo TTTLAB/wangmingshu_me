@@ -1,0 +1,42 @@
+---
+import { homeContent } from '../../data/home';
+import type { Lang } from '../../data/site';
+import PixelArrow from '../svg/PixelArrow.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = homeContent[lang];
+const rects = Array.from({ length: 37 }, (_, i) => i);
+---
+<section
+  data-navbar-theme="dark"
+  class:list={['case-histories', 'js-section-spy', { 'case-histories--single': c.caseItems.length === 1 }]}
+  id="case-histories"
+>
+  <div class="case-histories__container">
+    <div class="case-histories__head">
+      <h3 class="t-2xl case-histories__title" set:html={c.casesTitle}></h3>
+      <p class="t-md case-histories__text" set:html={c.casesText}></p>
+    </div>
+    <ul class="case-histories__items">
+      {c.caseItems.map((item) => (
+        <li class="case-histories__item js-case-histories-item">
+          <a class="case-histories__item-link" href={item.href}>
+            <div class="case-histories__item-pattern js-case-row-pattern" aria-hidden="true">
+              {rects.map(() => <div class="case-histories__pattern-item js-case-row-rect"></div>)}
+            </div>
+            <p class="t-xl case-histories__item-index">{item.index}</p>
+            <p class="t-xl case-histories__item-title">{item.title}</p>
+            <p class="t-eye-sm case-histories__item-year">[ {item.year} ]</p>
+            <p class="t-eye-sm case-histories__item-type">{item.type}</p>
+            <div class="case-histories__item-action">
+              <div class="case-histories__item-button"><PixelArrow /></div>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

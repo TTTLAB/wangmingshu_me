@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/sections/Hero.astro';
+import About from '../../components/sections/About.astro';
+import DataViz from '../../components/sections/DataViz.astro';
+import Services from '../../components/sections/Services.astro';
+import Cases from '../../components/sections/Cases.astro';
+import Call from '../../components/sections/Call.astro';
+import NavSpy from '../../components/NavSpy.astro';
+import { homeContent } from '../../data/home';
+
+const c = homeContent.en;
+---
+<BaseLayout
+  lang="en"
+  title={c.meta.title}
+  description={c.meta.description}
+  alternate="/"
+  page="home"
+  home
+  footerTheme="dark"
+>
+  <Hero lang="en" />
+  <main class="page__content js-home-content js-page-content">
+    <div id="about" class="js-section-spy">
+      <About lang="en" />
+      <DataViz lang="en" />
+    </div>
+    <div class="page__home-sections">
+      <Services lang="en" />
+      <Cases lang="en" />
+    </div>
+    <Call lang="en" />
+  </main>
+  <NavSpy lang="en" />
+</BaseLayout>

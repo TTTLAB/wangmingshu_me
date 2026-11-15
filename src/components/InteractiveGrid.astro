@@ -1,0 +1,19 @@
+---
+interface Props {
+  variant?: 'light' | 'dark';
+}
+
+const { variant = 'light' } = Astro.props;
+const rows = Array.from({ length: 5 }, (_, i) => i);
+const cells = Array.from({ length: 9 }, (_, i) => i);
+---
+<div aria-hidden="true" class:list={['interactive-grid', `interactive-grid--${variant}`]} data-interactive-grid>
+  <div class="interactive-grid__container">
+    {rows.map(() => (
+      <div class="interactive-grid__row">
+        {cells.map(() => <div class="interactive-grid__cell"></div>)}
+      </div>
+    ))}
+    <div class="interactive-grid__background"></div>
+  </div>
+</div>

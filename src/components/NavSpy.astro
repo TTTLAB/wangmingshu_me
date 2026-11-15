@@ -1,0 +1,32 @@
+---
+import type { Lang } from '../data/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const labels =
+  lang === 'zh'
+    ? [
+        { href: '#about', label: '关于' },
+        { href: '#services', label: '服务' },
+        { href: '#case-histories', label: '作品' },
+        { href: '#contact', label: '联系' },
+      ]
+    : [
+        { href: '#about', label: 'About' },
+        { href: '#services', label: 'Services' },
+        { href: '#case-histories', label: 'Works' },
+        { href: '#contact', label: 'Contact' },
+      ];
+---
+<nav class="nav-spy is-hidden" data-nav-spy aria-label={lang === 'zh' ? '页面章节导航' : 'Section navigation'}>
+  <ul class="nav-spy__list">
+    {labels.map((item) => (
+      <li class="nav-spy__item">
+        <a href={item.href} class="nav-spy__link">{item.label}</a>
+      </li>
+    ))}
+  </ul>
+</nav>

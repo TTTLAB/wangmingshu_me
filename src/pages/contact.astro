@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactPage from '../components/ContactPage.astro';
+import { contactContent } from '../data/contact';
+
+const c = contactContent.zh;
+---
+<BaseLayout
+  lang="zh"
+  title={c.meta.title}
+  description={c.meta.description}
+  alternate="/en/contact"
+  navbarDark
+  footerTheme="light"
+  page="contact"
+>
+  <ContactPage lang="zh" />
+</BaseLayout>

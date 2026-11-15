@@ -1,0 +1,21 @@
+---
+import PixelArrow from './svg/PixelArrow.astro';
+import WideArrow from './svg/WideArrow.astro';
+
+interface Props {
+  href: string;
+  label: string;
+  variant?: 'primary' | 'light';
+  size?: 'regular' | 'sm';
+  className?: string;
+}
+
+const { href, label, variant = 'primary', size = 'regular', className = '' } = Astro.props;
+---
+<a class:list={['button', `button--${variant}`, `button--${size}`, className]} href={href}>
+  <p class="t-sm button__text">{label}</p>
+  <div class="button__icon" aria-hidden="true">
+    <div class="button__icon-front"><PixelArrow /></div>
+    <div class="button__icon-back"><WideArrow /></div>
+  </div>
+</a>

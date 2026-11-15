@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="920" viewBox="0 0 1800 920">
+<rect width="1800" height="920" fill="#09090B"/>
+<defs><pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#1c1c20"/></pattern></defs>
+<rect width="1800" height="920" fill="url(#g)"/>
+<text x="90" y="70" fill="#F2EFE9" font-size="22" letter-spacing="6" font-family="JetBrains Mono, DejaVu Sans Mono, monospace">PILLBOX · SIGNAL FLOW</text>
+<text x="1710" y="70" fill="#6E6A64" font-size="18" text-anchor="end" font-family="Noto Sans CJK SC, sans-serif">信号流 · 跟随 DJ 的 BPM</text>
+<path d="M600,250 C630.0,250 630.0,250 660,250" fill="none" stroke="#F2EFE9" stroke-opacity="0.8" stroke-width="2" stroke-dasharray="6 6"/>
+<circle cx="660" cy="250" r="4" fill="#F2EFE9"/>
+<path d="M890,250 C925.0,250 925.0,470 960,470" fill="none" stroke="#F2EFE9" stroke-opacity="0.8" stroke-width="2" stroke-dasharray="6 6"/>
+<circle cx="960" cy="470" r="4" fill="#F2EFE9"/>
+<path d="M320,470 C345.0,470 345.0,470 370,470" fill="none" stroke="#FF3B1D" stroke-opacity="1" stroke-width="2"/>
+<circle cx="370" cy="470" r="4" fill="#FF3B1D"/>
+<path d="M600,470 C630.0,470 630.0,470 660,470" fill="none" stroke="#FF3B1D" stroke-opacity="1" stroke-width="2"/>
+<circle cx="660" cy="470" r="4" fill="#FF3B1D"/>
+<path d="M890,470 C925.0,470 925.0,470 960,470" fill="none" stroke="#FF3B1D" stroke-opacity="1" stroke-width="2"/>
+<circle cx="960" cy="470" r="4" fill="#FF3B1D"/>
+<path d="M1190,470 C1220.0,470 1220.0,150 1250,150" fill="none" stroke="#F2EFE9" stroke-opacity="0.55" stroke-width="2"/>
+<circle cx="1250" cy="150" r="4" fill="#F2EFE9"/>
+<path d="M1190,470 C1220.0,470 1220.0,385 1250,385" fill="none" stroke="#F2EFE9" stroke-opacity="0.55" stroke-width="2"/>
+<circle cx="1250" cy="385" r="4" fill="#F2EFE9"/>
+<path d="M1190,470 C1220.0,470 1220.0,600 1250,600" fill="none" stroke="#F2EFE9" stroke-opacity="0.55" stroke-width="2"/>
+<circle cx="1250" cy="600" r="4" fill="#F2EFE9"/>
+<path d="M1190,470 C1220.0,470 1220.0,790 1250,790" fill="none" stroke="#F2EFE9" stroke-opacity="0.55" stroke-width="2"/>
+<circle cx="1250" cy="790" r="4" fill="#F2EFE9"/>
+<path d="M1480,150 C1510.0,150 1510.0,150 1540,150" fill="none" stroke="#F2EFE9" stroke-opacity="0.55" stroke-width="2"/>
+<circle cx="1540" cy="150" r="4" fill="#F2EFE9"/>
+<path d="M1480,385 C1510.0,385 1510.0,330 1540,330" fill="none" stroke="#F2EFE9" stroke-opacity="0.55" stroke-width="2"/>
+<circle cx="1540" cy="330" r="4" fill="#F2EFE9"/>
+<path d="M1480,385 C1510.0,385 1510.0,440 1540,440" fill="none" stroke="#F2EFE9" stroke-opacity="0.55" stroke-width="2"/>
+<circle cx="1540" cy="440" r="4" fill="#F2EFE9"/>
+<path d="M1480,600 C1510.0,600 1510.0,600 1540,600" fill="none" stroke="#F2EFE9" stroke-opacity="0.55" stroke-width="2"/>
+<circle cx="1540" cy="600" r="4" fill="#F2EFE9"/>
+<path d="M1480,790 C1510.0,790 1510.0,790 1540,790" fill="none" stroke="#F2EFE9" stroke-opacity="0.55" stroke-width="2"/>
+<circle cx="1540" cy="790" r="4" fill="#F2EFE9"/>
+<rect x="370" y="213.0" width="230" height="74" rx="4" fill="#111114" stroke="#F2EFE9" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="390" y="246" fill="#F2EFE9" font-size="21" font-weight="700" font-family="Noto Sans CJK SC, sans-serif">iPad 控制界面</text>
+<text x="390" y="274" fill="#6E6A64" font-size="15" font-family="Noto Sans CJK SC, sans-serif">更新 · 甲方无线改色</text>
+<rect x="660" y="213.0" width="230" height="74" rx="4" fill="#111114" stroke="#F2EFE9" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="680" y="246" fill="#F2EFE9" font-size="21" font-weight="700" font-family="Noto Sans CJK SC, sans-serif">OSC</text>
+<text x="680" y="274" fill="#6E6A64" font-size="15" font-family="Noto Sans CJK SC, sans-serif">颜色参数</text>
+<rect x="90" y="433.0" width="230" height="74" rx="4" fill="#FF3B1D" stroke="#FF3B1D" stroke-width="1.5"/>
+<text x="110" y="466" fill="#09090B" font-size="21" font-weight="700" font-family="Noto Sans CJK SC, sans-serif">CDJ</text>
+<text x="110" y="494" fill="#09090B" font-size="15" font-family="Noto Sans CJK SC, sans-serif">DJ 台</text>
+<rect x="370" y="433.0" width="230" height="74" rx="4" fill="#111114" stroke="#FF3B1D" stroke-width="1.5"/>
+<text x="390" y="466" fill="#F2EFE9" font-size="21" font-weight="700" font-family="Noto Sans CJK SC, sans-serif">Beat Link Trigger</text>
+<text x="390" y="494" fill="#6E6A64" font-size="15" font-family="Noto Sans CJK SC, sans-serif">波形 / 节拍数据</text>
+<rect x="660" y="433.0" width="230" height="74" rx="4" fill="#111114" stroke="#FF3B1D" stroke-width="1.5"/>
+<text x="680" y="466" fill="#F2EFE9" font-size="21" font-weight="700" font-family="Noto Sans CJK SC, sans-serif">Ableton Link</text>
+<text x="680" y="494" fill="#6E6A64" font-size="15" font-family="Noto Sans CJK SC, sans-serif">BPM 同步</text>
+<rect x="960" y="433.0" width="230" height="74" rx="4" fill="#111114" stroke="#F2EFE9" stroke-width="1.5"/>
+<text x="980" y="466" fill="#F2EFE9" font-size="21" font-weight="700" font-family="Noto Sans CJK SC, sans-serif">MadMapper</text>
+<text x="980" y="494" fill="#6E6A64" font-size="15" font-family="Noto Sans CJK SC, sans-serif">画面 / 灯光 / 激光编排</text>
+<rect x="1250" y="113.0" width="230" height="74" rx="4" fill="#111114" stroke="#3a3836" stroke-width="1.5"/>
+<text x="1270" y="146" fill="#F2EFE9" font-size="21" font-weight="700" font-family="Noto Sans CJK SC, sans-serif">Art-Net</text>
+<text x="1270" y="174" fill="#6E6A64" font-size="15" font-family="Noto Sans CJK SC, sans-serif">灯带控制器</text>
+<rect x="1250" y="348.0" width="230" height="74" rx="4" fill="#111114" stroke="#3a3836" stroke-width="1.5"/>
+<text x="1270" y="381" fill="#F2EFE9" font-size="21" font-weight="700" font-family="Noto Sans CJK SC, sans-serif">DMX512</text>
+<text x="1270" y="409" fill="#6E6A64" font-size="15" font-family="Noto Sans CJK SC, sans-serif">继电器</text>
+<rect x="1250" y="563.0" width="230" height="74" rx="4" fill="#111114" stroke="#3a3836" stroke-width="1.5"/>
+<text x="1270" y="596" fill="#F2EFE9" font-size="21" font-weight="700" font-family="Noto Sans CJK SC, sans-serif">DMX512</text>
+<text x="1270" y="624" fill="#6E6A64" font-size="15" font-family="Noto Sans CJK SC, sans-serif">Dimmer 调光</text>
+<rect x="1250" y="753.0" width="230" height="74" rx="4" fill="#111114" stroke="#3a3836" stroke-width="1.5"/>
+<text x="1270" y="786" fill="#F2EFE9" font-size="21" font-weight="700" font-family="Noto Sans CJK SC, sans-serif">Pangolin BEYOND</text>
+<text x="1270" y="814" fill="#6E6A64" font-size="15" font-family="Noto Sans CJK SC, sans-serif">MadMapper Laser 模块</text>
+<rect x="1540" y="113.0" width="230" height="74" rx="4" fill="#111114" stroke="#3a3836" stroke-width="1.5"/>
+<rect x="1540" y="113.0" width="4" height="74" fill="#FF3B1D"/>
+<text x="1560" y="146" fill="#F2EFE9" font-size="21" font-weight="700" font-family="Noto Sans CJK SC, sans-serif">2815 点控灯带</text>
+<text x="1560" y="174" fill="#6E6A64" font-size="15" font-family="Noto Sans CJK SC, sans-serif">150 m · 60 灯/m</text>
+<rect x="1540" y="293.0" width="230" height="74" rx="4" fill="#111114" stroke="#3a3836" stroke-width="1.5"/>
+<rect x="1540" y="293.0" width="4" height="74" fill="#FF3B1D"/>
+<text x="1560" y="326" fill="#F2EFE9" font-size="21" font-weight="700" font-family="Noto Sans CJK SC, sans-serif">638nm 红色激光头</text>
+<text x="1560" y="354" fill="#6E6A64" font-size="15" font-family="Noto Sans CJK SC, sans-serif">开关控制</text>
+<rect x="1540" y="403.0" width="230" height="74" rx="4" fill="#111114" stroke="#3a3836" stroke-width="1.5"/>
+<rect x="1540" y="403.0" width="4" height="74" fill="#FF3B1D"/>
+<text x="1560" y="436" fill="#F2EFE9" font-size="21" font-weight="700" font-family="Noto Sans CJK SC, sans-serif">旋转警灯</text>
+<text x="1560" y="464" fill="#6E6A64" font-size="15" font-family="Noto Sans CJK SC, sans-serif">开关控制</text>
+<rect x="1540" y="563.0" width="230" height="74" rx="4" fill="#111114" stroke="#3a3836" stroke-width="1.5"/>
+<rect x="1540" y="563.0" width="4" height="74" fill="#FF3B1D"/>
+<text x="1560" y="596" fill="#F2EFE9" font-size="21" font-weight="700" font-family="Noto Sans CJK SC, sans-serif">钨丝灯</text>
+<text x="1560" y="624" fill="#6E6A64" font-size="15" font-family="Noto Sans CJK SC, sans-serif">调光</text>
+<rect x="1540" y="753.0" width="230" height="74" rx="4" fill="#111114" stroke="#3a3836" stroke-width="1.5"/>
+<rect x="1540" y="753.0" width="4" height="74" fill="#FF3B1D"/>
+<text x="1560" y="786" fill="#F2EFE9" font-size="21" font-weight="700" font-family="Noto Sans CJK SC, sans-serif">全彩动画激光</text>
+<text x="1560" y="814" fill="#6E6A64" font-size="15" font-family="Noto Sans CJK SC, sans-serif">FB4 输出</text>
+<text x="90" y="870" fill="#6E6A64" font-size="15" letter-spacing="4" font-family="Noto Sans CJK SC, sans-serif">01 输入</text>
+<text x="370" y="870" fill="#6E6A64" font-size="15" letter-spacing="4" font-family="Noto Sans CJK SC, sans-serif">02 解析</text>
+<text x="660" y="870" fill="#6E6A64" font-size="15" letter-spacing="4" font-family="Noto Sans CJK SC, sans-serif">03 同步</text>
+<text x="960" y="870" fill="#6E6A64" font-size="15" letter-spacing="4" font-family="Noto Sans CJK SC, sans-serif">04 主控</text>
+<text x="1250" y="870" fill="#6E6A64" font-size="15" letter-spacing="4" font-family="Noto Sans CJK SC, sans-serif">05 接口 / 驱动</text>
+<text x="1540" y="870" fill="#6E6A64" font-size="15" letter-spacing="4" font-family="Noto Sans CJK SC, sans-serif">06 灯具</text>
+<line x1="1240" y1="64" x2="1280" y2="64" stroke="#F2EFE9" stroke-width="2" stroke-dasharray="6 6"/>
+<text x="1292" y="70" fill="#6E6A64" font-size="15" font-family="Noto Sans CJK SC, sans-serif">虚线：交付后更新加入</text>
+</svg>

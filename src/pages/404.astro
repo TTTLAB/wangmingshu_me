@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+---
+<BaseLayout
+  lang="zh"
+  title="404 — 页面不存在"
+  description="你要找的页面不存在。"
+  alternate="/en/"
+  page="404"
+  footerTheme="dark"
+>
+  <main class="page__content js-page-content error-page">
+    <div class="l-container error-page__inner">
+      <p class="t-eye-sm error-page__eyebrow">错误 404</p>
+      <h1 class="t-3xl error-page__title">这页不存在。</h1>
+      <p class="t-md error-page__text">链接可能旧了，也可能本来就没这页。回首页重新找。</p>
+      <Button href="/" label="回到首页" />
+    </div>
+  </main>
+</BaseLayout>

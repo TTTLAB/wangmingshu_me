@@ -1,0 +1,27 @@
+---
+import { homeContent } from '../../data/home';
+import { routes, type Lang } from '../../data/site';
+import CallPattern from '../svg/CallPattern.astro';
+import Button from '../Button.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = homeContent[lang];
+const contactHref = routes[lang].contact;
+---
+<section class="call-section js-section-spy" id="contact">
+  <div class="call-section__pattern">
+    <CallPattern />
+  </div>
+  <div class="call-section__content">
+    <p class="t-2xl call-section__title js-title" set:html={c.callTitle}></p>
+    <p class="t-md call-section__text js-text" set:html={c.callText}></p>
+    <div class="call-section__cta">
+      <div class="js-cta-inner">
+        <Button href={contactHref} label={c.callCta} />
+      </div>
+    </div>
+  </div>
+</section>
