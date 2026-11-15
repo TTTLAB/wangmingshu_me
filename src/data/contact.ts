@@ -47,17 +47,22 @@ const zh = {
 
 const en: typeof zh = {
   meta: {
-    title: 'Contact Ratking — Lighting Systems and Installations',
+    title: 'Contact Ratking — Lighting Systems and Interactive Installations',
     description:
-      'Tell me about your venue, budget and timeline. Club lighting systems, control programming and interactive installations.',
+      'Tell me about your venue, your budget and your timeline. Club lighting systems, control programming, interactive installations — if I can do it, I take it on; if not, I say so.',
   },
   infoLabel: 'Contact',
   infoEmpty:
-    'Email and phone are still to be added. The form is a front-end demo and does not send anything to a server.',
-  title: 'Tell me about the room,<br>the budget and the timeline.',
-  nav: ['Request', 'Details', 'Contact', 'Summary'],
-  serviceTitle: 'What are you building?*',
-  services: ['Lighting system', 'Interactive installation'],
+    'd0a1ccec@gmail.com <br>Instagram: @wangmingshu.me <br>Xiaohongshu ID: 949135495',
+  title: 'Tell me about your venue,<br>your budget and your timeline.',
+  nav: ['Request', 'Details', 'Contact', 'Confirm'],
+  serviceTitle: 'Which of these do you need?*',
+  services: [
+    'Lighting system',
+    'Sound system',
+    'Interactive installation',
+    'Festival stage design',
+  ],
   detailsTitle: 'Your details',
   fields: {
     name: 'Name*',
@@ -69,9 +74,9 @@ const en: typeof zh = {
     name: 'Your name',
     email: 'you@example.com',
     phone: 'Optional',
-    message: 'Where is the venue, how big is it, what is the budget, when should it open…',
+    message: "Where is the venue, how big is it, what's the budget, and when do you want it up and running…",
   },
-  summaryTitle: 'Summary',
+  summaryTitle: 'Confirm',
   summary: {
     service: 'Type',
     name: 'Name',
@@ -79,16 +84,16 @@ const en: typeof zh = {
     phone: 'Phone',
     message: 'Project brief',
   },
-  hint: 'press Enter',
+  hint: 'Press Enter to continue',
   ok: 'OK',
   back: 'Back',
   next: 'Next',
-  required: 'Please fill in this field.',
-  invalidEmail: 'Please enter a valid email address.',
+  required: "You haven't filled this one in yet.",
+  invalidEmail: "That email doesn't look right.",
   successTitle: 'Demo form: nothing was sent.',
   successText:
-    'This is a front-end demo. The content stays in your browser; it is not sent to a server and is not stored by this site. Official contact details are still to be added.',
-  successAgain: 'Write another',
+    'This is a front-end demo. What you type stays in your browser — it is not sent to a server, and this site does not store it. Proper contact details are still to be added.',
+  successAgain: 'Fill in another',
 };
 
 export const contactContent = { zh, en } satisfies Record<Lang, typeof zh>;

@@ -62,11 +62,11 @@ export const shell = {
       { label: 'Contact', href: '/en/contact' },
     ],
     info: {
-      connect: 'Connect',
-      phone: 'Phone',
+      connect: 'Email:d0a1ccec@gmail.com',
+      phone: 'Instagram: @wangmingshu.me',
     },
     footerLabel: 'Contact',
-    footerMarquee: "Let's talk about your venue",
+    footerMarquee: "Let's keep moving forward.",
     footerNav: [
       { label: 'Services', index: '01', href: '/en/#services' },
       { label: 'Works', index: '02', href: '/en/#case-histories' },

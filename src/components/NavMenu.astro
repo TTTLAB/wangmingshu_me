@@ -16,7 +16,7 @@ const XHS_URL = 'https://www.xiaohongshu.com/user/profile/5657f794f53ee0375b2aeb
 const rawConnect = String(copy.info.connect || '');
 const emailAddr = (rawConnect.match(/[^\s:]+@[^\s:]+/) || [''])[0];
 const hasEmail = !!emailAddr;
-const xhsText = '小红书id: 949135495';
+const xhsText = lang === 'zh' ? '小红书id: 949135495' : 'Xiaohongshu ID: 949135495';
 ---
 <button class="navmenu__close" type="button" aria-label={copy.closeLabel}>
   <span class="sr-only">{copy.closeLabel}</span>

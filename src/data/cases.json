@@ -66,11 +66,11 @@
     "lang": "en",
     "route": "/en/works/pillbox",
     "alternate": "/works/pillbox",
-    "h1": "Pillbox Main Floor Visual",
+    "h1": "Pillbox Dance Floor Visual",
     "index": "01",
-    "head": "A main-floor visual driven by the CDJs: light breathing with BPM and waveform",
-    "metaTitle": "Pillbox Main Floor Visual — Ratking",
-    "metaDescription": "A dance-floor lighting installation at Pillbox, Beijing: 150 m of pixel-mapped LED tape, 2,815 pixels and 638 nm lasers, driven live by the CDJs. Approx. RMB 70,000, delivered in two weeks.",
+    "head": "A dance floor visual driven live by the CDJs: light that breathes with the BPM and the waveform",
+    "metaTitle": "Pillbox Dance Floor Visual — Ratking",
+    "metaDescription": "A lighting installation for the dance floor at Pillbox, Beijing: 150 m of pixel-controlled LED tape, 2,815 pixels and 638 nm lasers, driven live by the CDJs. Approx. RMB 70,000, delivered in two weeks.",
     "scrollLabel": "Scroll",
     "infos": [
       {
@@ -79,7 +79,7 @@
       },
       {
         "label": "Type",
-        "value": "Main floor visual / lighting installation"
+        "value": "Dance floor visual / new media lighting installation"
       },
       {
         "label": "Budget",
@@ -97,23 +97,23 @@
     "sections": [
       {
         "label": "The room",
-        "html": "<div class=\"js-anim-content\">\n<p>Pillbox is an underground club in Beijing. The brief was a main-floor visual above the dance floor that follows the DJ — without closing the venue. Budget: about RMB 70,000. Timeline: two weeks.</p>\n<p>Under ten hours of initial conversation. Layout, positions, power and control chain were settled on paper before anyone went on site. The build was three people for five days — 15 person-days. I handled communication, design, programming and delivery from start to finish.</p>\n<figure class=\"case-figure\"><img src=\"/works/pillbox/pillbox-01.webp\" alt=\"Spiral duct lighting installation above the Pillbox dance floor\" loading=\"lazy\" /><figcaption>Pillbox dance floor, Nov 2025. Photo: Akilou Photo</figcaption></figure>\n</div>"
+        "html": "<div class=\"js-anim-content\">\n<p>Pillbox is an underground club in Beijing. The brief was a visual above the dance floor that follows the DJ, built without closing the venue. Budget around RMB 70,000; timeline two weeks.</p>\n<p>Under ten hours of initial conversation. The scheme, fixture positions, power and the control chain were settled on paper before anyone went on site. The build was three people over five days — 15 person-days. I covered communication, design, programming and delivery — one person, end to end.</p>\n<figure class=\"case-figure\"><img src=\"/works/pillbox/pillbox-01.webp\" alt=\"Spiral duct lighting installation above the Pillbox dance floor\" loading=\"lazy\" /><figcaption>Pillbox dance floor, Nov 2025. Photo: Akilou Photo</figcaption></figure>\n</div>"
       },
       {
         "label": "Design",
-        "html": "<div class=\"js-anim-content\">\n<p>A transparent spiral duct structure hangs above the dance floor. Inside the duct: 150 m of pixel-mapped LED tape and cable. Tungsten lamps, lasers and rotating beacons are arranged along the structure.</p>\n<p>The installation does not run presets. The CDJ waveform and BPM feed the system in real time; LED tape and lasers follow the beat. When the DJ changes track, pitch or intensity, the light changes with them. An iPad control interface was added after handover so the client can change colours wirelessly.</p>\n<figure class=\"case-figure\"><img src=\"/works/pillbox/pillbox-lineart.webp\" alt=\"Pillbox installation line drawing: spiral duct and LED tape routing\" loading=\"lazy\" /><figcaption>Line drawing: spiral duct and LED tape routing</figcaption></figure>\n</div>"
+        "html": "<div class=\"js-anim-content\">\n<p>A transparent spiral duct structure hangs above the dance floor, threaded with 150 m of pixel-controlled LED tape and cable. Tungsten lamps, lasers and rotating beacons are arranged along it.</p>\n<p>The installation runs no presets. CDJ waveform and BPM feed the system in real time; the LED tape and lasers track the beat. When the DJ changes track or tempo, or pushes to a peak, the light moves with it. An iPad control interface was added after handover, so the client can change colours wirelessly.</p>\n<figure class=\"case-figure\"><img src=\"/works/pillbox/pillbox-lineart.webp\" alt=\"Pillbox installation line drawing: spiral duct and LED tape routing\" loading=\"lazy\" /><figcaption>Line drawing: spiral duct and LED tape routing</figcaption></figure>\n</div>"
       },
       {
         "label": "System",
-        "html": "<div class=\"js-anim-content\">\n<p>MadMapper is the main controller. The signal comes from the DJ booth: Beat Link Trigger reads real-time waveform and beat data from the CDJs, Ableton Link syncs BPM, and the system distributes it to LED tape, lasers, beacons and tungsten lamps.</p>\n<ul>\n<li>150 m of pixel-mapped LED tape, 2,815 pixels, driven through an Art-Net controller</li>\n<li>638 nm red laser heads and rotating beacons, switched through DMX512 relays</li>\n<li>Full-colour animation laser: MadMapper Laser module → Pangolin BEYOND → FB4</li>\n<li>Tungsten lamps: E27 T300, dimmed through a DMX512 dimmer</li>\n<li>iPad over OSC into MadMapper, for wireless colour control (added after handover)</li>\n<li>Auxiliary control: microcontroller + sensors</li>\n</ul>\n<figure class=\"case-figure\"><img src=\"/works/pillbox/pillbox-signal-flow.webp\" alt=\"Pillbox signal flow: CDJs, Ableton Link, MadMapper and fixtures\" loading=\"lazy\" /><figcaption>Signal flow: from the CDJs to LED tape, lasers and tungsten lamps</figcaption></figure>\n</div>"
+        "html": "<div class=\"js-anim-content\">\n<p>MadMapper is the main controller. Signal comes in from the DJ booth: Beat Link Trigger reads live waveform and beat data from the CDJs, Ableton Link syncs BPM, and the signal is distributed to LED tape, lasers, beacons and tungsten lamps.</p>\n<ul>\n<li>150 m of pixel-controlled LED tape, 2,815 pixels, driven through an Art-Net controller</li>\n<li>638 nm red laser heads and rotating beacons, controlled through DMX512 relays</li>\n<li>Full-colour animation laser: MadMapper Laser module → Pangolin BEYOND → FB4</li>\n<li>Tungsten lamps: E27 T300, dimmed through a DMX512 dimmer</li>\n<li>iPad into MadMapper over OSC, for wireless colour control (added in a post-handover update)</li>\n<li>Auxiliary control: microcontroller + sensors</li>\n</ul>\n<figure class=\"case-figure\"><img src=\"/works/pillbox/pillbox-signal-flow.webp\" alt=\"Pillbox signal flow: CDJs, Ableton Link, MadMapper and fixtures\" loading=\"lazy\" /><figcaption>Signal flow: from the CDJs to LED tape, lasers and tungsten lamps</figcaption></figure>\n</div>"
       },
       {
         "label": "Build",
-        "html": "<div class=\"js-anim-content\">\n<p>Cabling, rigging and commissioning happened outside opening hours; the room was handed back for daytime use. Three people, five days, 15 person-days. LED tape, lasers, beacons and tungsten lamps were all commissioned in one pass.</p>\n<ul>\n<li>Budget: approx. RMB 70,000</li>\n<li>Timeline: two weeks from design to handover, without closing the venue</li>\n<li>On site: 3 people × 5 days, 15 person-days</li>\n<li>LED tape: 150 m, 60 pixels per metre, 2,815 pixels in total</li>\n<li>Lasers: 638 nm red laser heads + full-colour animation laser</li>\n</ul>\n<div class=\"case-gallery\">\n<figure class=\"case-figure\"><img src=\"/works/pillbox/pillbox-02.webp\" alt=\"Pillbox installation on site, LED tape along the spiral duct\" loading=\"lazy\" /></figure>\n<figure class=\"case-figure\"><img src=\"/works/pillbox/pillbox-03.webp\" alt=\"Pillbox dance floor with light following the DJ\" loading=\"lazy\" /></figure>\n<figure class=\"case-figure\"><img src=\"/works/pillbox/pillbox-04.webp\" alt=\"Pillbox installation detail\" loading=\"lazy\" /></figure>\n</div>\n</div>"
+        "html": "<div class=\"js-anim-content\">\n<p>Cabling, rigging and commissioning all happened outside opening hours; the room was handed back for daytime use. Three people, five days, 15 person-days. LED tape, lasers, beacons and tungsten lamps were all brought online in one pass.</p>\n<ul>\n<li>Budget: approx. RMB 70,000</li>\n<li>Timeline: two weeks from design to handover, with no disruption to normal business</li>\n<li>On site: 3 people × 5 days, 15 person-days</li>\n<li>LED tape: 150 m, 60 pixels per metre, 2,815 pixels in total</li>\n<li>Lasers: 638 nm red laser heads + full-colour animation laser</li>\n</ul>\n<div class=\"case-gallery\">\n<figure class=\"case-figure\"><img src=\"/works/pillbox/pillbox-02.webp\" alt=\"Pillbox installation on site, LED tape along the spiral duct\" loading=\"lazy\" /></figure>\n<figure class=\"case-figure\"><img src=\"/works/pillbox/pillbox-03.webp\" alt=\"Pillbox dance floor with light following the DJ\" loading=\"lazy\" /></figure>\n<figure class=\"case-figure\"><img src=\"/works/pillbox/pillbox-04.webp\" alt=\"Pillbox installation detail\" loading=\"lazy\" /></figure>\n</div>\n</div>"
       },
       {
         "label": "Result",
-        "html": "<div class=\"js-anim-content\">\n<p>It runs automatically: the program follows the DJ's BPM, so the venue does not need a dedicated lighting operator or routine maintenance.</p>\n<p>Two updates since handover, one of which added the iPad control interface. I handle after-sales myself. The lights staying on is the handover.</p>\n</div>"
+        "html": "<div class=\"js-anim-content\">\n<p>It runs fully automatically: the program follows the DJ's BPM, so the venue needs no dedicated lighting operator and no routine maintenance.</p>\n<p>Two updates since handover, one of which added the iPad control interface. I handle after-sales myself. It only counts as delivered while the lights are on.</p>\n</div>"
       }
     ],
     "next": {

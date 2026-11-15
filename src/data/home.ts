@@ -63,31 +63,31 @@ const zh = {
 
 const en: typeof zh = {
   meta: {
-    title: 'Ratking / Wang Mingshu — Underground Club Lighting, Sound and Control',
+    title: 'Ratking - WANGMINGSHU.ME',
     description:
-      'Ratking / Wang Mingshu is a frontend developer of seven years, now working on lighting systems, sound systems, festival stages, control programming and interactive installations for underground electronic-music clubs. Design, programming and build — one person, end to end.',
+      "Ratking / Wang Mingshu is a frontend developer with seven years' experience, now working on lighting and sound systems for underground electronic-music clubs, stage design for electronic music festivals, control programming and interactive installations. Design, programming and build — one person, all the way through.",
   },
   video: '/works/pillbox/pillbox-led.mp4',
   videoMobile: '/works/pillbox/pillbox-led.mp4',
-  heroDescription: '“For most of a music career, 80% is ordinary, 15% is disaster, and only <span class="hl-5">5%</span> are the highlights. That <span class="hl-5">5%</span> is enough to keep us moving forward.” <span class="hero__quote-attr">— Kode9 (cited from an OIL article)</span>',
+  heroDescription: '“Over a music career, 80% of the time it is ordinary, 15% of the time it is a disaster, and only <span class="hl-5">5%</span> are the highlights. That <span class="hl-5">5%</span> is enough to keep us moving forward.” <span class="hero__quote-attr">— Kode9 (quoted in an OIL article)</span>',
   heroTitle: 'Let light and music<br>build the atmosphere.',
   scrollLabel: 'Scroll down',
   aboutTitle:
-    'I am Ratking / Wang Mingshu, a member of SDS TEAM, based in Shanghai. I focus on lighting and sound systems, interactive installations and festival projects — from design and programming to on-site delivery, with long-term work in domestic underground clubs and electronic music festivals.',
+    "I'm Ratking / Wang Mingshu, a member of SDS TEAM, based in Shanghai. I work on lighting and sound systems, interactive installations and festival projects — from design and programming through to on-site delivery — and have long been involved in creating and building underground clubs and electronic music festivals in China.",
   dataVizText:
-    'Let sound be the cue for light. Rhythm, waveform and beat become changes in light, breathing with the room.',
-  dataVizCenterTitle: 'For that <span class="hl-5">5%</span>, it is worth being serious together.',
+    'Let sound cue the light — rhythm, waveform and beat turned into shifting light that breathes with the room.',
+  dataVizCenterTitle: 'For that <span class="hl-5">5%</span>, it is worth getting right together.',
   dataVizCenterText:
-    'Not every night can become a highlight. But if you are also willing to put care into those rare, memorable moments, we can start with an idea and slowly bring music, light and the room together.',
-  dataVizCta: 'Let something good happen',
-  servicesTitle: 'Design, program, build.',
+    "Not every night can be a highlight. But if you're also willing to put care into those few unforgettable moments, we can start with an idea and, little by little, polish music, light and the room into one.",
+  dataVizCta: 'Let something beautiful happen',
+  servicesTitle: 'How I deliver',
   servicesText:
-    'From the first wiring diagram to the last fixture on site. Turn the idea of the night into a budget, a schedule and every detail, so the moments worth looking forward to have something solid behind them.',
+    'From the first wiring diagram to the last light on site. Turning the vision for a room into a budget, a schedule and every detail — so the moments worth looking forward to stand on something solid.',
   services: [
     {
       title: 'System design',
       index: '001',
-      text: 'Fixtures, positions, power, cable tray, control chain. Drawings and a list first, then a budget that can actually be built.',
+      text: 'Fixtures, positions, power, cable tray, control chain. Drawings and a list first, then a budget you can actually build to.',
       image: '/works/pillbox/pillbox-lineart.webp',
     },
     {
@@ -99,12 +99,12 @@ const en: typeof zh = {
     {
       title: 'On-site delivery',
       index: '003',
-      text: 'Cabling, installation, commissioning, handover. Every detail on the drawings becomes a stable part of the live system.',
+      text: 'Cabling, installation, commissioning, handover. Every detail on the drawings becomes part of a system that runs reliably on site.',
       image: '/works/pillbox/pillbox-03.webp',
     },
   ] satisfies Service[],
   casesTitle: 'Work',
-  casesText: 'More than lighting. It is also what I hope for.',
+  casesText: 'Not just lighting. What I hope for, too.',
   caseItems: [
     {
       href: '/en/works/pillbox',
@@ -114,9 +114,9 @@ const en: typeof zh = {
       type: 'Lighting installation / control programming',
     },
   ] satisfies CaseItem[],
-  callTitle: 'Worth letting <span>something good happen.</span>',
+  callTitle: 'Worth it — <span>let something beautiful happen.</span>',
   callText:
-    'From lighting systems and sound systems to interactive installations, let every design and technical choice serve those <span class="hl-5">5%</span> highlights.',
+    'From lighting systems and sound systems to interactive installations, let every design and technical decision serve that <span class="hl-5">5%</span> of highlights.',
   callCta: 'Contact Ratking',
 };
 
