@@ -22,7 +22,7 @@ const isZh = lang === 'zh';
       <span class="sr-only">鼠王 Ratking</span>
     </a>
     <div class="navbar__actions">
-      <div class="locale-switcher locale-switcher--nav" aria-label="Language">
+      <div class="locale-switcher locale-switcher--nav" role="group" aria-label="Language">
         <a class:list={['locale-switcher__item', { 'locale-switcher__item--active': isZh }]} href={isZh ? Astro.url.pathname : alternate} aria-current={isZh ? 'true' : undefined}><span>zh</span></a>
         <a class:list={['locale-switcher__item', { 'locale-switcher__item--active': !isZh }]} href={isZh ? alternate : Astro.url.pathname} aria-current={!isZh ? 'true' : undefined}><span>en</span></a>
       </div>

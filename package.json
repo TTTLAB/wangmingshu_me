@@ -7,7 +7,9 @@
     "node": ">=22.23.4"
   },
   "scripts": {
+    "predev": "node scripts/ensure-md-bom.mjs",
     "dev": "astro dev",
+    "prebuild": "node scripts/ensure-md-bom.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"

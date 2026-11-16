@@ -1,0 +1,994 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from './Button.astro';
+import { bioContent, pressBio, type BioSegment } from '../data/bio';
+import { routes, type Lang } from '../data/site';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = bioContent[lang];
+const s = c.sections;
+const alternate = routes[lang === 'zh' ? 'en' : 'zh'].bio;
+const lines = (text: string) => text.split('\n');
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<BaseLayout
+  lang={lang}
+  title={c.meta.title}
+  description={c.meta.description}
+  alternate={alternate}
+  navbarDark
+  footerTheme="light"
+  page="bio"
+>
+  <main class="bio page__content js-page-content">
+    <header class="bio-hero">
+      <div class="bio__wrap">
+        <aside class="bio-press" aria-label={pressBio.label}>
+          <div class="bio-press__head">
+            <p class="t-eye-sm bio-press__label">{pressBio.label}</p>
+            <button class="bio-press__copy" type="button" data-copy-press>复制</button>
+          </div>
+          <p class="bio-press__text">{pressBio.text}</p>
+        </aside>
+        <h1 class="t-eye-sm bio-hero__eyebrow js-side-el">{c.eyebrow}</h1>
+        <blockquote class="bio-hero__quote">
+          <p class="bio-quote js-bio-quote">
+            {c.quote.map((part: BioSegment) =>
+              part.accent ? <span class="hl-5">{part.text}</span> : part.text
+            )}
+          </p>
+          <footer class="t-eye-sm bio-quote__attr js-side-el">{c.quoteAttr}</footer>
+        </blockquote>
+        <p class="bio-bridge js-side-el">
+          {c.bridge.map((part: BioSegment) =>
+            part.accent ? <span class="hl-5">{part.text}</span> : part.text
+          )}
+        </p>
+        <div class="bio-hero__lead">
+          <div class="bio-hero__lead-main">
+            <p class="bio-hero__lead-name js-side-el">{c.lead.name}</p>
+            <p class="bio-hero__lead-desc js-side-el">{c.lead.desc}</p>
+          </div>
+          <p class="bio-hero__claim js-side-el">
+            {lines(c.lead.claim).map((line, i) => (
+              <Fragment>{i > 0 && <br />}{line}</Fragment>
+            ))}
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <section class="bio-section" id="about">
+      <div class="bio__wrap bio-section__grid">
+        <div class="bio-section__head">
+          <p class="t-eye-sm bio-section__index">{s.about.index}</p>
+          <h2 class="bio-section__label">{s.about.label}</h2>
+        </div>
+        <div class="bio-section__body">
+          {s.about.paragraphs.map((p) => <p class="bio-p js-bio-reveal">{p}</p>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="bio-section" id="timeline">
+      <div class="bio__wrap bio-section__grid">
+        <div class="bio-section__head">
+          <p class="t-eye-sm bio-section__index">{s.timeline.index}</p>
+          <h2 class="bio-section__label">{s.timeline.label}</h2>
+        </div>
+        <div class="bio-section__body">
+          <ul class="bio-timeline">
+            {s.timeline.items.map((item) => (
+              <li class="bio-timeline__item js-bio-reveal">
+                <p class="t-eye-sm bio-timeline__period">{item.period}</p>
+                <div class="bio-timeline__text">
+                  <p class="bio-timeline__role">{item.role}</p>
+                  <p class="bio-timeline__note">{item.note}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bio-section" id="capabilities">
+      <div class="bio__wrap bio-section__grid">
+        <div class="bio-section__head">
+          <p class="t-eye-sm bio-section__index">{s.skills.index}</p>
+          <h2 class="bio-section__label">{s.skills.label}</h2>
+        </div>
+        <div class="bio-section__body">
+          <ul class="bio-skills">
+            {s.skills.items.map((item, i) => (
+              <li class="bio-skills__item js-bio-reveal">
+                <p class="t-eye-sm bio-skills__num">{pad(i + 1)}</p>
+                <p class="bio-skills__title">{item.title}</p>
+                <p class="bio-skills__desc">{item.desc}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bio-section" id="projects">
+      <div class="bio__wrap bio-section__grid">
+        <div class="bio-section__head">
+          <p class="t-eye-sm bio-section__index">{s.projects.index}</p>
+          <h2 class="bio-section__label">{s.projects.label}</h2>
+        </div>
+        <div class="bio-section__body">
+          <ul class="bio-projects">
+            {s.projects.items.map((item) => (
+              <li class="bio-card js-bio-reveal" id={`bio-project-${item.index}`}>
+                <div class="bio-card__media">
+                  {item.video ? (
+                    <video
+                      class="bio-card__video"
+                      src={item.video.src}
+                      poster={item.video.poster}
+                      width={item.video.width}
+                      height={item.video.height}
+                      controls
+                      muted
+                      loop
+                      playsinline
+                      preload="metadata"
+                      aria-label={item.video.alt}
+                    ></video>
+                  ) : item.image ? (
+                    <img
+                      class="bio-card__img"
+                      src={item.image.src}
+                      alt={item.image.alt}
+                      width={item.image.width}
+                      height={item.image.height}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <div class="bio-card__plate">
+                      <span class="bio-card__plate-index">{item.index}</span>
+                      {item.mediaPending && <span class="bio-card__plate-label">{item.mediaPending}</span>}
+                      <span class="bio-card__plate-dot"></span>
+                    </div>
+                  )}
+                </div>
+                <div class="bio-card__body">
+                  <p class="t-eye-sm bio-card__meta">{item.meta}</p>
+                  <h3 class="bio-card__title">{item.title}</h3>
+                  <p class="bio-card__desc">{item.desc}</p>
+                  <ul class="bio-card__tags">
+                    {item.tags.map((tag) => <li class="bio-tag">{tag}</li>)}
+                  </ul>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bio-section" id="stages">
+      <div class="bio__wrap bio-section__grid">
+        <div class="bio-section__head">
+          <p class="t-eye-sm bio-section__index">{s.stages.index}</p>
+          <h2 class="bio-section__label">{s.stages.label}</h2>
+        </div>
+        <div class="bio-section__body">
+          <div class="bio-stages">
+            {s.stages.columns.map((column) => (
+              <div class="bio-stages__col js-bio-reveal">
+                <h3 class="t-eye-sm bio-stages__label">{column.label}</h3>
+                <ul class="bio-stages__list">
+                  {column.items.map((item) => (
+                    <li class="bio-stages__item">
+                      <div class="bio-stages__row">
+                        <p class="bio-stages__name">{item.name}</p>
+                        {item.meta && <p class="t-eye-sm bio-stages__meta">{item.meta}</p>}
+                      </div>
+                      {item.note && <p class="bio-stages__note">{item.note}</p>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bio-section" id="toolbox">
+      <div class="bio__wrap bio-section__grid">
+        <div class="bio-section__head">
+          <p class="t-eye-sm bio-section__index">{s.toolbox.index}</p>
+          <h2 class="bio-section__label">{s.toolbox.label}</h2>
+        </div>
+        <div class="bio-section__body">
+          <div class="bio-toolbox">
+            {s.toolbox.groups.map((group) => (
+              <div class="bio-toolbox__row js-bio-reveal">
+                <p class="t-eye-sm bio-toolbox__label">{group.label}</p>
+                <ul class="bio-toolbox__items">
+                  {group.items.map((item) => <li class="bio-chip">{item}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bio-section bio-section--cta" id="contact">
+      <div class="bio__wrap bio-section__grid">
+        <div class="bio-section__head">
+          <p class="t-eye-sm bio-section__index">{c.cta.index}</p>
+          <h2 class="bio-section__label">{c.cta.label}</h2>
+        </div>
+        <div class="bio-section__body">
+          <p class="bio-cta__heading js-bio-reveal">
+            {lines(c.cta.heading).map((line, i) => (
+              <Fragment>{i > 0 && <br />}{line}</Fragment>
+            ))}
+          </p>
+          <p class="bio-cta__text js-bio-reveal">{c.cta.text}</p>
+          <div class="bio-cta__action js-bio-reveal">
+            <Button href={routes[lang].contact} label={c.cta.button} variant="light" />
+            <a
+              class="bio-cta__resume"
+              href={lang === 'zh' ? '/bio.md' : '/bio-en.md'}
+              target="_blank"
+              rel="noopener"
+            >
+              {lang === 'zh' ? '履历原文（Markdown，以此为准）' : 'Résumé source (Markdown)'}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    /* Copy the FOR PRESS paragraph. Delegated on document so it survives
+       view-transition swaps; the flag stops a double bind if this ever runs twice. */
+    (() => {
+      if (window.__rkPressCopy) return;
+      window.__rkPressCopy = true;
+
+      const legacyCopy = (text) => {
+        const area = document.createElement('textarea');
+        area.value = text;
+        area.setAttribute('readonly', '');
+        area.style.position = 'fixed';
+        area.style.top = '-9999px';
+        area.style.opacity = '0';
+        document.body.appendChild(area);
+        area.select();
+        let ok = false;
+        try {
+          ok = document.execCommand('copy');
+        } catch (error) {
+          ok = false;
+        }
+        document.body.removeChild(area);
+        return ok;
+      };
+
+      const markCopied = (button) => {
+        if (!button.dataset.label) button.dataset.label = button.textContent;
+        button.textContent = '已复制';
+        button.classList.add('is-copied');
+        window.clearTimeout(Number(button.dataset.timer));
+        button.dataset.timer = String(
+          window.setTimeout(() => {
+            button.textContent = button.dataset.label;
+            button.classList.remove('is-copied');
+          }, 1600)
+        );
+      };
+
+      document.addEventListener('click', (event) => {
+        const button =
+          event.target instanceof Element ? event.target.closest('[data-copy-press]') : null;
+        if (!button) return;
+        const card = button.closest('.bio-press');
+        const textEl = card ? card.querySelector('.bio-press__text') : null;
+        if (!textEl) return;
+        const text = textEl.textContent || '';
+        const fallback = () => {
+          if (legacyCopy(text)) markCopied(button);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => markCopied(button), fallback);
+        } else {
+          fallback();
+        }
+      });
+    })();
+  </script>
+</BaseLayout>
+
+<style>
+  /* Bio page only. Scoped by Astro, so nothing here can reach another page.
+     Colours: the six VI tokens, plus alpha derivatives of asphalt for hairlines
+     (the same construction the captured site.css already uses). */
+  .bio {
+    --bio-line: rgba(9, 9, 11, 0.16);
+    --bio-line-soft: rgba(9, 9, 11, 0.08);
+    --bio-mono: var(--font-basically-amono);
+    background-color: var(--vi-stencil-white);
+    color: var(--vi-bg-asphalt);
+    padding-bottom: clamp(56px, 8vw, 120px);
+  }
+
+  .bio__wrap {
+    width: 93.75%;
+    margin-inline: auto;
+  }
+
+  /* ---------- Hero ---------- */
+
+  .bio-hero {
+    padding-top: clamp(104px, 17vh, 210px);
+    padding-bottom: clamp(44px, 6vw, 88px);
+  }
+
+  .bio-hero__eyebrow {
+    display: inline-block;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--bio-line);
+    letter-spacing: 0.16em;
+    font-weight: 700;
+  }
+
+  /* ---------- For press ---------- */
+
+  .bio-press {
+    display: grid;
+    gap: clamp(12px, 1.6vw, 18px);
+    max-width: 46rem;
+    margin-bottom: clamp(26px, 3.4vw, 44px);
+    padding: clamp(16px, 2vw, 22px) clamp(16px, 2.4vw, 26px);
+    border: 1px solid var(--bio-line);
+  }
+
+  .bio-press__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px 16px;
+    padding-bottom: clamp(10px, 1.2vw, 14px);
+    border-bottom: 1px solid var(--bio-line-soft);
+  }
+
+  .bio-press__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--vi-tech-grey);
+    letter-spacing: 0.14em;
+  }
+
+  .bio-press__label::before {
+    content: '';
+    flex: none;
+    width: 6px;
+    height: 6px;
+    background-color: var(--vi-accent-signal);
+  }
+
+  .bio-press__copy {
+    flex: none;
+    min-height: 34px;
+    padding: 0 14px;
+    border: 1px solid var(--bio-line);
+    background-color: transparent;
+    color: var(--vi-bg-asphalt);
+    font-family: var(--bio-mono);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition:
+      color 0.18s ease,
+      background-color 0.18s ease,
+      border-color 0.18s ease;
+  }
+
+  .bio-press__copy:hover,
+  .bio-press__copy:focus-visible {
+    border-color: var(--vi-accent-signal);
+    background-color: var(--vi-accent-signal);
+    color: var(--vi-stencil-white);
+  }
+
+  .bio-press__copy:focus-visible {
+    outline: 2px solid var(--vi-accent-signal);
+    outline-offset: 2px;
+  }
+
+  .bio-press__copy.is-copied {
+    border-color: var(--vi-accent-signal);
+    background-color: transparent;
+    color: var(--vi-accent-signal);
+  }
+
+  .bio-press__text {
+    max-width: 44em;
+    font-size: max(14px, var(--text-sm));
+    line-height: 1.75;
+    letter-spacing: 0.01em;
+    text-wrap: pretty;
+  }
+
+  .bio-hero__quote {
+    margin: clamp(26px, 4vw, 52px) 0 0;
+  }
+
+  .bio-quote {
+    max-width: 30em;
+    font-size: clamp(21px, 2.7vw, 38px);
+    font-weight: 450;
+    line-height: 1.44;
+    letter-spacing: var(--tp-title-tracking);
+    text-wrap: pretty;
+  }
+
+  html[lang='en'] .bio-quote {
+    max-width: 24em;
+    line-height: 1.28;
+  }
+
+  /* SplitText wraps every glyph in a `.char` and site.css makes it inline-flex,
+     which lets CJK punctuation break onto its own line. Keep glyphs inline, the
+     same fix the home hero uses. */
+  .bio-quote :global(.char) {
+    display: inline;
+  }
+
+  .bio-quote__attr {
+    margin-top: clamp(14px, 1.8vw, 22px);
+    color: var(--vi-tech-grey);
+    letter-spacing: 0.04em;
+    text-transform: none;
+  }
+
+  .bio-bridge {
+    margin-top: clamp(28px, 3.6vw, 52px);
+    max-width: 34em;
+    font-size: var(--text-md);
+    line-height: var(--tp-body-leading);
+    letter-spacing: var(--tp-body-tracking);
+  }
+
+  html[lang='en'] .bio-bridge {
+    max-width: 40em;
+  }
+
+  .bio-hero__lead {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(18px, 2.4vw, 32px);
+    margin-top: clamp(32px, 4.4vw, 64px);
+    padding-top: clamp(18px, 2.2vw, 28px);
+    border-top: 1px solid var(--bio-line);
+  }
+
+  @media (min-width: 64rem) {
+    .bio-hero__lead {
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: start;
+      gap: clamp(24px, 4vw, 64px);
+    }
+  }
+
+  .bio-hero__lead-name {
+    font-size: var(--text-lg);
+    font-weight: 450;
+    line-height: 1.4;
+    letter-spacing: var(--tp-body-tracking);
+    text-wrap: pretty;
+  }
+
+  html[lang='en'] .bio-hero__lead-name {
+    line-height: 1.24;
+  }
+
+  .bio-hero__lead-desc {
+    margin-top: 0.9em;
+    font-size: var(--text-md);
+    line-height: var(--tp-body-leading);
+    letter-spacing: var(--tp-body-tracking);
+  }
+
+  .bio-hero__claim {
+    font-family: var(--bio-mono);
+    font-size: var(--text-md);
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- Sections ---------- */
+
+  .bio-section {
+    padding-block: clamp(48px, 7vw, 96px);
+    border-top: 1px solid var(--bio-line);
+  }
+
+  .bio-section__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(20px, 2.6vw, 28px);
+  }
+
+  @media (min-width: 64rem) {
+    .bio-section__grid {
+      grid-template-columns: 22% minmax(0, 1fr);
+      gap: 0;
+    }
+  }
+
+  .bio-section__head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  @media (min-width: 64rem) {
+    .bio-section__head {
+      display: block;
+    }
+  }
+
+  .bio-section__index {
+    color: var(--vi-tech-grey);
+  }
+
+  .bio-section__label {
+    font-family: var(--bio-mono);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 64rem) {
+    .bio-section__label {
+      margin-top: 8px;
+    }
+  }
+
+  .bio-section__body {
+    min-width: 0;
+  }
+
+  /* ---------- Statement ---------- */
+
+  .bio-p {
+    max-width: 34em;
+    font-size: var(--text-md);
+    line-height: var(--tp-body-leading);
+    letter-spacing: var(--tp-body-tracking);
+    text-wrap: pretty;
+  }
+
+  html[lang='en'] .bio-p {
+    max-width: 40em;
+  }
+
+  .bio-p + .bio-p {
+    margin-top: 1.15em;
+  }
+
+  /* ---------- Timeline ---------- */
+
+  .bio-timeline__item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-block: clamp(16px, 2vw, 24px);
+    border-top: 1px solid var(--bio-line-soft);
+  }
+
+  .bio-timeline__item:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  @media (min-width: 48rem) {
+    .bio-timeline__item {
+      grid-template-columns: minmax(9rem, 22%) minmax(0, 1fr);
+      gap: 24px;
+    }
+  }
+
+  .bio-timeline__period {
+    color: var(--vi-tech-grey);
+    white-space: nowrap;
+  }
+
+  .bio-timeline__role {
+    font-size: var(--text-md);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .bio-timeline__note {
+    margin-top: 0.55em;
+    max-width: 34em;
+    font-size: var(--text-md);
+    line-height: var(--tp-body-leading);
+    letter-spacing: var(--tp-body-tracking);
+  }
+
+  html[lang='en'] .bio-timeline__note {
+    max-width: 40em;
+  }
+
+  /* ---------- Capabilities ---------- */
+
+  .bio-skills {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 48rem) {
+    .bio-skills {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(24px, 4vw, 56px);
+    }
+  }
+
+  .bio-skills__item {
+    padding-block: clamp(16px, 2vw, 24px);
+    border-top: 1px solid var(--bio-line-soft);
+  }
+
+  .bio-skills__item:nth-child(-n + 1) {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  @media (min-width: 48rem) {
+    .bio-skills__item:nth-child(2) {
+      border-top: 0;
+      padding-top: 0;
+    }
+  }
+
+  .bio-skills__num {
+    color: var(--vi-tech-grey);
+  }
+
+  .bio-skills__title {
+    margin-top: 8px;
+    font-size: var(--text-md);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .bio-skills__desc {
+    margin-top: 0.55em;
+    font-size: var(--text-md);
+    line-height: var(--tp-body-leading);
+    letter-spacing: var(--tp-body-tracking);
+    text-wrap: pretty;
+  }
+
+  /* ---------- Project cards ---------- */
+
+  .bio-projects {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(16px, 2.4vw, 28px);
+  }
+
+  @media (min-width: 64rem) {
+    .bio-projects {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .bio-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--bio-line);
+    transition: border-color 0.24s ease;
+    /* Anchor targets from the home page must clear the fixed navbar. */
+    scroll-margin-top: clamp(96px, 12vh, 160px);
+  }
+
+  .bio-card:hover {
+    border-color: var(--vi-accent-signal);
+  }
+
+  @media (min-width: 96rem) {
+    .bio-card {
+      /* At this breakpoint the navbar sits 4rem from the top and is taller,
+         so the anchor offset needs a larger floor. */
+      scroll-margin-top: 128px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bio-card {
+      transition: none;
+    }
+  }
+
+  .bio-card__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-bottom: 1px solid var(--bio-line);
+  }
+
+  .bio-card__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Projects 02 and 03 have no cleared still for the web; a drawn 1px grid with
+     the index numeral is honest, and stays inside the brand's graphic language. */
+  .bio-card__plate {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: clamp(12px, 1.6vw, 18px);
+    background-color: var(--vi-stencil-white);
+    background-image:
+      linear-gradient(to right, var(--bio-line-soft) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--bio-line-soft) 1px, transparent 1px);
+    background-size: 26px 26px;
+  }
+
+  .bio-card__plate-index {
+    font-family: var(--bio-mono);
+    font-size: clamp(34px, 4vw, 46px);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--vi-tech-grey);
+  }
+
+  .bio-card__plate-dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--vi-accent-signal);
+  }
+
+  .bio-card__plate-label {
+    font-family: var(--bio-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--vi-tech-grey);
+    text-transform: uppercase;
+  }
+
+  .bio-card__video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: var(--vi-stencil-white);
+  }
+
+  .bio-card__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: clamp(14px, 1.8vw, 22px);
+  }
+
+  .bio-card__meta {
+    color: var(--vi-tech-grey);
+  }
+
+  .bio-card__title {
+    margin-top: 8px;
+    font-size: var(--text-base);
+    font-weight: 600;
+    line-height: 1.4;
+    text-wrap: pretty;
+  }
+
+  .bio-card__desc {
+    margin-top: 0.7em;
+    font-size: var(--text-sm);
+    line-height: 1.75;
+    letter-spacing: var(--tp-body-tracking);
+    text-wrap: pretty;
+  }
+
+  .bio-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 16px;
+  }
+
+  .bio-tag,
+  .bio-chip {
+    border: 1px solid var(--bio-line);
+    padding: 4px 8px;
+    font-family: var(--bio-mono);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ---------- Stages ---------- */
+
+  .bio-stages {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(24px, 3vw, 40px);
+  }
+
+  @media (min-width: 48rem) {
+    .bio-stages {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(24px, 4vw, 56px);
+    }
+  }
+
+  .bio-stages__label {
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--bio-line);
+    color: var(--vi-tech-grey);
+  }
+
+  .bio-stages__item {
+    padding-block: clamp(12px, 1.6vw, 18px);
+    border-top: 1px solid var(--bio-line-soft);
+  }
+
+  .bio-stages__label + .bio-stages__list .bio-stages__item:first-child {
+    border-top: 0;
+    padding-top: clamp(12px, 1.6vw, 18px);
+  }
+
+  .bio-stages__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .bio-stages__name {
+    font-size: var(--text-md);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .bio-stages__meta {
+    flex: none;
+    color: var(--vi-tech-grey);
+    white-space: nowrap;
+  }
+
+  .bio-stages__note {
+    margin-top: 0.4em;
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    letter-spacing: var(--tp-body-tracking);
+  }
+
+  /* ---------- Toolbox ---------- */
+
+  .bio-toolbox__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding-block: clamp(14px, 1.8vw, 20px);
+    border-top: 1px solid var(--bio-line-soft);
+  }
+
+  .bio-toolbox__row:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  @media (min-width: 48rem) {
+    .bio-toolbox__row {
+      grid-template-columns: minmax(7rem, 18%) minmax(0, 1fr);
+      gap: 24px;
+      align-items: baseline;
+    }
+  }
+
+  .bio-toolbox__label {
+    color: var(--vi-tech-grey);
+  }
+
+  .bio-toolbox__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* ---------- CTA ---------- */
+
+  .bio-section--cta .bio-section__body {
+    padding-top: clamp(4px, 1vw, 12px);
+  }
+
+  .bio-cta__heading {
+    font-size: clamp(26px, 4.2vw, 54px);
+    font-weight: 450;
+    line-height: 1.18;
+    letter-spacing: var(--tp-title-tracking);
+    text-wrap: balance;
+  }
+
+  html[lang='zh-CN'] .bio-cta__heading {
+    line-height: 1.3;
+  }
+
+  .bio-cta__text {
+    margin-top: clamp(14px, 2vw, 22px);
+    max-width: 34em;
+    font-size: var(--text-md);
+    line-height: var(--tp-body-leading);
+    letter-spacing: var(--tp-body-tracking);
+  }
+
+  html[lang='en'] .bio-cta__text {
+    max-width: 40em;
+  }
+
+  .bio-cta__action {
+    margin-top: clamp(24px, 3vw, 36px);
+  }
+
+  .bio-cta__resume {
+    display: block;
+    width: fit-content;
+    margin-top: clamp(14px, 2vw, 20px);
+    font-family: var(--bio-mono);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--vi-bg-asphalt);
+    text-decoration: underline;
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+    transition: text-decoration-color 160ms ease;
+  }
+
+  .bio-cta__resume:hover,
+  .bio-cta__resume:focus-visible {
+    text-decoration-color: var(--vi-accent-signal);
+    text-decoration-thickness: 2px;
+  }
+
+  /* ---------- Highlight (the 5%) ---------- */
+
+  .hl-5 {
+    color: var(--vi-accent-signal);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 26rem) {
+    .bio-hero__claim {
+      font-size: var(--text-sm);
+    }
+  }
+</style>

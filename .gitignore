@@ -51,3 +51,9 @@ _reference/
 comparisons/
 tools/inspect/
 
+
+# local audit & screenshot artifacts (not for repo)
+.audit/
+.wx-evidence/
+_wx_*.png
+screen-full.png

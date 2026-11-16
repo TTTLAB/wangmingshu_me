@@ -16,9 +16,10 @@ interface Props {
   alternate: string;
   navbarDark?: boolean;
   footerTheme?: 'dark' | 'light';
-  page: 'home' | 'contact' | 'case' | 'legal' | '404';
+  page: 'home' | 'bio' | 'contact' | 'case' | 'legal' | '404';
   home?: boolean;
   ogImage?: string;
+  preloadImage?: string;
 }
 
 const {
@@ -31,10 +32,20 @@ const {
   page,
   home = false,
   ogImage = '/assets/og/ratking-og.png',
+  preloadImage,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const alternateUrl = new URL(alternate, Astro.site);
+// canonical 是目录形式（带结尾斜杠），alternate 是手写路径（不带）。形式不统一
+// 会让 hreflang 指向的 URL 和对方页面自己的 canonical 对不上，这里补齐。
+if (!alternateUrl.pathname.endsWith('/')) alternateUrl.pathname += '/';
 const ogImageUrl = new URL(ogImage, Astro.site);
+
+// hreflang 互指：当前语言用 canonical，另一种语言用 alternate。
+// x-default 指向中文站（站点默认语言）。
+const zhUrl = lang === 'zh' ? canonical : alternateUrl;
+const enUrl = lang === 'en' ? canonical : alternateUrl;
 ---
 <!doctype html>
 <html lang={lang === 'zh' ? 'zh-CN' : 'en'} class="l13ACa_variable">
@@ -47,6 +58,12 @@ const ogImageUrl = new URL(ogImage, Astro.site);
     <meta name="robots" content="index, follow" />
     <meta name="creator" content="鼠王 Ratking" />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="zh-CN" href={zhUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={zhUrl} />
+    {preloadImage && (
+      <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />
+    )}
     <meta property="og:site_name" content="鼠王 Ratking" />
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
@@ -61,7 +78,7 @@ const ogImageUrl = new URL(ogImage, Astro.site);
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#09090B" />
     <ClientRouter />
-    <script is:inline src="/assets/vi/rat.js"></script>
+    <script is:inline src="/assets/vi/rat.js" defer></script>
     <script>
       import '../scripts/app';
     </script>

@@ -5,10 +5,10 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://wangmingshu.me',
   // ClientRouter's own prefetch module only runs when `prefetch` is not
-  // `false`. `prefetchAll` + `viewport` warms every same-origin link as soon
-  // as it intersects the viewport, so the fetch inside the page transition
-  // resolves from the HTTP cache instead of blocking the URL swap.
-  prefetch: { prefetchAll: true, defaultStrategy: 'viewport' },
+  // `false`. Prefetching on viewport meant every page fetched the whole other
+  // locale's HTML while the hero was still loading; `hover` keeps the page
+  // transition warm without spending first-screen bandwidth.
+  prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
   vite: {
     build: {
       assetsInlineLimit: 0,

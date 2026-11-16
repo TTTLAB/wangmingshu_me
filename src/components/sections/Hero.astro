@@ -13,8 +13,8 @@ const c = homeContent[lang];
     <p class="t-lg main-hero__description js-description" set:html={c.heroDescription}></p>
   </div>
   <div class="main-hero__media">
-    <video class="main-hero__video" autoplay muted loop playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" x5-video-player-fullscreen="false" disablepictureinpicture preload="auto" poster="/works/pillbox/pillbox-01.webp" aria-hidden="true" data-hero-video>
-      <source src={c.video} type="video/mp4" data-src-desktop={c.video} data-src-mobile={c.videoMobile} />
+    <video class="main-hero__video" width="1280" height="720" autoplay muted loop playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" x5-video-player-fullscreen="false" disablepictureinpicture preload="none" poster="/works/pillbox/pillbox-01.webp" aria-hidden="true" data-hero-video>
+      <source type="video/mp4" data-src-desktop={c.video} data-src-mobile={c.videoMobile} />
     </video>
   </div>
   <div class="main-hero__footer">

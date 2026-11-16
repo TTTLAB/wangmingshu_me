@@ -18,20 +18,18 @@ const emailAddr = (rawConnect.match(/[^\s:]+@[^\s:]+/) || [''])[0];
 const displayEmail = site.email || emailAddr;
 // On the home page the in-page links are bare hashes; SmoothLink scrolls them.
 // Everywhere else they point back to the home page (normal navigation).
+// Pages carry their own href in the data, so adding one no longer shifts the
+// numbering of the section links.
 const normalize = (path: string) => path.replace(/\/+$/, '') || '/';
 const isHome = normalize(Astro.url.pathname) === normalize(r.home);
-const labels = copy.footerNav.map((item, i) => ({
+const labels = copy.footerNav.map((item) => ({
   ...item,
   href:
-    i === 0
+    'hash' in item
       ? isHome
-        ? '#services'
-        : r.home + '#services'
-      : i === 1
-        ? isHome
-          ? '#case-histories'
-          : r.home + '#case-histories'
-        : r.contact,
+        ? `#${item.hash}`
+        : `${r.home}#${item.hash}`
+      : item.href,
 }));
 ---
 <footer class:list={['footer', 'js-footer', theme === 'dark' ? 'footer--dark' : 'footer--light']} data-footer>

@@ -7,12 +7,12 @@ const zh = {
   meta: {
     title: '鼠王 Ratking - WANGMINGSHU.ME',
     description:
-      '鼠王 Ratking / 王明鼠，7年前端开发程序员，目前在做地下电子音乐俱乐部的灯光系统、声音系统、电子音乐节舞美、控制编程和互动装置。设计、编程、施工，一个人跟到底。',
+      '鼠王 Ratking / 王明鼠，独立灯光系统工程师，做地下电子音乐俱乐部与音乐节的灯光系统、声音系统、舞美、控制编程和互动装置。设计、编程、施工，一个人跟到底。',
   },
   video: '/works/pillbox/pillbox-led.mp4',
-  videoMobile: '/works/pillbox/pillbox-led.mp4',
+  videoMobile: '/works/pillbox/pillbox-led-mobile.mp4',
   heroDescription: '“音乐生涯这些年，80%的时候平平淡淡，15%的时候灾难一般，只有<span class="hl-5">5%</span>才是高光时刻。那<span class="hl-5">5%</span>的高光足以让我们始终保持前进。” <span class="hero__quote-attr">— Kode9（引自 OIL 的文章）</span>',
-  heroTitle: '让灯光与音乐<br>共筑氛围。',
+  heroTitle: 'Mohemann说：<br>隧道尽头会有光',
   scrollLabel: '往下滑',
   aboutTitle:
     '我是鼠王 / 王明鼠，SDS TEAM成员，现居上海。专注灯光与声音系统、互动装置及音乐节项目，从设计、编程到现场落地，长期参与国内地下俱乐部与电子音乐节的创作与建设。',
@@ -54,6 +54,20 @@ const zh = {
       year: '2025',
       type: '灯光装置 / 控制编程',
     },
+    {
+      href: '/bio#bio-project-02',
+      index: '02',
+      title: '东坝好莱坞 · 声音系统',
+      year: '长期',
+      type: '声音系统 / 现场调音',
+    },
+    {
+      href: '/bio#bio-project-03',
+      index: '03',
+      title: 'Lust 装置灯光与中央发光装置',
+      year: '2025',
+      type: '装置灯光 / 商业空间',
+    },
   ] satisfies CaseItem[],
   callTitle: '值得让，<span>美好发生。</span>',
   callText:
@@ -65,10 +79,10 @@ const en: typeof zh = {
   meta: {
     title: 'Ratking - WANGMINGSHU.ME',
     description:
-      "Ratking / Wang Mingshu is a frontend developer with seven years' experience, now working on lighting and sound systems for underground electronic-music clubs, stage design for electronic music festivals, control programming and interactive installations. Design, programming and build — one person, all the way through.",
+      "Ratking / Wang Mingshu is an independent lighting systems engineer working on lighting and sound systems for underground electronic-music clubs, stage design for electronic music festivals, control programming and interactive installations. Design, programming and build — one person, all the way through.",
   },
   video: '/works/pillbox/pillbox-led.mp4',
-  videoMobile: '/works/pillbox/pillbox-led.mp4',
+  videoMobile: '/works/pillbox/pillbox-led-mobile.mp4',
   heroDescription: '“Over a music career, 80% of the time it is ordinary, 15% of the time it is a disaster, and only <span class="hl-5">5%</span> are the highlights. That <span class="hl-5">5%</span> is enough to keep us moving forward.” <span class="hero__quote-attr">— Kode9 (quoted in an OIL article)</span>',
   heroTitle: 'Let light and music<br>build the atmosphere.',
   scrollLabel: 'Scroll down',
@@ -112,6 +126,20 @@ const en: typeof zh = {
       title: 'Pillbox Main Floor Visual',
       year: '2025',
       type: 'Lighting installation / control programming',
+    },
+    {
+      href: '/en/bio#bio-project-02',
+      index: '02',
+      title: 'Dongba Hollywood · Sound system',
+      year: 'Ongoing',
+      type: 'Sound system / live tuning',
+    },
+    {
+      href: '/en/bio#bio-project-03',
+      index: '03',
+      title: 'Lust — installation lighting and central light piece',
+      year: '2025',
+      type: 'Installation lighting / commercial space',
     },
   ] satisfies CaseItem[],
   callTitle: 'Worth it — <span>let something beautiful happen.</span>',

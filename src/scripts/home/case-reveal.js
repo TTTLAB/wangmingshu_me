@@ -449,3 +449,46 @@ export function initLegalReveal() {
 
   return store.cleanup;
 }
+
+/** Bio page: the Kode9 quote splits in on load, everything else arrives on scroll. */
+export function initBioReveal() {
+  const store = createStore();
+  const page = document.querySelector('.bio');
+  if (!page) return store.cleanup;
+  if (reducedMotion()) return store.cleanup;
+
+  store.onCleanup(
+    onLoaderDone(() => {
+      const quote = page.querySelector('.js-bio-quote');
+      if (quote) {
+        // The quote is long; a slow per-character stagger reads as a stutter.
+        introSplit(quote, store, { lineStagger: 0.1, charStagger: 0.006 });
+      }
+
+      const side = page.querySelectorAll('.js-side-el');
+      if (side.length) {
+        fadeIn(side, store, {
+          scroll: false,
+          y: 16,
+          duration: 0.6,
+          stagger: 0.05,
+          delay: 0.15,
+        });
+      }
+
+      page.querySelectorAll('.js-bio-reveal').forEach((el) => {
+        const tween = gsap.from(el, {
+          opacity: 0,
+          y: 18,
+          duration: 0.7,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 92%', once: true },
+        });
+        store.tween(tween);
+        store.trigger(tween.scrollTrigger);
+      });
+    })
+  );
+
+  return store.cleanup;
+}

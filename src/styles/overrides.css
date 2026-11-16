@@ -974,3 +974,61 @@ html[lang='zh-CN'] .about-section__title {
 @media (max-width: 640px) {
   .case-materials { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   Mobile pass — WeChat / phones (<=767px)
+   Desktop (>=768px) is untouched. No new colours, fonts or deps.
+   ============================================================ */
+
+/* Data-viz fallback still: phones get the signal-flow diagram instead of the
+   WebGL scene. Hidden by default so the desktop pinned layout is unchanged. */
+.data-viz-section__static {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  /* Phones keep the desktop pinned WebGL data-viz scene — the scroll effect
+     is a required part of the design. No static fallback / height collapse. */
+
+  /* Functional microcopy: 11px -> 12px on phones. Decorative indices
+     (.service-card__label) keep their small size. */
+  .navbar__toggle-label,
+  .footer__end-link,
+  .footer__credits .t-xs,
+  .main-hero__scroll-label {
+    font-size: 12px;
+  }
+
+  /* About: site.css pads the section by 1x and 1.5x the viewport height,
+     i.e. 2.5 screens of scroll runway for the pinned intro. Halve both on
+     phones so the section does not eat an extra screen and a half. */
+  .about-section {
+    padding-top: calc(var(--v-height) * 0.5);
+    padding-bottom: calc(var(--v-height) * 0.75);
+  }
+}
+
+/* Phones: the home nav mark is 2x (95px) on desktop-class layouts, which reads
+   oversized on a 390px screen and inflates the bar to 84px. Use the base 1x
+   mark on phones so the navbar keeps its proportions. Desktop is untouched. */
+@media (max-width: 767px) {
+  .navbar--home .navbar__link .vi-nav-rat {
+    width: 47.5px;
+    height: 42.2px;
+  }
+}
+
+/* Lenis smooth-scroll base styles. Previously imported from app.js as
+   `lenis/dist/lenis.css`, which Vite emitted as a second <link> (381 B) on
+   every page. Inlined here so the whole site ships one CSS file. */
+html.lenis, html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+.lenis [data-lenis-prevent],
+.lenis [data-lenis-prevent-wheel],
+.lenis [data-lenis-prevent-touch] { overscroll-behavior: contain; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+.lenis.lenis-autoToggle {
+  transition-property: overflow;
+  transition-duration: 1ms;
+  transition-behavior: allow-discrete;
+}

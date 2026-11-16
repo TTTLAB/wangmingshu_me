@@ -11,6 +11,7 @@ export const site = {
 export const routes = {
   zh: {
     home: '/',
+    bio: '/bio',
     works: '/works/pillbox',
     contact: '/contact',
     privacy: '/privacy',
@@ -18,6 +19,7 @@ export const routes = {
   },
   en: {
     home: '/en/',
+    bio: '/en/bio',
     works: '/en/works/pillbox',
     contact: '/en/contact',
     privacy: '/en/privacy',
@@ -31,6 +33,7 @@ export const shell = {
     closeLabel: '关闭菜单',
     menuAria: '主导航',
     nav: [
+      { label: '关于', href: '/bio' },
       { label: '服务', hash: 'services' },
       { label: '作品', hash: 'case-histories' },
       { label: '联系', href: '/contact' },
@@ -43,9 +46,10 @@ export const shell = {
     footerLabel: '联系我',
     footerMarquee: '让我们始终保持前进。',
     footerNav: [
-      { label: '服务', index: '01', href: '/#services' },
-      { label: '作品', index: '02', href: '/#case-histories' },
-      { label: '联系', index: '03', href: '/contact' },
+      { label: '关于', index: '01', href: '/bio' },
+      { label: '服务', index: '02', hash: 'services' },
+      { label: '作品', index: '03', hash: 'case-histories' },
+      { label: '联系', index: '04', href: '/contact' },
     ],
     privacy: '隐私政策',
     cookies: 'Cookie 政策',
@@ -57,6 +61,7 @@ export const shell = {
     closeLabel: 'Close menu',
     menuAria: 'Main menu',
     nav: [
+      { label: 'About', href: '/en/bio' },
       { label: 'Services', hash: 'services' },
       { label: 'Works', hash: 'case-histories' },
       { label: 'Contact', href: '/en/contact' },
@@ -68,9 +73,10 @@ export const shell = {
     footerLabel: 'Contact',
     footerMarquee: "Let's keep moving forward.",
     footerNav: [
-      { label: 'Services', index: '01', href: '/en/#services' },
-      { label: 'Works', index: '02', href: '/en/#case-histories' },
-      { label: 'Contact', index: '03', href: '/en/contact' },
+      { label: 'About', index: '01', href: '/en/bio' },
+      { label: 'Services', index: '02', hash: 'services' },
+      { label: 'Works', index: '03', hash: 'case-histories' },
+      { label: 'Contact', index: '04', href: '/en/contact' },
     ],
     privacy: 'Privacy Policy',
     cookies: 'Cookie Policy',
