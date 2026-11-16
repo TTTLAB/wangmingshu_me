@@ -925,3 +925,52 @@ html[lang='zh-CN'] .about-section__title {
   min-height: 0;
   overflow: hidden;
 }
+
+/* Case study: main materials grid */
+.case-materials {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: calc(var(--spacing) * 5);
+  margin-top: calc(var(--spacing) * 8);
+}
+.case-material {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 3);
+}
+.case-material__media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: rgba(9, 9, 11, 0.06);
+  border: 1px solid rgba(9, 9, 11, 0.12);
+  border-radius: 4px;
+}
+.case-material__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.case-material__caption {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 1);
+}
+.case-material__name {
+  font-weight: 600;
+}
+.case-material__spec {
+  opacity: 0.7;
+}
+.case-materials__note {
+  margin-top: calc(var(--spacing) * 6);
+  font-size: var(--text-md);
+  opacity: 0.8;
+}
+@media (max-width: 1024px) {
+  .case-materials { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .case-materials { grid-template-columns: 1fr; }
+}
