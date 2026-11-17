@@ -161,11 +161,22 @@ const pad = (n: number) => String(n).padStart(2, '0');
                 </div>
                 <div class="bio-card__body">
                   <p class="t-eye-sm bio-card__meta">{item.meta}</p>
-                  <h3 class="bio-card__title">{item.title}</h3>
+                  <h3 class="bio-card__title">
+                    {item.href ? (
+                      <a class="bio-card__title-link" href={item.href}>{item.title}</a>
+                    ) : (
+                      item.title
+                    )}
+                  </h3>
                   <p class="bio-card__desc">{item.desc}</p>
                   <ul class="bio-card__tags">
                     {item.tags.map((tag) => <li class="bio-tag">{tag}</li>)}
                   </ul>
+                  {item.href && (
+                    <a class="bio-card__case-link" href={item.href}>
+                      {lang === 'zh' ? '查看案例' : 'View case'} <span aria-hidden="true">→</span>
+                    </a>
+                  )}
                 </div>
               </li>
             ))}
@@ -802,6 +813,32 @@ const pad = (n: number) => String(n).padStart(2, '0');
     font-weight: 600;
     line-height: 1.4;
     text-wrap: pretty;
+  }
+
+  .bio-card__title-link {
+    color: inherit;
+    text-decoration: none;
+  }
+  .bio-card__title-link:hover,
+  .bio-card__title-link:focus-visible {
+    color: var(--vi-accent-signal);
+  }
+  .bio-card__case-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+    font-family: var(--bio-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--vi-tech-grey);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .bio-card__case-link:hover,
+  .bio-card__case-link:focus-visible {
+    color: var(--vi-accent-signal);
   }
 
   .bio-card__desc {

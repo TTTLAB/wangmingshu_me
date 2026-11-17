@@ -14,6 +14,7 @@ export type BioProject = {
   image?: { src: string; width: number; height: number; alt: string };
   video?: { src: string; poster?: string; width?: number; height?: number; alt?: string };
   mediaPending?: string;
+  href?: string;
 };
 
 export type BioStage = { name: string; meta?: string; note?: string };
@@ -142,6 +143,7 @@ const zh = {
           meta: '北京 Pillbox · 2025.11',
           desc: 'Beat Link Trigger 实时读取 CDJ 的 BPM、波形与节拍，驱动灯光跟着节奏切换；MadMapper、Beyond 点控灯带、激光与继电器；iPad 无线界面实时调色与快捷编程，现场不占控台。Art-Net 通讯，多俱乐部稳定运行。独立完成，图纸到落地两周。',
           tags: ['Art-Net', 'Beat Link Trigger', 'iPad 灯控'],
+          href: '/works/pillbox',
           image: {
             src: '/works/pillbox/pillbox-01.webp',
             width: 2000,
@@ -335,6 +337,7 @@ const en: typeof zh = {
           meta: 'Pillbox, Beijing · Nov 2025',
           desc: 'Beat Link Trigger reads BPM, waveform and beat from the CDJs in real time and drives the lighting in time with the music; MadMapper and Beyond address LED strips, lasers and relays; a wireless iPad interface handles real-time colour and quick programming without occupying the console. Art-Net throughout, running reliably across several clubs. Delivered solo, from drawings to completion in two weeks.',
           tags: ['Art-Net', 'Beat Link Trigger', 'iPad control'],
+          href: '/en/works/pillbox',
           image: {
             src: '/works/pillbox/pillbox-01.webp',
             width: 2000,
