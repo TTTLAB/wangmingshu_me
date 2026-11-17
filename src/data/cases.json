@@ -130,5 +130,237 @@
     },
     "nextTitle": "Tell me about your venue",
     "footerTheme": "light"
+  },
+  {
+    "slug": "wigwam-park-2025",
+    "lang": "zh",
+    "route": "/works/wigwam-park-2025",
+    "alternate": "/en/works/wigwam-park-2025",
+    "h1": "上海 · WIGWAM PARK 2025",
+    "index": "04",
+    "head": "钨丝灯、频闪与烟雾，让光成为音乐之外的表达",
+    "metaTitle": "WIGWAM PARK 2025 灯光 — 鼠王 Ratking",
+    "metaDescription": "上海 WIGWAM PARK 2025 音乐节灯光：金字塔帐篷舞台，12 台大歌 380、4 台 LED 频闪、20 个钨丝 PAR 灯、16 盏 PAR64、2 台十眼钨丝灯和 2 台直喷烟机。SDS TEAM 舞美设计，鼠王负责灯光控制与现场落地。",
+    "scrollLabel": "往下看",
+    "infos": [
+      {
+        "label": "场地",
+        "value": "上海，WIGWAM PARK"
+      },
+      {
+        "label": "类型",
+        "value": "户外音乐节 / 舞台灯光"
+      },
+      {
+        "label": "年份",
+        "value": "2025"
+      },
+      {
+        "label": "我的角色",
+        "value": "灯光控制、现场落地"
+      },
+      {
+        "label": "团队",
+        "value": "舞美设计 SDS TEAM；灯具租赁 上海驰郎文化传播有限公司"
+      }
+    ],
+    "sections": [
+      {
+        "label": "现场",
+        "html": "<div class=\"js-anim-content\">\n<p>WIGWAM PARK 2025 在上海的一处园区。舞台是几座金字塔式帐篷，顶端一盏球形灯，人群围在帐篷前。</p>\n<p>入夜后，钨丝灯的暖光、频闪和烟雾把舞台包住。灯不只是照亮，它和音乐一起，构成现场的另一层表达。</p>\n<figure class=\"case-figure\"><img src=\"/works/wigwam-park-2025/wigwam-02.webp\" alt=\"WIGWAM PARK 2025 园区夜景：金字塔帐篷舞台、人群与烟雾\" fetchpriority=\"high\" width=\"2000\" height=\"1334\" decoding=\"async\" /><figcaption>WIGWAM PARK 2025 现场，上海</figcaption></figure>\n</div>"
+      },
+      {
+        "label": "设计",
+        "html": "<div class=\"js-anim-content\">\n<p>光的出发点是让声音与空间发生联系。金字塔帐篷定下舞台的轮廓，顶部球形灯收住视线；钨丝暖光铺底，频闪和烟雾把节奏推出来。</p>\n<p>灯位按舞台结构排布，桁架、PAR 灯和控台的位置落在灯位图上，再进现场落地。</p>\n<p>Mohemann 说：“隧道尽头会有光。”在 WIGWAM，光从帐篷顶端落下来。</p>\n<div class=\"case-gallery\">\n<figure class=\"case-figure\"><img src=\"/works/wigwam-park-2025/wigwam-stage.webp\" alt=\"WIGWAM PARK 2025 灯位与舞台示意：桁架、PAR 灯与控台\" loading=\"lazy\" width=\"1276\" height=\"624\" decoding=\"async\" /><figcaption>灯位与舞台示意</figcaption></figure>\n<figure class=\"case-figure\"><img src=\"/works/wigwam-park-2025/wigwam-05.webp\" alt=\"红色与青色烟雾中的帐篷尖顶\" loading=\"lazy\" width=\"1334\" height=\"2000\" decoding=\"async\" /></figure>\n</div>\n</div>"
+      },
+      {
+        "label": "灯光配置",
+        "html": "<div class=\"js-anim-content\">\n<p>现场灯具与烟雾：</p>\n<ul>\n<li>12 台大歌 380</li>\n<li>4 台 LED 频闪</li>\n<li>20 个钨丝 PAR 灯</li>\n<li>16 盏 PAR64</li>\n<li>2 台十眼钨丝灯</li>\n<li>2 台大功率直喷烟机</li>\n</ul>\n<p>舞美设计由 SDS TEAM 完成，灯具租赁来自上海驰郎文化传播有限公司。我负责灯光控制与现场落地。</p>\n</div>"
+      },
+      {
+        "label": "现场记录",
+        "html": "<div class=\"js-anim-content\">\n<p>从帐篷外到帐篷内，光把人群、DJ 和舞台连在一起。</p>\n<div class=\"case-gallery\">\n<figure class=\"case-figure\"><img src=\"/works/wigwam-park-2025/wigwam-01.webp\" alt=\"金字塔帐篷舞台，顶端球形灯与钨丝暖光\" loading=\"lazy\" width=\"1332\" height=\"2000\" decoding=\"async\" /></figure>\n<figure class=\"case-figure\"><img src=\"/works/wigwam-park-2025/wigwam-04.webp\" alt=\"DJ 在 CDJ 前，暖色与绿色灯光穿过烟雾\" loading=\"lazy\" width=\"2000\" height=\"1334\" decoding=\"async\" /></figure>\n<figure class=\"case-figure\"><img src=\"/works/wigwam-park-2025/wigwam-06.webp\" alt=\"仰视布幔天花与橙色烟雾，可见 PARK 字样\" loading=\"lazy\" width=\"2000\" height=\"1334\" decoding=\"async\" /></figure>\n<figure class=\"case-figure\"><img src=\"/works/wigwam-park-2025/wigwam-07.webp\" alt=\"帐篷内的 DJ 与金字塔舞台、顶部球形灯\" loading=\"lazy\" width=\"1334\" height=\"2000\" decoding=\"async\" /><figcaption>WIGWAM PARK 2025 现场，上海</figcaption></figure>\n</div>\n</div>"
+      }
+    ],
+    "next": {
+      "href": "/works/youshan-2025",
+      "label": "查看案例"
+    },
+    "nextTitle": "游山音乐节 YOUSHAN 2025",
+    "footerTheme": "light"
+  },
+  {
+    "slug": "wigwam-park-2025",
+    "lang": "en",
+    "route": "/en/works/wigwam-park-2025",
+    "alternate": "/works/wigwam-park-2025",
+    "h1": "Shanghai · WIGWAM PARK 2025",
+    "index": "04",
+    "head": "Tungsten, strobe and smoke — light as another voice beside the music",
+    "metaTitle": "WIGWAM PARK 2025 Lighting — Ratking",
+    "metaDescription": "Festival lighting for WIGWAM PARK 2025, Shanghai: tungsten, strobe and smoke across pyramid tents. 12 Dage 380s, 4 LED strobes; control and build with SDS TEAM.",
+    "scrollLabel": "Scroll",
+    "infos": [
+      {
+        "label": "Venue",
+        "value": "WIGWAM PARK, Shanghai"
+      },
+      {
+        "label": "Type",
+        "value": "Outdoor festival / stage lighting"
+      },
+      {
+        "label": "Year",
+        "value": "2025"
+      },
+      {
+        "label": "Role",
+        "value": "Lighting control, on-site delivery"
+      },
+      {
+        "label": "Team",
+        "value": "Stage design SDS TEAM; fixture rental Shanghai Chilang Culture Communication Co., Ltd."
+      }
+    ],
+    "sections": [
+      {
+        "label": "The site",
+        "html": "<div class=\"js-anim-content\">\n<p>WIGWAM PARK 2025 took place in a park in Shanghai. The stage was a cluster of pyramid tents, a spherical lamp at the apex, with the crowd gathered in front.</p>\n<p>After dark, tungsten warmth, strobe and smoke wrapped the stage. The light did more than illuminate — with the music, it became another layer of the event.</p>\n<figure class=\"case-figure\"><img src=\"/works/wigwam-park-2025/wigwam-02.webp\" alt=\"WIGWAM PARK 2025 at night: pyramid stage, crowd and smoke\" fetchpriority=\"high\" width=\"2000\" height=\"1334\" decoding=\"async\" /><figcaption>WIGWAM PARK 2025, Shanghai</figcaption></figure>\n</div>"
+      },
+      {
+        "label": "Design",
+        "html": "<div class=\"js-anim-content\">\n<p>The starting point was to connect the sound to the space. The pyramid tents set the stage silhouette and the spherical lamp at the apex held the eye; tungsten warmth carried the base while strobe and smoke pushed the rhythm forward.</p>\n<p>Fixtures were laid out around the stage structure. Truss, PAR lamps and the control position were set on the lighting plot, then built on site.</p>\n<p>Mohemann put it this way: “there will be light at the end of the tunnel.” At WIGWAM, it came down from the top of the tent.</p>\n<div class=\"case-gallery\">\n<figure class=\"case-figure\"><img src=\"/works/wigwam-park-2025/wigwam-stage.webp\" alt=\"WIGWAM PARK 2025 lighting plot: truss, PAR lamps and control position\" loading=\"lazy\" width=\"1276\" height=\"624\" decoding=\"async\" /><figcaption>Lighting plot and stage layout</figcaption></figure>\n<figure class=\"case-figure\"><img src=\"/works/wigwam-park-2025/wigwam-05.webp\" alt=\"Tent apex in red and cyan smoke\" loading=\"lazy\" width=\"1334\" height=\"2000\" decoding=\"async\" /></figure>\n</div>\n</div>"
+      },
+      {
+        "label": "Lighting rig",
+        "html": "<div class=\"js-anim-content\">\n<p>Fixtures and haze on site:</p>\n<ul>\n<li>12 × Dage 380</li>\n<li>4 × LED strobe</li>\n<li>20 × tungsten PAR lamp</li>\n<li>16 × PAR64</li>\n<li>2 × ten-eye tungsten fixture</li>\n<li>2 × high-output direct-fog machine</li>\n</ul>\n<p>Stage design by SDS TEAM; fixture rental from Shanghai Chilang Culture Communication Co., Ltd. I handled lighting control and on-site delivery.</p>\n</div>"
+      },
+      {
+        "label": "On site",
+        "html": "<div class=\"js-anim-content\">\n<p>From outside the tents to inside, the light connected the crowd, the DJ and the stage.</p>\n<div class=\"case-gallery\">\n<figure class=\"case-figure\"><img src=\"/works/wigwam-park-2025/wigwam-01.webp\" alt=\"Pyramid tent stage with spherical lamp and tungsten warmth\" loading=\"lazy\" width=\"1332\" height=\"2000\" decoding=\"async\" /></figure>\n<figure class=\"case-figure\"><img src=\"/works/wigwam-park-2025/wigwam-04.webp\" alt=\"DJ at the CDJs, warm and green light through smoke\" loading=\"lazy\" width=\"2000\" height=\"1334\" decoding=\"async\" /></figure>\n<figure class=\"case-figure\"><img src=\"/works/wigwam-park-2025/wigwam-06.webp\" alt=\"Looking up at draped ceiling and orange smoke, PARK sign visible\" loading=\"lazy\" width=\"2000\" height=\"1334\" decoding=\"async\" /></figure>\n<figure class=\"case-figure\"><img src=\"/works/wigwam-park-2025/wigwam-07.webp\" alt=\"DJ inside the pyramid tent beneath the spherical lamp\" loading=\"lazy\" width=\"1334\" height=\"2000\" decoding=\"async\" /><figcaption>WIGWAM PARK 2025, Shanghai</figcaption></figure>\n</div>\n</div>"
+      }
+    ],
+    "next": {
+      "href": "/en/works/youshan-2025",
+      "label": "View case"
+    },
+    "nextTitle": "YOUSHAN Festival 2025",
+    "footerTheme": "light"
+  },
+  {
+    "slug": "youshan-2025",
+    "lang": "zh",
+    "route": "/works/youshan-2025",
+    "alternate": "/en/works/youshan-2025",
+    "h1": "北京 · 游山音乐节 YOUSHAN 2025",
+    "index": "05",
+    "head": "让灯光贴近音乐，也贴近现场的情绪",
+    "metaTitle": "游山音乐节 YOUSHAN 2025 灯光 — 鼠王 Ratking",
+    "metaDescription": "北京游山音乐节 YOUSHAN 2025 灯光：夜间穹顶与帐篷舞台，彩色侧光、暖光内场、烟雾与光束。灯光氛围设计 Lyu Zhi-Qiang（Mohemann），落地执行与灯光控制编程 DancRan，灯光控制鼠王，SDS TEAM。",
+    "scrollLabel": "往下看",
+    "infos": [
+      {
+        "label": "场地",
+        "value": "北京，游山音乐节"
+      },
+      {
+        "label": "类型",
+        "value": "户外音乐节 / 舞台灯光"
+      },
+      {
+        "label": "年份",
+        "value": "2025"
+      },
+      {
+        "label": "我的角色",
+        "value": "灯光控制"
+      },
+      {
+        "label": "团队",
+        "value": "灯光氛围设计 Lyu Zhi-Qiang（Mohemann）；落地执行与灯光控制编程 DancRan（SDS TEAM）；灯光控制鼠王"
+      }
+    ],
+    "sections": [
+      {
+        "label": "现场",
+        "html": "<div class=\"js-anim-content\">\n<p>游山音乐节在北京的夜里。舞台是一座穹顶帐篷，人群围在四周，灯光从侧面和内部同时进入场地。</p>\n<p>彩色侧光、暖光内场、烟雾和光束一起工作。灯先贴近音乐，再贴近站在现场的人。</p>\n<figure class=\"case-figure\"><img src=\"/works/youshan-2025/youshan-01.webp\" alt=\"游山音乐节 2025 穹顶舞台：粉蓝侧光、烟雾与人群剪影\" fetchpriority=\"high\" width=\"2000\" height=\"1333\" decoding=\"async\" /><figcaption>游山音乐节 2025 现场，北京</figcaption></figure>\n</div>"
+      },
+      {
+        "label": "设计",
+        "html": "<div class=\"js-anim-content\">\n<p>设计从音乐和现场的情绪出发。穹顶提供包裹感，粉、蓝、紫的侧光勾出帐篷轮廓，暖光留在内场，让人群始终看得见彼此。</p>\n<p>烟雾让光束有了形状。灯光跟着音乐走，快慢起伏都贴着现场的情绪。</p>\n<div class=\"case-gallery\">\n<figure class=\"case-figure\"><img src=\"/works/youshan-2025/youshan-02.webp\" alt=\"穹顶正面，粉蓝轮廓光与内部暖光中的 DJ\" loading=\"lazy\" width=\"2000\" height=\"1333\" decoding=\"async\" /></figure>\n<figure class=\"case-figure\"><img src=\"/works/youshan-2025/youshan-04.webp\" alt=\"浓黄色烟雾中的帐篷剪影\" loading=\"lazy\" width=\"1337\" height=\"2000\" decoding=\"async\" /></figure>\n</div>\n</div>"
+      },
+      {
+        "label": "控制与团队",
+        "html": "<div class=\"js-anim-content\">\n<p>灯光氛围设计、落地执行与现场控制的分工：</p>\n<ul>\n<li>灯光氛围设计：Lyu Zhi-Qiang（Mohemann）</li>\n<li>落地执行与灯光控制编程：DancRan（SDS TEAM 成员）</li>\n<li>灯光控制：鼠王</li>\n</ul>\n</div>"
+      },
+      {
+        "label": "现场记录",
+        "html": "<div class=\"js-anim-content\">\n<p>从帐篷侧面到人群背后，现场的几个角度。</p>\n<div class=\"case-gallery\">\n<figure class=\"case-figure\"><img src=\"/works/youshan-2025/youshan-03.webp\" alt=\"金字塔帐篷侧面，深蓝环境光与内部红光\" loading=\"lazy\" width=\"2000\" height=\"1333\" decoding=\"async\" /></figure>\n<figure class=\"case-figure\"><img src=\"/works/youshan-2025/youshan-05.webp\" alt=\"金字塔帐篷全景，橙色洗光与绿白光束下的人群\" loading=\"lazy\" width=\"2000\" height=\"1333\" decoding=\"async\" /></figure>\n<figure class=\"case-figure\"><img src=\"/works/youshan-2025/youshan-06.webp\" alt=\"橙色逆光中的人群剪影\" loading=\"lazy\" width=\"1706\" height=\"1706\" decoding=\"async\" /></figure>\n<figure class=\"case-figure\"><img src=\"/works/youshan-2025/youshan-07.webp\" alt=\"红橙逆光中的人群剪影\" loading=\"lazy\" width=\"2000\" height=\"1333\" decoding=\"async\" /><figcaption>游山音乐节 2025 现场，北京</figcaption></figure>\n</div>\n</div>"
+      }
+    ],
+    "next": {
+      "href": "/works/pillbox",
+      "label": "查看案例"
+    },
+    "nextTitle": "Pillbox 舞池主视觉",
+    "footerTheme": "light"
+  },
+  {
+    "slug": "youshan-2025",
+    "lang": "en",
+    "route": "/en/works/youshan-2025",
+    "alternate": "/works/youshan-2025",
+    "h1": "Beijing · YOUSHAN Festival 2025",
+    "index": "05",
+    "head": "Light close to the music, and close to the mood of the room",
+    "metaTitle": "YOUSHAN Festival 2025 Lighting — Ratking",
+    "metaDescription": "Lighting for YOUSHAN 2025, Beijing: colour side light, warm interior light, smoke and beams across dome and pyramid tents. Design Mohemann; control Ratking, with DancRan and SDS TEAM.",
+    "scrollLabel": "Scroll",
+    "infos": [
+      {
+        "label": "Venue",
+        "value": "YOUSHAN Festival, Beijing"
+      },
+      {
+        "label": "Type",
+        "value": "Outdoor festival / stage lighting"
+      },
+      {
+        "label": "Year",
+        "value": "2025"
+      },
+      {
+        "label": "Role",
+        "value": "Lighting control"
+      },
+      {
+        "label": "Team",
+        "value": "Lighting mood design Lyu Zhi-Qiang (Mohemann); on-site execution and control programming DancRan (SDS TEAM); lighting control Ratking"
+      }
+    ],
+    "sections": [
+      {
+        "label": "The site",
+        "html": "<div class=\"js-anim-content\">\n<p>YOUSHAN takes place at night in Beijing. The stage is a dome tent, the crowd gathered around it, with light entering the space from the sides and from within.</p>\n<p>Colour side light, warm interior light, smoke and beams worked together. The light stayed close to the music, then close to the people in the room.</p>\n<figure class=\"case-figure\"><img src=\"/works/youshan-2025/youshan-01.webp\" alt=\"YOUSHAN 2025 dome stage: pink and blue side light, smoke and crowd silhouettes\" fetchpriority=\"high\" width=\"2000\" height=\"1333\" decoding=\"async\" /><figcaption>YOUSHAN Festival 2025, Beijing</figcaption></figure>\n</div>"
+      },
+      {
+        "label": "Design",
+        "html": "<div class=\"js-anim-content\">\n<p>The design started from the music and the mood of the room. The dome gives the space its enclosure; pink, blue and violet side light draws the tent outline; warm light stays in the interior so the crowd can still see each other.</p>\n<p>Smoke gives the beams a shape. The light follows the music, and its rises and falls stay close to the mood of the room.</p>\n<div class=\"case-gallery\">\n<figure class=\"case-figure\"><img src=\"/works/youshan-2025/youshan-02.webp\" alt=\"Front of the dome: pink and blue rim light with the DJ in warm interior light\" loading=\"lazy\" width=\"2000\" height=\"1333\" decoding=\"async\" /></figure>\n<figure class=\"case-figure\"><img src=\"/works/youshan-2025/youshan-04.webp\" alt=\"Tent silhouette in thick yellow smoke\" loading=\"lazy\" width=\"1337\" height=\"2000\" decoding=\"async\" /></figure>\n</div>\n</div>"
+      },
+      {
+        "label": "Control and team",
+        "html": "<div class=\"js-anim-content\">\n<p>Credits and roles:</p>\n<ul>\n<li>Lighting mood design: Lyu Zhi-Qiang (Mohemann)</li>\n<li>On-site execution and lighting control programming: DancRan (SDS TEAM)</li>\n<li>Lighting control: Ratking</li>\n</ul>\n</div>"
+      },
+      {
+        "label": "On site",
+        "html": "<div class=\"js-anim-content\">\n<p>A few angles from the site, from the side of the tent to the crowd.</p>\n<div class=\"case-gallery\">\n<figure class=\"case-figure\"><img src=\"/works/youshan-2025/youshan-03.webp\" alt=\"Side of a pyramid tent in deep blue ambient light, red glow inside\" loading=\"lazy\" width=\"2000\" height=\"1333\" decoding=\"async\" /></figure>\n<figure class=\"case-figure\"><img src=\"/works/youshan-2025/youshan-05.webp\" alt=\"Pyramid tent in orange wash with green and white beams over the crowd\" loading=\"lazy\" width=\"2000\" height=\"1333\" decoding=\"async\" /></figure>\n<figure class=\"case-figure\"><img src=\"/works/youshan-2025/youshan-06.webp\" alt=\"Crowd silhouettes against orange backlight\" loading=\"lazy\" width=\"1706\" height=\"1706\" decoding=\"async\" /></figure>\n<figure class=\"case-figure\"><img src=\"/works/youshan-2025/youshan-07.webp\" alt=\"Crowd silhouettes in red and orange backlight\" loading=\"lazy\" width=\"2000\" height=\"1333\" decoding=\"async\" /><figcaption>YOUSHAN Festival 2025, Beijing</figcaption></figure>\n</div>\n</div>"
+      }
+    ],
+    "next": {
+      "href": "/en/works/pillbox",
+      "label": "View case"
+    },
+    "nextTitle": "Pillbox Dance Floor Visual",
+    "footerTheme": "light"
   }
 ]
