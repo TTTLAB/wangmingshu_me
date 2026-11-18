@@ -1018,6 +1018,32 @@ html[lang='zh-CN'] .about-section__title {
   }
 }
 
+/* Touch targets: WCAG 2.2 AA 2.5.8 (Target Size Minimum). Standalone
+   controls such as the locale switcher, the footer legal links and the
+   contact links inside the nav menu measured 13-20px tall — below the
+   24x24 CSS px minimum. Padding / min-height only; type sizes unchanged. */
+.locale-switcher {
+  height: auto;
+  min-height: 24px;
+}
+.locale-switcher__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 24px;
+}
+.footer__end-link {
+  display: flex;
+  align-items: center;
+  min-height: 24px;
+}
+.navmenu__info-title {
+  display: flex;
+  align-items: center;
+  min-height: 24px;
+}
+
 /* Lenis smooth-scroll base styles. Previously imported from app.js as
    `lenis/dist/lenis.css`, which Vite emitted as a second <link> (381 B) on
    every page. Inlined here so the whole site ships one CSS file. */
