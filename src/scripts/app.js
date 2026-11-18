@@ -4,7 +4,7 @@ import { CustomEase } from 'gsap/CustomEase';
 import { SplitText } from 'gsap/SplitText';
 import { createLenis, destroyLenis, getLenis } from './lenis';
 import { playLoaderOnce } from './loader';
-import { initNavbar, cleanupNavbar } from './navbar';
+import { initNavbar, cleanupNavbar, collapseNavbar } from './navbar';
 import {
   initMenu,
   bindMenuTriggers,
@@ -315,6 +315,11 @@ function settleIncomingLayout() {
     }
     lastScrollY = Math.round(window.scrollY);
     lastDrift = Math.round(target.getBoundingClientRect().top);
+
+    // 锚点跳转是程序化滚动，导航的滚动监听读不到“下滚”手势，导航条会停在
+    // 顶部压住区块标题；落位的同时直接置为收起态。自带 scroll-margin-top
+    // 的目标（bio 卡片）已经给导航留了位置，保持可见。
+    if (!(margin > 0)) collapseNavbar();
   };
 
   // One debounced refresh channel: observer, fonts and load all funnel

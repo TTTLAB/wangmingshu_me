@@ -3,10 +3,24 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { getLenis } from './lenis';
 
 let cleanups = [];
+// Set by the live initNavbar(); lets other modules park the bar without
+// reaching into its closure.
+let collapseHandler = null;
 
 function cleanup() {
   cleanups.forEach((fn) => fn());
   cleanups = [];
+}
+
+/**
+ * Put the navbar in its hidden state at once (no slide), using the same
+ * resting offset as the scroll-down hide. Anchor landings call this: a hash
+ * jump from another page is a programmatic scroll, so the scroll handler
+ * never reads it as a downward gesture and the bar would otherwise sit on
+ * top of the target's title.
+ */
+export function collapseNavbar() {
+  collapseHandler?.();
 }
 
 export function initNavbar() {
@@ -31,6 +45,33 @@ export function initNavbar() {
     gsap.to(nav, { y: 0, duration: 0.4, ease: 'power3.out', overwrite: true });
   };
 
+  // Same offset as the scroll-down hide, but placed in a single tick. The
+  // base top is measured from the untransformed position so a mid-flight
+  // reveal cannot shorten the distance.
+  const hideNow = () => {
+    // The menu owns the bar's transform while it is open (menu.js tweens it
+    // back to 0); collapsing underneath it would fight that tween.
+    if (document.body.classList.contains('is-menu-open')) return;
+    // The scroll handler keeps the bar visible above HIDE_AT; a shallow
+    // landing must follow the same rule or `hidden` would disagree with it.
+    if (window.scrollY < HIDE_AT) return;
+    hidden = true;
+    lastY = window.scrollY;
+    const y = Number(gsap.getProperty(nav, 'y')) || 0;
+    const baseTop = nav.getBoundingClientRect().top - y;
+    const distance = -(nav.offsetHeight + baseTop + 8);
+    gsap.to(nav, {
+      y: distance,
+      duration: 0,
+      ease: 'none',
+      overwrite: true,
+    });
+  };
+  collapseHandler = hideNow;
+  cleanups.push(() => {
+    if (collapseHandler === hideNow) collapseHandler = null;
+  });
+
   const onScroll = (event) => {
     if (document.body.classList.contains('is-menu-open')) return;
     const y = typeof event?.scroll === 'number' ? event.scroll : window.scrollY;
@@ -42,6 +83,9 @@ export function initNavbar() {
           : y < lastY
             ? -1
             : 0;
+    // Immediate Lenis jumps (anchor landings, resize) report the direction
+    // of the last real scroll; never let a stale one re-open the bar.
+    const isProgrammaticJump = event?.isScrolling === false;
 
     if (y < HIDE_AT) {
       if (hidden) showNav();
@@ -58,7 +102,7 @@ export function initNavbar() {
         ease: 'power3.in',
         overwrite: true,
       });
-    } else if (direction === -1 && hidden) {
+    } else if (direction === -1 && hidden && !isProgrammaticJump) {
       showNav();
     }
 
