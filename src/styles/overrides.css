@@ -327,6 +327,12 @@ body.is-menu-open {
   min-height: 100svh;
   display: flex;
   align-items: center;
+  /* The site footer is a fixed viewport-height layer (z-index 8); page
+     content paints over it and only reveals it after the 100dvh bottom
+     margin. Other pages get this from their section backgrounds — the 404
+     page had none, so the footer's marquee, contact links and side nav
+     bled through the copy. */
+  background-color: var(--color-black);
 }
 .error-page__inner {
   padding-block: 140px;
