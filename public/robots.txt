@@ -1,0 +1,12 @@
+# robots.txt — 鼠王 Ratking / wangmingshu.me
+# 允许所有搜索引擎与 AI 抓取全站。
+
+User-agent: *
+Allow: /
+
+# AI / 搜索引擎可直接读取的文本与结构化文件
+Allow: /llms.txt
+Allow: /bio.md
+Allow: /bio-en.md
+
+# 本仓库目前没有生成 sitemap，故不在此写 Sitemap 行（有真实地址后再补）。

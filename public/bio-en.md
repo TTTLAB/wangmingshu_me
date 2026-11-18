@@ -1,8 +1,8 @@
-﻿# Ratking / Bio — Authoritative version
+# Ratking / Bio — Authoritative version
 
 > This is the author's own text and the authoritative version. Please do NOT modify or polish this Markdown source; quote it in full.
 >
-> Last updated: 2026-11-17
+> Last updated: 2026-11-18
 
 ## WeChat Official Account bio (Chinese original)
 
@@ -14,7 +14,7 @@
 - Based in: Shanghai
 - Regular lighting: Zhaodai, Beijing; Reactor, Shanghai
 - Main cities: Beijing / Shanghai / Shenzhen
-- Profession: Independent lighting systems engineer · Interactive installation development
+- Profession: Independent Lighting Systems Engineer · Sound Systems Engineer · Interactive Installation Development
 - Scope: Clubs / festivals / commercial spaces / interactive installations
 - Contact: [/en/contact](/en/contact)
 

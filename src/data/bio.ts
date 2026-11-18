@@ -28,11 +28,13 @@ export const pressBio = {
   text: '王明鼠，互联网下水道里的老鼠人，也是没遇上Nancy的低配Sid。这一世叫惜得（是个值得珍惜的男孩），在触电边缘试探的二流电工、在抽象海洋里狗刨儿的乐子人、失业至今还没饿死的程序员。',
 };
 
+
 const zh = {
   meta: {
-    title: '关于鼠王 — 独立灯光系统工程师 · 互动装置',
+    title: '关于鼠王 — 独立灯光系统工程师 · 声音系统工程师 · 互动装置开发',
     description:
-      '鼠王（王明鼠）：2013–2016 在北京公路商店做黑市电商前后端与运维，2017 年从 Wigwam 开业做起，2018 年起做俱乐部灯光成为自由灯光师，如今独立灯光系统工程师、互动装置开发。现居上海，常驻北京 Zhaodai、上海 Reactor 控灯。',
+      '鼠王（王明鼠）：2013–2016 在北京公路商店做黑市电商前后端与运维，2017 年从 Wigwam 开业做起，2018 年起做俱乐部灯光成为自由灯光师，如今独立灯光系统工程师、声音系统工程师、互动装置开发。现居上海，常驻北京 Zhaodai、上海 Reactor 控灯。',
+    jobTitle: '独立灯光系统工程师 · 声音系统工程师 · 互动装置开发',
   },
   eyebrow: 'BIO / 关于鼠王',
   quote: [
@@ -224,9 +226,10 @@ const zh = {
 
 const en: typeof zh = {
   meta: {
-    title: 'About Ratking — Independent Lighting Systems Engineer · Interactive Installations',
+    title: 'About Ratking — Independent Lighting Systems Engineer · Sound Systems Engineer · Interactive Installation Development',
     description:
-      'Ratking (Wang Mingshu): front-end, back-end and operations for the black-market e-commerce operation at Highway Store in Beijing, 2013–2016; at Wigwam from its opening in 2017; freelance club lighting designer from 2018; now an independent lighting systems engineer and interactive installation developer. Based in Shanghai, with regular lighting work at Zhaodai in Beijing and Reactor in Shanghai.',
+      'Ratking (Wang Mingshu): front-end, back-end and operations for the black-market e-commerce operation at Highway Store in Beijing, 2013–2016; at Wigwam from its opening in 2017; freelance club lighting designer from 2018; now an independent lighting systems engineer, sound systems engineer and interactive installation developer. Based in Shanghai, with regular lighting work at Zhaodai in Beijing and Reactor in Shanghai.',
+    jobTitle: 'Independent Lighting Systems Engineer · Sound Systems Engineer · Interactive Installation Development',
   },
   eyebrow: 'BIO / ABOUT RATKING',
   quote: [

@@ -13,6 +13,18 @@ const s = c.sections;
 const alternate = routes[lang === 'zh' ? 'en' : 'zh'].bio;
 const lines = (text: string) => text.split('\n');
 const pad = (n: number) => String(n).padStart(2, '0');
+
+// 向 <head> 注入 Markdown 版本链接与 Person JSON-LD。
+const siteOrigin = 'https://wangmingshu.me';
+const markdownHref = lang === 'zh' ? '/bio.md' : '/bio-en.md';
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: '鼠王',
+  alternateName: ['王明鼠', 'Ratking', '惜得'],
+  jobTitle: c.meta.jobTitle,
+  url: lang === 'zh' ? siteOrigin + '/bio' : siteOrigin + '/en/bio',
+};
 ---
 
 <BaseLayout
@@ -24,6 +36,10 @@ const pad = (n: number) => String(n).padStart(2, '0');
   footerTheme="light"
   page="bio"
 >
+  <Fragment slot="head">
+    <link rel="alternate" type="text/markdown" href={markdownHref} />
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+  </Fragment>
   <main class="bio page__content js-page-content">
     <header class="bio-hero">
       <div class="bio__wrap">
@@ -1028,4 +1044,5 @@ const pad = (n: number) => String(n).padStart(2, '0');
       font-size: var(--text-sm);
     }
   }
+
 </style>
