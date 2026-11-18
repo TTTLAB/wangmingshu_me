@@ -7,7 +7,7 @@ const zh = {
   meta: {
     title: '鼠王 Ratking - WANGMINGSHU.ME',
     description:
-      '鼠王 Ratking / 王明鼠，独立灯光系统工程师，做地下电子音乐俱乐部与音乐节的灯光系统、声音系统、舞美、控制编程和互动装置。设计、编程、施工，一个人跟到底。',
+      '鼠王 Ratking / 王明鼠，独立灯光系统工程师，做俱乐部与音乐节的灯光、声音系统、舞美、控制编程和互动装置，设计、编程、施工一人跟到底。',
   },
   video: '/works/pillbox/pillbox-led.mp4',
   videoMobile: '/works/pillbox/pillbox-led-mobile.mp4',
@@ -93,7 +93,7 @@ const en: typeof zh = {
   meta: {
     title: 'Ratking - WANGMINGSHU.ME',
     description:
-      "Ratking / Wang Mingshu is an independent lighting systems engineer working on lighting and sound systems for underground electronic-music clubs, stage design for electronic music festivals, control programming and interactive installations. Design, programming and build — one person, all the way through.",
+      'Ratking — independent lighting systems engineer for underground clubs and music festivals: lighting, sound, control programming and interactive installations.',
   },
   video: '/works/pillbox/pillbox-led.mp4',
   videoMobile: '/works/pillbox/pillbox-led-mobile.mp4',

@@ -9,4 +9,4 @@ Allow: /llms.txt
 Allow: /bio.md
 Allow: /bio-en.md
 
-# 本仓库目前没有生成 sitemap，故不在此写 Sitemap 行（有真实地址后再补）。
+Sitemap: https://wangmingshu.me/sitemap-index.xml

@@ -20,6 +20,7 @@ interface Props {
   home?: boolean;
   ogImage?: string;
   preloadImage?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -33,6 +34,7 @@ const {
   home = false,
   ogImage = '/assets/og/ratking-og.png',
   preloadImage,
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -55,18 +57,18 @@ const enUrl = lang === 'en' ? canonical : alternateUrl;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
     <meta name="creator" content="鼠王 Ratking" />
-    <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="zh-CN" href={zhUrl} />
-    <link rel="alternate" hreflang="en" href={enUrl} />
-    <link rel="alternate" hreflang="x-default" href={zhUrl} />
+    {!noindex && <link rel="canonical" href={canonical} />}
+    {!noindex && <link rel="alternate" hreflang="zh-CN" href={zhUrl} />}
+    {!noindex && <link rel="alternate" hreflang="en" href={enUrl} />}
+    {!noindex && <link rel="alternate" hreflang="x-default" href={zhUrl} />}
     <slot name="head" />
     {preloadImage && (
       <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />
     )}
     <meta property="og:site_name" content="鼠王 Ratking" />
-    <meta property="og:url" content={canonical} />
+    {!noindex && <meta property="og:url" content={canonical} />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />

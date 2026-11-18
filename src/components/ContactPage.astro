@@ -9,9 +9,6 @@ interface Props {
 }
 const { lang } = Astro.props;
 const c = contactContent[lang];
-const IG_URL = 'https://www.instagram.com/wangmingshu.me/';
-const XHS_URL = 'https://www.xiaohongshu.com/user/profile/5657f794f53ee0375b2aeb50';
-const infoParts = String(c.infoEmpty ?? '').split(/<br\s*\/?>/i);
 ---
 <div class="contacts page__content js-page-content">
   <InteractiveGrid variant="light" />
@@ -21,42 +18,46 @@ const infoParts = String(c.infoEmpty ?? '').split(/<br\s*\/?>/i);
         <p class="t-eye-sm contacts__infos-label p-eye js-side-el">{c.infoLabel}</p>
         <div class="contacts__infos-values">
           {site.email && (
-            <a class="cursor-pointer contacts__infos-value js-side-el" href={`mailto:${site.email}`}>
-              <p class="t-md">{site.email}</p>
-            </a>
+            <p class="t-md contacts__infos-value js-side-el">
+              <a class="cursor-pointer" href={`mailto:${site.email}`}>{site.email}</a>
+              <button
+                type="button"
+                class="contacts__copy"
+                data-copy-email={site.email}
+                aria-label={`${c.copyEmail}${c.labelSeparator}${site.email}`}
+              >
+                {c.copyEmail}
+              </button>
+            </p>
           )}
-          {site.phone && (
-            <a class="contacts__infos-value js-side-el" href={site.phoneHref}>
-              <p class="t-md">{site.phone}</p>
-            </a>
+          {site.instagramHandle && (
+            <p class="t-md contacts__infos-value js-side-el">
+              <a class="cursor-pointer" href={site.instagramUrl} target="_blank" rel="noopener noreferrer">
+                {c.instagramLabel}{c.labelSeparator}{site.instagramHandle}
+              </a>
+            </p>
           )}
-          {!site.email && !site.phone && (
-            <p class="t-md contacts__infos-empty js-side-el">
-              {infoParts.map((part, i) => {
-                const href = part.includes('@wangmingshu.me')
-                  ? IG_URL
-                  : /xiaohongshu|小红书id/i.test(part)
-                    ? XHS_URL
-                    : null;
-                return (
-                  <Fragment>
-                    {i > 0 && <br />}
-                    {href ? (
-                      <a class="cursor-pointer" href={href} target="_blank" rel="noopener noreferrer">{part}</a>
-                    ) : (
-                      part
-                    )}
-                  </Fragment>
-                );
-              })}
+          {site.xiaohongshuId && (
+            <p class="t-md contacts__infos-value js-side-el">
+              <a class="cursor-pointer" href={site.xiaohongshuUrl} target="_blank" rel="noopener noreferrer">
+                {c.xiaohongshuLabel}{c.labelSeparator}{site.xiaohongshuId}
+              </a>
             </p>
           )}
         </div>
+        <p
+          class="t-sm contacts__copy-status"
+          role="status"
+          aria-live="polite"
+          data-copy-status
+          data-copied={c.emailCopied}
+          data-copy-failed={c.emailCopyFailed}
+        ></p>
       </div>
       <h1 class="t-half-xl contacts__title js-main-title"><BreakText text={c.title} /></h1>
     </div>
     <div class="contacts__body js-contacts-body">
-      <div class="multi-step-form" data-contact-form>
+      <div class="multi-step-form" data-contact-form data-mailto-to={site.email}>
         <aside class="multi-step-form__sidebar">
           <nav class="multi-step-form__nav" aria-label={c.summaryTitle}>
             {c.nav.map((label, i) => (
@@ -135,6 +136,9 @@ const infoParts = String(c.infoEmpty ?? '').split(/<br\s*\/?>/i);
               <div class="multi-step-form__success" hidden data-success>
                 <p class="t-lg multi-step-form__step-title">{c.successTitle}</p>
                 <p class="t-md multi-step-form__success-text">{c.successText}</p>
+                <a class="multi-step-form__success-link cursor-pointer" data-mailto-link hidden>{c.successOpen}</a>
+                <button type="button" class="multi-step-form__copy cursor-pointer" data-copy-mail hidden>{c.successCopy}</button>
+                <p class="t-sm multi-step-form__copy-status" role="status" aria-live="polite" data-mail-copy-status></p>
                 <button type="button" class="button button--primary button--regular" data-restart>
                   <p class="t-sm button__text">{c.successAgain}</p>
                 </button>
@@ -174,7 +178,47 @@ const infoParts = String(c.infoEmpty ?? '').split(/<br\s*\/?>/i);
   </div>
 </div>
 <style>
-  .contacts__infos-empty a:hover {
+  .contacts__infos-value a:hover,
+  .contacts__copy:hover {
     text-decoration: underline;
+  }
+  .contacts__copy {
+    margin-left: calc(var(--spacing) * 2);
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .contacts__copy-status {
+    min-height: 1.2em;
+  }
+  .multi-step-form__success-link {
+    display: inline-block;
+    margin-top: calc(var(--spacing) * 3);
+    text-decoration: underline;
+  }
+  .multi-step-form__success-link[hidden] {
+    display: none;
+  }
+  .multi-step-form__copy {
+    display: inline-block;
+    margin-top: calc(var(--spacing) * 2);
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+  }
+  .multi-step-form__copy[hidden] {
+    display: none;
+  }
+  .multi-step-form__copy-status {
+    min-height: 1.2em;
   }
 </style>

@@ -1,7 +1,7 @@
 {
   "zh": {
     "privacy": {
-      "content": "<h3 class=\"t-lg\">隐私政策</h3>\n<p>本站是鼠王 Ratking 的个人作品展示站，用来介绍灯光系统、控制编程和互动装置项目。</p>\n<h2>收集哪些信息</h2>\n<p>本站目前不收集、不存储个人信息。联系表单是前端演示：填写的内容只留在当前浏览器中，不会发送到服务器，也不会被本站保存。邮箱和电话暂未公开。</p>\n<h2>第三方服务</h2>\n<p>本站不使用统计、广告或第三方追踪服务。</p>\n<h2>问题</h2>\n<p>如对本站的数据处理有疑问，可通过联系页留言（演示）或等待正式联系方式公布后联系。</p>"
+      "content": "<h3 class=\"t-lg\">隐私政策</h3>\n<p>本站是鼠王 Ratking 的个人作品展示站，用来介绍灯光系统、控制编程和互动装置项目。</p>\n<h2>收集哪些信息</h2>\n<p>本站不接收、不存储你通过联系页填写的信息。联系表单只在你的浏览器里生成一封邮件草稿，邮件由你的邮件客户端发出；本站没有服务器端表单接收，也不会保存草稿内容。</p>\n<h2>公开的联系方式</h2>\n<p>联系页、页脚和导航菜单公开展示邮箱、Instagram 和小红书，电话号码不公开。点击这些链接时，相应平台会按其隐私政策处理你的信息。</p>\n<h2>第三方服务</h2>\n<p>本站不使用统计、广告或第三方追踪服务。</p>\n<h2>问题</h2>\n<p>如对本站的数据处理有疑问，请通过联系页公开的邮箱联系。</p>"
     },
     "cookies": {
       "content": "<h3 class=\"t-lg\">Cookie 政策</h3>\n<p>本站不使用广告、统计或第三方追踪 Cookie。</p>\n<h2>本地存储</h2>\n<p>为了记住你是否同意 Cookie 提示，本站仅在浏览器 localStorage 中保存一条同意记录。该记录不会发送到服务器。你可以随时通过页脚的「管理 Cookie 偏好」修改或清除它。</p>\n<h2>第三方 Cookie</h2>\n<p>本站不加载第三方 Cookie。页面所需的字体和素材均由本站直接提供。</p>"
@@ -9,7 +9,7 @@
   },
   "en": {
     "privacy": {
-      "content": "<h3 class=\"t-lg\">Privacy Policy</h3>\n<p>This site is the personal portfolio of Ratking (鼠王), presenting lighting systems, control programming and interactive installation projects.</p>\n<h2>What this site collects</h2>\n<p>This site does not currently collect or store personal information. The contact form is a front-end demo: anything you enter stays in your current browser, is never sent to a server, and is not stored by this site. Email and phone are not published yet.</p>\n<h2>Third-party services</h2>\n<p>This site uses no analytics, advertising or third-party tracking services.</p>\n<h2>Questions</h2>\n<p>If you have questions about how this site handles data, leave a message on the contact page (demo), or get in touch once official contact details are published.</p>"
+      "content": "<h3 class=\"t-lg\">Privacy Policy</h3>\n<p>This site is the personal portfolio of Ratking (鼠王), presenting lighting systems, control programming and interactive installation projects.</p>\n<h2>What this site collects</h2>\n<p>This site does not receive or store anything you enter on the contact page. The contact form only creates an email draft in your browser, and your email client sends it; there is no server-side form handler, and the draft is not saved.</p>\n<h2>Published contact details</h2>\n<p>The contact page, footer and navigation menu publish an email address, Instagram and Xiaohongshu. The phone number is not published. When you follow those links, the respective platform handles your information under its own privacy policy.</p>\n<h2>Third-party services</h2>\n<p>This site uses no analytics, advertising or third-party tracking services.</p>\n<h2>Questions</h2>\n<p>If you have questions about how this site handles data, contact me at the email address published on the contact page.</p>"
     },
     "cookies": {
       "content": "<h3 class=\"t-lg\">Cookie Policy</h3>\n<p>This site uses no advertising, analytics or third-party tracking cookies.</p>\n<h2>Local storage</h2>\n<p>To remember whether you accepted the cookie notice, this site stores a single consent record in your browser's localStorage. That record is never sent to a server. You can change or clear it at any time with \"Manage cookie preferences\" in the footer.</p>\n<h2>Third-party cookies</h2>\n<p>This site loads no third-party cookies. All fonts and assets the pages need are served directly by this site.</p>"

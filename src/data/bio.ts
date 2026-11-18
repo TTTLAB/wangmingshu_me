@@ -33,7 +33,7 @@ const zh = {
   meta: {
     title: '关于鼠王 — 独立灯光系统工程师 · 声音系统工程师 · 互动装置开发',
     description:
-      '鼠王（王明鼠）：2013–2016 在北京公路商店做黑市电商前后端与运维，2017 年从 Wigwam 开业做起，2018 年起做俱乐部灯光成为自由灯光师，如今独立灯光系统工程师、声音系统工程师、互动装置开发。现居上海，常驻北京 Zhaodai、上海 Reactor 控灯。',
+      '鼠王（王明鼠），独立灯光系统工程师、声音系统工程师、互动装置开发。现居上海，常驻北京 Zhaodai、上海 Reactor 控灯，做俱乐部与音乐节项目。',
     jobTitle: '独立灯光系统工程师 · 声音系统工程师 · 互动装置开发',
   },
   eyebrow: 'BIO / 关于鼠王',
@@ -226,9 +226,9 @@ const zh = {
 
 const en: typeof zh = {
   meta: {
-    title: 'About Ratking — Independent Lighting Systems Engineer · Sound Systems Engineer · Interactive Installation Development',
+    title: 'About Ratking — Lighting & Sound Systems Engineer',
     description:
-      'Ratking (Wang Mingshu): front-end, back-end and operations for the black-market e-commerce operation at Highway Store in Beijing, 2013–2016; at Wigwam from its opening in 2017; freelance club lighting designer from 2018; now an independent lighting systems engineer, sound systems engineer and interactive installation developer. Based in Shanghai, with regular lighting work at Zhaodai in Beijing and Reactor in Shanghai.',
+      'Ratking (Wang Mingshu) is an independent lighting and sound systems engineer in Shanghai. He also builds interactive installations for clubs and festivals.',
     jobTitle: 'Independent Lighting Systems Engineer · Sound Systems Engineer · Interactive Installation Development',
   },
   eyebrow: 'BIO / ABOUT RATKING',

@@ -11,10 +11,12 @@
     "dev": "astro dev",
     "prebuild": "node scripts/ensure-md-bom.mjs",
     "build": "astro build",
+    "check:links": "node scripts/check-links.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.5",
     "astro": "^7.4.10",
     "gsap": "3.13.0",
     "lenis": "1.3.17",

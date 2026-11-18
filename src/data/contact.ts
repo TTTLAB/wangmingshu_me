@@ -7,7 +7,12 @@ const zh = {
       '说说你的场地、预算和时间。俱乐部灯光系统、控制编程、互动装置，能做就接，做不了直说。',
   },
   infoLabel: '联系方式',
-  infoEmpty: 'd0a1ccec@gmail.com <br>instagram: @wangmingshu.me <br>小红书id: 949135495',
+  instagramLabel: 'Instagram',
+  xiaohongshuLabel: '小红书',
+  labelSeparator: '：',
+  copyEmail: '复制邮箱',
+  emailCopied: '邮箱已复制。',
+  emailCopyFailed: '复制失败，请手动选择邮箱地址。',
   title: '说说你的场地、<br>预算和时间。',
   nav: ['需求', '信息', '联系', '确认'],
   serviceTitle: '你想做哪一类？*',
@@ -39,21 +44,29 @@ const zh = {
   next: '下一步',
   required: '这项还没填。',
   invalidEmail: '邮箱格式不对。',
-  successTitle: '演示表单：没有发送。',
+  successTitle: '已生成邮件草稿，请在邮件客户端里确认并发送。',
   successText:
-    '这是前端演示，内容只留在你的浏览器里，不会发送到服务器，也不会被本站保存。正式联系方式待补充。',
+    '本站不接收、不存储你填写的内容；邮件由你的邮件客户端发出。',
+  successOpen: '重新打开邮件',
+  successCopy: '复制邮件内容',
+  successCopyDone: '已复制邮件内容',
+  successCopyFail: '复制失败，请手动选中邮件内容。',
   successAgain: '再填一条',
 };
 
 const en: typeof zh = {
   meta: {
-    title: 'Contact Ratking — Lighting Systems and Interactive Installations',
+    title: 'Contact Ratking — Lighting & Sound Systems',
     description:
-      'Tell me about your venue, your budget and your timeline. Club lighting systems, control programming, interactive installations — if I can do it, I take it on; if not, I say so.',
+      'Tell me about your venue, budget and timeline. Club lighting, sound systems and interactive installations — if I can do it, I take it on; if not, I say so.',
   },
   infoLabel: 'Contact',
-  infoEmpty:
-    'd0a1ccec@gmail.com <br>Instagram: @wangmingshu.me <br>Xiaohongshu ID: 949135495',
+  instagramLabel: 'Instagram',
+  xiaohongshuLabel: 'Xiaohongshu',
+  labelSeparator: ': ',
+  copyEmail: 'Copy email',
+  emailCopied: 'Email copied.',
+  emailCopyFailed: 'Copy failed — please select the address manually.',
   title: 'Tell me about your venue,<br>your budget and your timeline.',
   nav: ['Request', 'Details', 'Contact', 'Confirm'],
   serviceTitle: 'Which of these do you need?*',
@@ -90,9 +103,13 @@ const en: typeof zh = {
   next: 'Next',
   required: "You haven't filled this one in yet.",
   invalidEmail: "That email doesn't look right.",
-  successTitle: 'Demo form: nothing was sent.',
+  successTitle: 'Email draft created — review and send it in your email client.',
   successText:
-    'This is a front-end demo. What you type stays in your browser — it is not sent to a server, and this site does not store it. Proper contact details are still to be added.',
+    'This site does not receive or store what you entered; the email is sent from your own email client.',
+  successOpen: 'Open the draft again',
+  successCopy: 'Copy email contents',
+  successCopyDone: 'Email contents copied',
+  successCopyFail: 'Copy failed. Please select the text manually.',
   successAgain: 'Fill in another',
 };
 

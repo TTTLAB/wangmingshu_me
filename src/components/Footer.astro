@@ -10,12 +10,7 @@ interface Props {
 const { lang, theme = 'dark' } = Astro.props;
 const copy = shell[lang];
 const r = routes[lang];
-const IG_URL = 'https://www.instagram.com/wangmingshu.me/';
-const XHS_URL = 'https://www.xiaohongshu.com/user/profile/5657f794f53ee0375b2aeb50';
-const xhsText = lang === 'zh' ? '小红书id: 949135495' : 'Xiaohongshu ID: 949135495';
-const rawConnect = String(copy.info.connect || '');
-const emailAddr = (rawConnect.match(/[^\s:]+@[^\s:]+/) || [''])[0];
-const displayEmail = site.email || emailAddr;
+const contact = site;
 // On the home page the in-page links are bare hashes; SmoothLink scrolls them.
 // Everywhere else they point back to the home page (normal navigation).
 // Pages carry their own href in the data, so adding one no longer shifts the
@@ -55,11 +50,21 @@ const labels = copy.footerNav.map((item) => ({
             <a class="cursor-pointer" href={r.contact}>{copy.footerLabel}</a>
           </p>
           <div class="footer__info-links">
-            {displayEmail && (
-              <a class="cursor-pointer p footer__info-link" href={`mailto:${displayEmail}`}>{displayEmail}</a>
+            {contact.email && (
+              <a class="cursor-pointer p footer__info-link" href={`mailto:${contact.email}`}>
+                {contact.email}
+              </a>
             )}
-            <a class="cursor-pointer p footer__info-link" href={IG_URL} target="_blank" rel="noopener noreferrer">{copy.info.phone}</a>
-            <a class="cursor-pointer p footer__info-link" href={XHS_URL} target="_blank" rel="noopener noreferrer">{xhsText}</a>
+            {contact.instagramHandle && (
+              <a class="cursor-pointer p footer__info-link" href={contact.instagramUrl} target="_blank" rel="noopener noreferrer">
+                {copy.info.phone}: {contact.instagramHandle}
+              </a>
+            )}
+            {contact.xiaohongshuId && (
+              <a class="cursor-pointer p footer__info-link" href={contact.xiaohongshuUrl} target="_blank" rel="noopener noreferrer">
+                {copy.info.xiaohongshu}: {contact.xiaohongshuId}
+              </a>
+            )}
           </div>
         </div>
         <nav class="footer__nav" aria-label={copy.menuAria}>

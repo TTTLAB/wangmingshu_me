@@ -6,18 +6,70 @@ const MESSAGES = {
     invalidEmail: '邮箱格式不对。',
     serviceRequired: '选一个类型。',
     next: '下一步',
-    submit: '提交',
+    submit: '生成邮件',
+    mailMissing: '收件邮箱未配置，请直接用页面上的邮箱联系。',
+    successCopy: '复制邮件内容',
+    successCopyDone: '已复制邮件内容',
+    successCopyFail: '复制失败，请手动选中邮件内容。',
+    mailSubject: (service, name) => `【网站联系】${service} · ${name}`,
+    mail: {
+      to: '收件人',
+      subject: '主题',
+      service: '服务类型',
+      name: '称呼',
+      email: '邮箱',
+      phone: '电话',
+      phoneEmpty: '未填写',
+      message: '项目情况',
+    },
   },
   en: {
     required: 'Please fill in this field.',
     invalidEmail: 'Please enter a valid email address.',
     serviceRequired: 'Please choose the type of service.',
     next: 'Next',
-    submit: 'Send',
+    submit: 'Create email',
+    mailMissing: 'No recipient is configured. Please use the email address shown on this page.',
+    successCopy: 'Copy email contents',
+    successCopyDone: 'Email contents copied',
+    successCopyFail: 'Copy failed. Please select the text manually.',
+    mailSubject: (service, name) => `Website enquiry: ${service} — ${name}`,
+    mail: {
+      to: 'To',
+      subject: 'Subject',
+      service: 'Service',
+      name: 'Name',
+      email: 'Email',
+      phone: 'Phone',
+      phoneEmpty: 'Not provided',
+      message: 'Project brief',
+    },
   },
 };
 
+function initCopyEmail() {
+  const button = document.querySelector('[data-copy-email]');
+  const status = document.querySelector('[data-copy-status]');
+  if (!button || !status || button.dataset.copyInit === '1') return;
+  button.dataset.copyInit = '1';
+  const copied = status.dataset.copied || '';
+  const failed = status.dataset.copyFailed || '';
+
+  button.addEventListener('click', async () => {
+    const email = button.dataset.copyEmail || '';
+    if (!email) return;
+    try {
+      await navigator.clipboard.writeText(email);
+      status.textContent = copied;
+    } catch {
+      status.textContent = failed;
+    }
+  });
+}
+
 export function initContactForm() {
+  initCopyEmail();
+
   const root = document.querySelector('[data-contact-form]');
   if (!root || root.dataset.dcInit === '1') return;
   root.dataset.dcInit = '1';
@@ -32,7 +84,11 @@ export function initContactForm() {
   const enter = root.querySelector('[data-enter]');
   const footer = root.querySelector('[data-form-footer]');
   const success = root.querySelector('[data-success]');
+  const successLink = root.querySelector('[data-mailto-link]');
+  const copyMail = root.querySelector('[data-copy-mail]');
+  const mailCopyStatus = root.querySelector('[data-mail-copy-status]');
   const restart = root.querySelector('[data-restart]');
+  let lastDraft = null;
 
   if (!form || steps.length === 0) return;
 
@@ -59,7 +115,7 @@ export function initContactForm() {
   const setError = (field, message) => {
     const target = root.querySelector(`[data-error-for="${field}"]`);
     if (target) target.textContent = message;
-    const input = fields[field === 'name' ? 'name' : field];
+    const input = fields[field === 'full_name' ? 'name' : field];
     if (input) input.setAttribute('aria-invalid', message ? 'true' : 'false');
   };
 
@@ -100,6 +156,34 @@ export function initContactForm() {
     }
 
     return valid;
+  };
+
+  const buildMailto = () => {
+    const to = (root.dataset.mailtoTo || '').trim();
+    if (!to) return null;
+
+    const m = messages.mail;
+    // Single-line fields never carry CR/LF into the mailto headers.
+    const oneLine = (value) => String(value).replace(/[\r\n]+/g, ' ').trim();
+    const service = oneLine(selectedService);
+    const name = oneLine(fields.name?.value || '');
+    const email = oneLine(fields.email?.value || '');
+    const phone = oneLine(fields.phone?.value || m.phoneEmpty);
+    const message = (fields.message?.value.trim() || '');
+    const body = [
+      `${m.service}: ${service}`,
+      `${m.name}: ${name}`,
+      `${m.email}: ${email}`,
+      `${m.phone}: ${phone}`,
+      '',
+      `${m.message}:`,
+      message,
+    ].join('\r\n');
+
+    const subject = messages.mailSubject(service, name);
+    const url = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const text = `${m.to}: ${to}\r\n${m.subject}: ${subject}\r\n\r\n${body}`;
+    return { url, text };
   };
 
   const fillSummary = () => {
@@ -173,9 +257,23 @@ export function initContactForm() {
       return;
     }
 
-    // Final step: purely local mock, no fetch / XHR / form action.
+    // Final step: build a mailto: draft in the browser. The site never posts
+    // or stores the form contents; the visitor's mail client sends the email.
     fillSummary();
+    const draft = buildMailto();
+    if (!draft) {
+      window.alert(messages.mailMissing);
+      return;
+    }
+    lastDraft = draft;
+    if (successLink) {
+      successLink.href = draft.url;
+      successLink.hidden = false;
+    }
+    if (copyMail) copyMail.hidden = false;
+    if (mailCopyStatus) mailCopyStatus.textContent = '';
     showSuccess();
+    window.location.href = draft.url;
   };
 
   const goBack = () => {
@@ -228,6 +326,16 @@ export function initContactForm() {
     });
   });
 
+  copyMail?.addEventListener('click', async () => {
+    if (!lastDraft) return;
+    try {
+      await navigator.clipboard.writeText(lastDraft.text);
+      if (mailCopyStatus) mailCopyStatus.textContent = messages.successCopyDone;
+    } catch {
+      if (mailCopyStatus) mailCopyStatus.textContent = messages.successCopyFail;
+    }
+  });
+
   restart?.addEventListener('click', () => {
     form.reset();
     clearErrors();
@@ -237,17 +345,22 @@ export function initContactForm() {
     });
     selectedService = '';
     maxVisited = 0;
+    lastDraft = null;
+    if (copyMail) copyMail.hidden = true;
+    if (mailCopyStatus) mailCopyStatus.textContent = '';
+    if (successLink) successLink.hidden = true;
     root.querySelectorAll('[data-summary]').forEach((element) => {
       element.textContent = '';
     });
     showStep(0);
   });
 
-  // Keyboard: Enter advances unless focus is in a textarea.
+  // Keyboard: Enter advances unless focus is in a textarea, button or link.
   form.addEventListener('keydown', (event) => {
     if (event.key !== 'Enter') return;
     if (event.target instanceof HTMLTextAreaElement) return;
     if (event.target instanceof HTMLButtonElement) return;
+    if (event.target instanceof HTMLAnchorElement) return;
     event.preventDefault();
     goNext();
   });

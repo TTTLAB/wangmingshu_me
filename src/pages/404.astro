@@ -9,6 +9,7 @@ import Button from '../components/Button.astro';
   alternate="/en/"
   page="404"
   footerTheme="dark"
+  noindex
 >
   <main class="page__content js-page-content error-page">
     <div class="l-container error-page__inner">
@@ -16,6 +17,7 @@ import Button from '../components/Button.astro';
       <h1 class="t-3xl error-page__title">这页不存在。</h1>
       <p class="t-md error-page__text">链接可能旧了，也可能本来就没这页。回首页重新找。</p>
       <Button href="/" label="回到首页" />
+      <Button href="/en/" label="Back to English homepage" variant="light" />
     </div>
   </main>
 </BaseLayout>

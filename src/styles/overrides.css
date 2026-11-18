@@ -633,7 +633,7 @@ html[lang='zh-CN'] :where(p, li, h1, h2, h3) {
 /* site.css zeroes the hero footer padding at <=768px, which pins the split
    title's last flex line to the hero's overflow:hidden bottom edge and clips
    the glyph descenders. Restore the same inset the footer uses above 768px. */
-@media screen and (min-width: 48rem) and (max-width: 48rem) {
+@media screen and (max-width: 48rem) {
   .main-hero__footer {
     padding-bottom: var(--padding);
   }

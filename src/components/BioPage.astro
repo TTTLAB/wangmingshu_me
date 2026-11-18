@@ -23,7 +23,7 @@ const personJsonLd = {
   name: '鼠王',
   alternateName: ['王明鼠', 'Ratking', '惜得'],
   jobTitle: c.meta.jobTitle,
-  url: lang === 'zh' ? siteOrigin + '/bio' : siteOrigin + '/en/bio',
+  url: lang === 'zh' ? siteOrigin + '/bio/' : siteOrigin + '/en/bio/',
 };
 ---
 
@@ -38,7 +38,7 @@ const personJsonLd = {
 >
   <Fragment slot="head">
     <link rel="alternate" type="text/markdown" href={markdownHref} />
-    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd).replace(/</g, '\\u003c')} />
   </Fragment>
   <main class="bio page__content js-page-content">
     <header class="bio-hero">

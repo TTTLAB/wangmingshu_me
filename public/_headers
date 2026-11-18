@@ -1,5 +1,11 @@
 /bio.md
   Content-Type: text/markdown; charset=utf-8
 
-/*.md
+/bio-en.md
   Content-Type: text/markdown; charset=utf-8
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

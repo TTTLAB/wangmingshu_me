@@ -2,10 +2,14 @@ export type Lang = 'zh' | 'en';
 
 export const site = {
   name: '鼠王 Ratking',
-  email: '',
+  email: 'd0a1ccec@gmail.com',
   emailMenu: '',
   phone: '',
   phoneHref: '',
+  instagramUrl: 'https://www.instagram.com/wangmingshu.me/',
+  instagramHandle: '@wangmingshu.me',
+  xiaohongshuUrl: 'https://www.xiaohongshu.com/user/profile/5657f794f53ee0375b2aeb50',
+  xiaohongshuId: '949135495',
 };
 
 export const routes = {
@@ -39,9 +43,9 @@ export const shell = {
       { label: '联系', href: '/contact' },
     ],
     info: {
-      connect: 'Email:d0a1ccec@gmail.com',
-      phone: 'IG:@wangmingshu.me',
-      xiaohongshu: '小红书id: 949135495'
+      connect: 'Email',
+      phone: 'IG',
+      xiaohongshu: '小红书id',
     },
     footerLabel: '联系我',
     footerMarquee: '让我们始终保持前进。',
@@ -67,8 +71,9 @@ export const shell = {
       { label: 'Contact', href: '/en/contact' },
     ],
     info: {
-      connect: 'Email:d0a1ccec@gmail.com',
-      phone: 'Instagram: @wangmingshu.me',
+      connect: 'Email',
+      phone: 'Instagram',
+      xiaohongshu: 'Xiaohongshu ID',
     },
     footerLabel: 'Contact',
     footerMarquee: "Let's keep moving forward.",
