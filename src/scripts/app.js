@@ -189,6 +189,259 @@ function initPageAnimations() {
   }
 }
 
+/**
+ * ScrollTrigger 的 start/end 是按 refresh 那一刻的布局量的，浏览器的
+ * #hash 落点也是。字体替换、首屏图片和动态模块都会在入场后继续改区块
+ * 高度；晚到的布局变化会让 scrub 动画停在旧进度上，锚点也可能偏——
+ * 带着 #case-histories 从别的页面进来，案例区整块 opacity 0、滑动也
+ * 不恢复，就是 refresh 停在了旧布局上。
+ *
+ * 入场后的短窗口里盯住文档高度，变化合并成一次 refresh；带 hash 时把目标
+ * 顶端停到视口顶边上方 8px（越过 start:'top top' 的 once 触发线；目标自己
+ * 设了 scroll-margin-top 的，按它给的留白停）。
+ *
+ * 对齐和 refresh 的停止条件是分开的：一有滚动意图、或位置明显离开锚点
+ * 就不再对齐（不把人拽回去），但 refresh 继续，晚到的布局变化仍会被
+ * 修正——在 loader 或 cookie 按钮上点一下，不该让修复失守。
+ */
+function settleIncomingLayout() {
+  let hash = '';
+  try {
+    hash =
+      location.hash.length > 1 ? decodeURIComponent(location.hash.slice(1)) : '';
+  } catch {
+    // Malformed escape sequence (#%) — nothing to align against.
+  }
+  const target = hash ? document.getElementById(hash) : null;
+
+  let stopped = false;
+  let alignCancelled = false;
+  let refreshTimer = 0;
+  let lastHeight = document.documentElement.scrollHeight;
+  let lastScrollY = -1;
+  let lastDrift = 0;
+  const timers = [];
+
+  // The settle window is idle-based rather than a fixed countdown: on a cold
+  // slow load, fonts and below-fold images can land well past 12s, and the
+  // original bug is precisely "layout changed after the window closed".
+  let idleTimer = 0;
+  let hardTimer = 0;
+  let loaded = false;
+  let stop = () => {};
+
+  const bumpIdle = () => {
+    // Before `load` the page is still fetching, and on a cold slow load that
+    // can take far longer than the idle window; starting the countdown early
+    // closes the window before the fonts and images ever arrive (the exact
+    // failure being fixed here). Layout activity before load still refreshes
+    // via scheduleRefresh — only the idle countdown waits.
+    if (stopped || !loaded) return;
+    window.clearTimeout(idleTimer);
+    idleTimer = window.setTimeout(() => stop(), 8000);
+  };
+
+  // Hard ceiling so a page that keeps changing layout can never hold this
+  // open indefinitely. Before `load` the ceiling only re-arms (up to a wider
+  // cold-load budget): a slow load can outlast 30s, and closing the window
+  // before the first assets arrive is exactly the failure being fixed here.
+  const preLoadCeiling = performance.now() + 120000;
+  const armHard = () => {
+    window.clearTimeout(hardTimer);
+    hardTimer = window.setTimeout(function tick() {
+      if (stopped) return;
+      if (!loaded && performance.now() < preLoadCeiling) {
+        hardTimer = window.setTimeout(tick, 30000);
+        return;
+      }
+      stop();
+    }, 30000);
+  };
+
+  const cancelAlign = () => {
+    alignCancelled = true;
+  };
+
+  const alignAnchor = () => {
+    if (stopped || alignCancelled || !target?.isConnected) return;
+    // display:none / 0×0 targets also report top 0; nothing to align to.
+    if (!target.getClientRects().length) return;
+
+    const drift = Math.round(target.getBoundingClientRect().top);
+    if (drift > window.innerHeight) {
+      // Target still below the fold while the page is at the very top: the
+      // browser has not performed its fragment scroll yet (SPA swaps reset
+      // to 0 first; Safari can defer it until load). Skipping this round
+      // only — cancelling here would give up before the browser ever lands.
+      if (window.scrollY <= 0) return;
+      // The page has scrolled away from the anchor: the user (or history /
+      // find-in-page) has moved on. Only sharp jumps taken without an input
+      // event land here; wheel and touch are caught below.
+      cancelAlign();
+      return;
+    }
+    if (drift < -24) {
+      cancelAlign();
+      return;
+    }
+    // Same scroll position and same target offset as after the last
+    // alignment — still aligned. This also keeps pinned targets (rect.top
+    // stays 0) from being nudged on every pass.
+    if (
+      lastScrollY >= 0 &&
+      Math.abs(window.scrollY - lastScrollY) <= 2 &&
+      Math.abs(drift - lastDrift) <= 12
+    ) {
+      return;
+    }
+
+    // Where the target's top edge should sit: honour an authored
+    // scroll-margin-top (bio cards use it to clear the fixed navbar), and
+    // otherwise park 8px above the viewport top — landing exactly on the
+    // line leaves `once` reveals (start: 'top top') unfired, and the
+    // services block would sit at opacity 0 after arriving from another
+    // page.
+    const margin = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+    const y =
+      Math.round(window.scrollY + drift) - (margin > 0 ? margin : -8);
+    // Route through Lenis when present: a running Lenis animation would
+    // otherwise overwrite the native write on its next tick.
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(y, { immediate: true, force: true });
+    } else {
+      window.scrollTo(0, y);
+    }
+    lastScrollY = Math.round(window.scrollY);
+    lastDrift = Math.round(target.getBoundingClientRect().top);
+  };
+
+  // One debounced refresh channel: observer, fonts and load all funnel
+  // through here instead of each forcing a full ScrollTrigger recalculation.
+  // The idle/hard timers bound the window, so there is no separate count cap
+  // (a cold load can legitimately settle late several times).
+  const scheduleRefresh = (delay) => {
+    window.clearTimeout(refreshTimer);
+    refreshTimer = window.setTimeout(() => {
+      if (stopped) return;
+      try {
+        ScrollTrigger.refresh();
+      } catch {
+        /* A broken trigger must not take alignment and the window with it. */
+      }
+      alignAnchor();
+      bumpIdle();
+    }, delay);
+  };
+
+  const scheduleAlign = (delays) => {
+    delays.forEach((delay) => {
+      timers.push(
+        window.setTimeout(() => {
+          if (!stopped) alignAnchor();
+        }, delay)
+      );
+    });
+  };
+
+  const observer =
+    typeof ResizeObserver === 'function'
+      ? new ResizeObserver(() => {
+          if (stopped) return;
+          const height = document.documentElement.scrollHeight;
+          if (height === lastHeight) return;
+          lastHeight = height;
+          bumpIdle();
+          scheduleRefresh(180);
+        })
+      : null;
+  observer?.observe(document.body);
+
+  // Fonts and the full page load are the two common late-layout events;
+  // cover them even when they do not change the document height. The load
+  // event also carries the browser's final fragment scroll correction, so
+  // the anchor gets another alignment round shortly after it.
+  const onLoad = () => {
+    if (stopped) return;
+    loaded = true;
+    // Re-arm the ceiling from load: before it, armHard() only renews the
+    // pre-load budget, so the post-load window gets its own full 30s.
+    armHard();
+    bumpIdle();
+    scheduleRefresh(0);
+    if (target) scheduleAlign([150, 600, 1500, 3000]);
+  };
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(
+      () => scheduleRefresh(0),
+      () => scheduleRefresh(0)
+    );
+  }
+  if (document.readyState === 'complete') {
+    onLoad();
+  } else {
+    window.addEventListener('load', onLoad, { once: true });
+  }
+
+  // The browser's own fragment scroll can land after (and overwrite) the
+  // first alignment — opening /#services cold left the section parked on its
+  // reveal line with every character at opacity 0.
+  if (target) scheduleAlign([0, 350, 900, 1800, 3000]);
+
+  // Scrolling intent only. Clicks and arbitrary keys (loader, cookie
+  // buttons) must not switch alignment off; jumps without any input event
+  // are caught by the range check in alignAnchor().
+  const scrollKeys = new Set([
+    ' ',
+    'PageUp',
+    'PageDown',
+    'ArrowUp',
+    'ArrowDown',
+    'Home',
+    'End',
+  ]);
+  const onKeydown = (event) => {
+    if (!scrollKeys.has(event.key)) return;
+    // Space on a focused control activates it (loader, cookie banner) — that
+    // is not scrolling intent and must not switch alignment off.
+    if (
+      event.target instanceof Element &&
+      event.target.closest('button, a, input, textarea, select')
+    ) {
+      return;
+    }
+    cancelAlign();
+  };
+  const onScrollIntent = () => cancelAlign();
+
+  window.addEventListener('wheel', onScrollIntent, { passive: true });
+  window.addEventListener('touchmove', onScrollIntent, { passive: true });
+  window.addEventListener('keydown', onKeydown);
+  window.addEventListener('hashchange', onScrollIntent);
+  window.addEventListener('popstate', onScrollIntent);
+
+  stop = () => {
+    if (stopped) return;
+    stopped = true;
+    window.clearTimeout(idleTimer);
+    window.clearTimeout(hardTimer);
+    window.clearTimeout(refreshTimer);
+    timers.forEach((id) => window.clearTimeout(id));
+    observer?.disconnect();
+    window.removeEventListener('load', onLoad);
+    window.removeEventListener('wheel', onScrollIntent);
+    window.removeEventListener('touchmove', onScrollIntent);
+    window.removeEventListener('keydown', onKeydown);
+    window.removeEventListener('hashchange', onScrollIntent);
+    window.removeEventListener('popstate', onScrollIntent);
+  };
+
+  bumpIdle();
+  armHard();
+
+  return stop;
+}
+
 function initPage() {
   if (pageReady) return;
   pageReady = true;
@@ -210,6 +463,7 @@ function initPage() {
   initMarquee();
   initNoise();
   initPageAnimations();
+  pageCleanups.push(settleIncomingLayout());
 
   requestAnimationFrame(() => {
     ScrollTrigger.refresh();

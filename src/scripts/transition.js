@@ -1,4 +1,5 @@
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { getLenis } from './lenis';
 
 const DURATION = 0.25;
@@ -170,6 +171,17 @@ export function initPageTransitions() {
 
     await waitForIncomingPage();
     if (token !== navToken) return;
+
+    // Fonts and first-screen images are in now, so this is the first moment
+    // the new page can be measured for real; ScrollTrigger's start/end were
+    // computed against the pre-image layout. Hash entries get realigned by
+    // settleIncomingLayout() as well, but plain SPA swaps need this
+    // remeasure too, or scrubbed reveals keep stale progress.
+    try {
+      ScrollTrigger.refresh();
+    } catch {
+      /* A broken trigger must not hold the veil or the fade-in. */
+    }
 
     hideLoadingVeil();
     gsap.to(layer, {
