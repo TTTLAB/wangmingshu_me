@@ -13,6 +13,7 @@ import {
 } from './menu';
 import { initPageTransitions } from './transition';
 import { renderBrandLogos } from './logo';
+import { initLogoTail } from './logo-tail';
 import { initCookies } from './cookies';
 import { initContactForm } from './contact';
 import { initHeroVideo, cleanupHeroVideo } from './media';
@@ -450,6 +451,10 @@ function initPage() {
   // Must run before initMenu() and playLoaderOnce(): the logo slots are part
   // of the navbar/loader markup and the menu reads the nav logo on init.
   renderBrandLogos();
+
+  // VI 14.4: the tail waves on its own clock. The driver only moves marks
+  // ≥64px wide and stays off under reduced motion, while hidden or printing.
+  pageCleanups.push(initLogoTail());
 
   createLenis();
 
