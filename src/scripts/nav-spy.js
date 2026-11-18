@@ -11,15 +11,21 @@ function scrollToTarget(target, lenis, immediate) {
   let top = window.scrollY + rect.top;
   const st = ScrollTrigger.getById(target.id);
 
-  if (st && target.id !== 'case-histories') {
+  // `services` deliberately skips the ScrollTrigger boundary: on phones its
+  // trigger starts at `bottom bottom`, so `st.start` sits most of a viewport
+  // past the section top and the jump lands mid-section. Use the element's
+  // own document offset (what a plain #hash jump does) plus a few pixels so
+  // the section's `once` reveal (start: 'top top') actually fires instead of
+  // parking exactly on its trigger line with the copy still at opacity 0.
+  if (st && target.id !== 'case-histories' && target.id !== 'services') {
     top =
       target.id === 'about'
         ? st.start
-        : target.id === 'services'
-          ? st.start + 50
-          : window.scrollY < st.start
-            ? st.end
-            : st.start;
+        : window.scrollY < st.start
+          ? st.end
+          : st.start;
+  } else if (target.id === 'services') {
+    top += 8;
   }
 
   if (lenis) {

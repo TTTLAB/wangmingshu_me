@@ -2,9 +2,12 @@
  * Footer navigation (home page only). The source site uses a SmoothLink that
  * overrides the hash jump and sends Lenis to the section's ScrollTrigger
  * boundary instead of the element's raw offset. Values are ported verbatim:
- *   case-histories -> trigger end
+ *   case-histories -> element's own document offset
  *   about          -> trigger start
- *   services       -> trigger start + 50
+ *   services       -> element's own document offset +8px (the phone trigger
+ *                     starts at `bottom bottom`, so its start is not the
+ *                     section top; the +8 clears the `once` reveal trigger
+ *                     line so the copy does not stay at opacity 0)
  *   anything else  -> end when scrolling up, start when scrolling down
  */
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -20,15 +23,21 @@ function scrollToTarget(target, lenis, immediate) {
   let top = window.scrollY + rect.top;
   const st = ScrollTrigger.getById(target.id);
 
-  if (st && target.id !== 'case-histories') {
+  // `services` deliberately skips the ScrollTrigger boundary: on phones its
+  // trigger starts at `bottom bottom`, so `st.start` sits most of a viewport
+  // past the section top and the jump lands mid-section. Use the element's
+  // own document offset (what a plain #hash jump does) plus a few pixels so
+  // the section's `once` reveal (start: 'top top') actually fires instead of
+  // parking exactly on its trigger line with the copy still at opacity 0.
+  if (st && target.id !== 'case-histories' && target.id !== 'services') {
     top =
       target.id === 'about'
         ? st.start
-        : target.id === 'services'
-          ? st.start + 50
-          : window.scrollY < st.start
-            ? st.end
-            : st.start;
+        : window.scrollY < st.start
+          ? st.end
+          : st.start;
+  } else if (target.id === 'services') {
+    top += 8;
   }
 
   if (lenis) {
