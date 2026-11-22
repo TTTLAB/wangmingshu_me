@@ -46,14 +46,31 @@ export function initHeroVideo() {
   // 命中 reduced-motion 时连 source 都不挂：不发请求，停在 poster 上。
   const skipMotion = () => reducedMq.matches;
 
-  const tryPlay = () => {
-    // 还没进入视口、还没挂上 source、或用户要求减少动效时不空转
+  const playDirect = () => {
     if (disposed || !sourceApplied || !inView || skipMotion()) return;
     if (!video.paused) return;
     try {
       const playAttempt = video.play();
       if (playAttempt?.catch) playAttempt.catch(() => {});
     } catch {}
+  };
+
+  const tryPlay = () => {
+    // 还没进入视口、还没挂上 source、或用户要求减少动效时不空转
+    if (disposed || !sourceApplied || !inView || skipMotion()) return;
+    if (!video.paused) return;
+    playDirect();
+    // 微信 WebView 里，load + requestIdleCallback 触发时往往已离开
+    // WeixinJSBridgeReady 同步上下文，且 SPA 换页回首页不会再次触发该事件；
+    // 借 getNetworkType 桥回调补一次 play()，保持首屏延迟挂载的同时放行微信自动播放。
+    if (typeof window.WeixinJSBridge?.invoke === 'function') {
+      try {
+        window.WeixinJSBridge.invoke('getNetworkType', {}, () => {
+          video.muted = true;
+          playDirect();
+        });
+      } catch {}
+    }
   };
 
   const apply = () => {

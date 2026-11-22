@@ -19,6 +19,7 @@ import { initContactForm } from './contact';
 import { initHeroVideo, cleanupHeroVideo } from './media';
 import { initMarquee, cleanupMarquee } from './marquee';
 import { initNoise } from './noise';
+import { initWeChat } from './wechat';
 import { initInteractiveGrids } from './home/interactive-grid';
 import {
   initCaseReveal,
@@ -28,6 +29,9 @@ import {
 } from './home/case-reveal';
 
 gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText);
+
+// 微信内置浏览器：打 is-wechat 标记、锁 Android 字号缩放。非微信 UA 直接返回。
+initWeChat();
 CustomEase.create('menuEase', 'M0,0 C0.7,0.098 0.097,1 1,1');
 
 let pageReady = false;
