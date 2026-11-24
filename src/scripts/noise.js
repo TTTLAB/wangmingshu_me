@@ -2,6 +2,17 @@ import gsap from 'gsap';
 
 const loaded = new Set();
 
+const reducedMotion = () =>
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function revealNoise(element) {
+  if (reducedMotion()) {
+    gsap.set(element, { opacity: 0.05 });
+    return;
+  }
+  gsap.to(element, { opacity: 0.05, duration: 0.6, ease: 'power1.out' });
+}
+
 export function initNoise() {
   document.querySelectorAll('.noise[data-src]').forEach((element) => {
     const src = element.getAttribute('data-src');
@@ -10,7 +21,7 @@ export function initNoise() {
 
     if (loaded.has(src)) {
       element.style.backgroundImage = `url("${src}")`;
-      gsap.to(element, { opacity: 0.05, duration: 0.6, ease: 'power1.out' });
+      revealNoise(element);
       return;
     }
 
@@ -18,7 +29,7 @@ export function initNoise() {
     image.onload = () => {
       loaded.add(src);
       element.style.backgroundImage = `url("${src}")`;
-      gsap.to(element, { opacity: 0.05, duration: 0.6, ease: 'power1.out' });
+      revealNoise(element);
     };
     image.src = src;
   });

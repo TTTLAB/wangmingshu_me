@@ -26,7 +26,7 @@ const reducedMotion = () =>
 function setClosedState() {
   if (!menu) return;
   menu.setAttribute('inert', '');
-  menu.setAttribute('aria-expanded', 'false');
+  closeButton?.setAttribute('inert', '');
   menu.style.pointerEvents = 'none';
   menu.style.visibility = 'hidden';
   menu.style.opacity = '0';
@@ -145,9 +145,15 @@ function openMenu() {
 
   document.body.classList.add('is-menu-open');
   menu.removeAttribute('inert');
-  menu.setAttribute('aria-expanded', 'true');
+  closeButton?.removeAttribute('inert');
   toggle?.setAttribute('aria-expanded', 'true');
   menu.style.visibility = 'visible';
+
+  // Move focus into the now-visible menu; rAF waits for the visibility write.
+  requestAnimationFrame(() => {
+    if (!isOpen) return;
+    closeButton?.focus({ preventScroll: true });
+  });
 
   getLenis()?.stop();
 
@@ -174,9 +180,18 @@ function closeMenu() {
   if (!menu || !isOpen) return;
   isOpen = false;
 
+  // Hand focus back before inert blurs the active element to <body>.
+  const activeElement = document.activeElement;
+  if (
+    toggle &&
+    (menu.contains(activeElement) || activeElement === closeButton)
+  ) {
+    toggle.focus({ preventScroll: true });
+  }
+
   document.body.classList.remove('is-menu-open');
-  menu.setAttribute('aria-expanded', 'false');
   menu.setAttribute('inert', '');
+  closeButton?.setAttribute('inert', '');
   toggle?.setAttribute('aria-expanded', 'false');
 
   if (reducedMotion()) {
@@ -267,8 +282,8 @@ export function cleanupMenu() {
 
   if (menu) {
     menu.setAttribute('inert', '');
-    menu.setAttribute('aria-expanded', 'false');
   }
+  closeButton?.setAttribute('inert', '');
   toggle?.setAttribute('aria-expanded', 'false');
   menu = null;
   toggle = null;

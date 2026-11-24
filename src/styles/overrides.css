@@ -468,6 +468,11 @@ body.is-menu-open .navmenu {
   html {
     scroll-behavior: auto;
   }
+  /* reduce 下噪点不做淡入：noise.js 已用 gsap.set 免补间，
+     但 site.css 的 .noise transition 仍会动画，这里关掉。 */
+  .noise {
+    transition: none;
+  }
 }
 
 /* Classic scrollbars: 100vw includes the vertical scrollbar; clip any

@@ -138,7 +138,19 @@ export function initPageTransitions() {
         });
       });
 
-      return await request;
+      try {
+        return await request;
+      } catch (error) {
+        // after-swap never fires when the fetch rejects, so the faded-out
+        // page would stay invisible and inFlight would lock future exits.
+        // Restore it here, then rethrow so the failure still reaches console.
+        if (token === navToken) {
+          hideLoadingVeil();
+          gsap.set(layer, { opacity: 1, clearProps: 'opacity' });
+          inFlight = false;
+        }
+        throw error;
+      }
     };
   });
 
